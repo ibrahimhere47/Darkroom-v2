@@ -26,4 +26,11 @@
   --font-zilla-italic: "Zilla Slab Italic", "Zilla Slab", Georgia, serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  --color-amber-47: #e8a33d
+}
+
+@utility mono {
+  font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+  color: #f5f5f5
 }
