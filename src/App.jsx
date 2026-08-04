@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { Heart } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
@@ -18,6 +19,9 @@ const App = () => {
       <h1 ref={h1Ref} className='font-mono'>I am Ibrahim</h1>
       <h1 className='font-body'>I am also Ibrahim</h1>
       <Heart />
+
+      <Link to="/tools/tool1">Tool 1</Link>
+      <Link to="/tools/tool2">Tool 2</Link>
     </div>
   )
 }
