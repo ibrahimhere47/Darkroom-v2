@@ -15,7 +15,8 @@ const App = () => {
 
   return (
     <div className='flex justify-center items-center w-screen h-screen'>
-      <h1 ref={h1Ref} className='mono'>I am Ibrahim</h1>
+      <h1 ref={h1Ref} className='font-mono'>I am Ibrahim</h1>
+      <h1 className='font-body'>I am also Ibrahim</h1>
     </div>
   )
 }

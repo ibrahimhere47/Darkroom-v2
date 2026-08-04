@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
-@utility mono {
-  color: rgb(95, 95, 95)
+@font-face {
+  font-family: "Zilla Slab";
+  src: url("/fonts/zilla/ZillaSlab-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Zilla Slab Italic";
+  src: url("/fonts/zilla/ZillaSlab-BoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/mono/IBMPlexMono-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@theme {
+  --font-zilla: "Zilla Slab", Georgia, serif;
+  --font-zilla-italic: "Zilla Slab Italic", "Zilla Slab", Georgia, serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
