@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@utility mono {
+  color: rgb(95, 95, 95)
+}
