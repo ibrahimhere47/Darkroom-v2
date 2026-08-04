@@ -7,8 +7,14 @@ import { tools } from '../tools/toolsRegistry'
 const Home = () => {
     return (
         <Layout>
-            <Hero />
-            <ToolCard tool={tools.at(0)} />
+            <div className='py-10 w-full'>
+                <Hero />
+                <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+                    {tools.map((tool, idx) => (
+                        <ToolCard key={idx} tool={tool} />
+                    ))}
+                </div>
+            </div>
         </Layout>
     )
 }
