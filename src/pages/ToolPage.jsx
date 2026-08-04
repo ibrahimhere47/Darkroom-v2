@@ -1,15 +1,18 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import Layout from '../components/Layout';
 
 const ToolPage = () => {
 
     const { toolId } = useParams(null);
 
     return (
-        <div>
-            ToolPage
-            <h1>{toolId}</h1>
-        </div>
+        <Layout>
+            <div>
+                ToolPage
+                <h1>{toolId}</h1>
+            </div>
+        </Layout>
     )
 }
 
