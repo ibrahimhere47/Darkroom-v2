@@ -8,6 +8,7 @@ import gsap from 'gsap'
 
 const Home = () => {
 
+    //Animating Loader
     const [loading, setLoading] = useState(true);
     const loaderRef = useRef(null)
 
