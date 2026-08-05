@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Image, Scale } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import HeroTitle from './HeroTitle'
 
 const Hero = () => {
 
@@ -9,6 +10,7 @@ const Hero = () => {
     const iconRef= useRef(null)
     const [mouseEnter, setMouseEnter] = useState(false)
 
+    //Icon Animation
     useGSAP(() => {
         if (mouseEnter) {
             gsap.to(glowRef.current, {
@@ -20,8 +22,7 @@ const Hero = () => {
                 duration: 0.4,
                 ease: "power2.out"
             })
-        }
-        if (!mouseEnter) {
+        } else {
             gsap.to(glowRef.current, {
                 opacity: 0,
                 duration: 0.4,
@@ -32,15 +33,14 @@ const Hero = () => {
                 ease: "power2.out"
             })
         }
-        
     }, { dependencies: [mouseEnter] })
 
     return (
         <>
-        <div className='flex justify-between mb-9'>
+        <div className='flex justify-between mb-9 cursor-default'>
             <div>
                 <p className='font-mono text-amber-47 text-sm pb-4'>safe | fast | efficient</p>
-                <h1 className='font-zilla text-6xl leading-14 tracking-wide'>Your Private<br />Image Editing Toolkit</h1>
+                <HeroTitle />
                 <p className='font-body text-md pt-4'>Quick edits are supposed to be quick.</p>
             </div>
             <div>
