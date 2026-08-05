@@ -1,29 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Layout from '../components/Layout'
 import ToolCard from '../components/ToolCard'
 import Hero from '../components/Hero'
 import Loader from '../components/Loader'
 import { tools } from '../tools/toolsRegistry'
+import gsap from 'gsap'
 
 const Home = () => {
 
     const [loading, setLoading] = useState(true);
+    const loaderRef = useRef(null)
 
     useEffect(() => {
-        const handleLoad = () => {
-            setLoading(false);
-        };
+        const timer = setTimeout(() => {
+            gsap.to(loaderRef.current, {
+                opacity: 0,
+                duration: 0.8,
+                onComplete: () => {
+                    setLoading(false)
+                }
+            })
+        }, 1500);
 
-        window.addEventListener("load", handleLoad);
-
-        return () => window.removeEventListener("load", handleLoad);
+        return () => clearTimeout(timer);
     }, []);
 
-    if (loading) {
-        return <Loader />;
-    }
-
     return (
+        <>
         <Layout>
             <div className='py-10 w-full'>
                 <Hero />
@@ -38,6 +41,11 @@ const Home = () => {
                 </div>
             </div>
         </Layout>
+
+        {loading && (
+            <Loader ref={loaderRef} />
+        )}
+        </>
     )
 }
 
