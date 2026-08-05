@@ -13,7 +13,7 @@ export const tools = [
     {
         id: 'resize',
         name: 'Resize',
-        tagline: 'Fit, crop, or scale to exact dimensions.',
+        tagline: 'Fit, crop, or scale to exact dimensions instantaneously.',
         icon: Crop,
         comingSoon: true,
     },

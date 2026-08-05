@@ -9,6 +9,7 @@ const ToolCard = (props) => {
     const Icon = tool.icon;
     const glowRef = useRef([]);
     const borderRef = useRef(null);
+    const cardRef = useRef(null)
     const tl = useRef(null)
     const [mouseEnter, setMouseEnter] = useState(false);
 
@@ -29,12 +30,40 @@ const ToolCard = (props) => {
 
     useGSAP(() => {
         mouseEnter ? tl.current.play() : tl.current.reverse();
+
+        // HANDLE MAGNETIC RETURN
+        if (!mouseEnter) {
+            gsap.to(cardRef.current, {
+                x: 0,
+                y: 0,
+                duration: 0.5,
+                ease: "elastic.out(1, 0.4)"
+            });
+        }
+
     }, { dependencies: [mouseEnter] });
 
+    const handleMouseMove = (e) => {
+        const card = e.currentTarget.getBoundingClientRect();
+        const centerX = card.left + card.width / 2
+        const centerY = card.top + card.height / 2
+        const x = e.clientX - centerX
+        const y = e.clientY - centerY
+        const moveX = x / 10
+        const moveY = y / 10
+
+        gsap.to(cardRef.current, {
+            x: moveX,
+            y: moveY,
+            duration: 0.3,
+            ease: "power2.out"
+        })
+    }
+
     const content = (
-        <div className='relative'>
+        <div className='relative' ref={cardRef}>
             <div className='absolute inset-0 rounded-xl border border-amber-47 opacity-0 pointer-events-none' ref={borderRef} />
-            <div className='flex flex-col gap-2 bg-neutral-700 rounded-xl p-3 flex-1 min-h-40 border-amber-47' onMouseEnter={() => {setMouseEnter(true)}} onMouseLeave={() => {setMouseEnter(false)}}>
+            <div className='flex flex-col gap-2 bg-neutral-700 rounded-xl p-3 flex-1 min-h-40 border-amber-47' onMouseEnter={() => {setMouseEnter(true)}} onMouseLeave={() => {setMouseEnter(false)}} onMouseMove={handleMouseMove}>
                 <div className='flex justify-between items-center'>
                     <div>
                         <div className='relative flex items-center justify-center w-9 h-9'>
