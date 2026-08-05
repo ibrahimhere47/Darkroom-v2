@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import ToolCard from '../components/ToolCard'
 import Hero from '../components/Hero'
+import Loader from '../components/Loader'
 import { tools } from '../tools/toolsRegistry'
 
 const Home = () => {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const handleLoad = () => {
+            setLoading(false);
+        };
+
+        window.addEventListener("load", handleLoad);
+
+        return () => window.removeEventListener("load", handleLoad);
+    }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
+
     return (
         <Layout>
             <div className='py-10 w-full'>
