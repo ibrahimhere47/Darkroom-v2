@@ -5,40 +5,46 @@ import { Image } from 'lucide-react'
 
 const HeroIcon = () => {
 
-    const glowRef = useRef(null)
-    const iconRef= useRef(null)
-    const [mouseEnter, setMouseEnter] = useState(false)
+    const containerRef = useRef(null);
+    const iconRef = useRef(null);
 
-    //Icon Animation
-    useGSAP(() => {
-        if (mouseEnter) {
-            gsap.to(glowRef.current, {
-                opacity: "40%",
-                duration: 0.4,
-            })
-            gsap.to(iconRef.current, {
-                scale: 1.05,
-                duration: 0.4,
-                ease: "power2.out"
-            })
-        } else {
-            gsap.to(glowRef.current, {
-                opacity: 0,
-                duration: 0.4,
-            })
-            gsap.to(iconRef.current, {
-                scale: 1,
-                duration: 0.4,
-                ease: "power2.out"
-            })
-        }
-    }, { dependencies: [mouseEnter] })
+    const handleMouseMove = (e) => {
+        const rect = containerRef.current.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY = ((x - rect.width / 2) / rect.width) * 30;
+        const rotateX = -((y - rect.height / 2) / rect.height) * 30;
+
+        gsap.to(iconRef.current, {
+            rotateX,
+            rotateY,
+            transformPerspective: 800,
+            transformOrigin: "center",
+            duration: 0.4,
+            ease: "power2.out",
+        });
+    };
     
+    const handleMouseLeave = () => {
+        gsap.to(iconRef.current, {
+            rotateX: 0,
+            rotateY: 0,
+            duration: 0.6,
+            ease: "power3.out",
+        });
+    };
+
     return (
         <>
-        <div className='relative flex items-center justify-center mr-15 w-48 h-48' onMouseEnter={() => {setMouseEnter(true)}} onMouseLeave={() => {setMouseEnter(false)}}>
-            <div className='absolute inset-0 bg-amber-47 opacity-0 blur-xl rounded-full z-0' ref={glowRef} />
-            <Image color='#e8a33d' size={200} className='z-10' ref={iconRef} />
+        <div
+            ref={containerRef}
+            className="relative flex items-center justify-center mr-15 w-48 h-48"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
+            <Image ref={iconRef} color="#e8a33d" size={200}/>
         </div>
         </>
     )
