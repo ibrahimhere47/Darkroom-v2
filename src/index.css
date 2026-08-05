@@ -28,6 +28,7 @@
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 
   --color-amber-47: #e8a33d;
+  --color-amber-dim: #d09235;
   --color-success: #50f050;
   --color-success-dim: #008200;
   --color-badge-dim: #383938;
@@ -40,7 +41,7 @@
 }
 
 @utility badge {
-  border: 2px solid;
+  border: 1px solid;
   border-radius: 34px;
   padding: 2px 7px;
 }
@@ -52,9 +53,13 @@
 }
 
 @utility badge-ready {
-  border-color: #50f050;
-  background-color: #008200;
-  color: #50f050;
+  border-color: #3fbd3f;
+  background-color: #297c29;
+  color: #ccffcc;
+}
+
+.class {
+  color: rgb(208, 146, 53)
 }
 
 @utility no-scrollbar {

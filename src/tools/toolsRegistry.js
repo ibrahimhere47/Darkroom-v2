@@ -8,7 +8,7 @@ export const tools = [
         tagline: 'Shrink file size with a quality slider. JPEG, PNG, or WebP.',
         icon: ArrowBigDownDash,
         // component: lazy(() => import('./compress/CompressTool.jsx')),
-        comingSoon: true,
+        comingSoon: false,
     },
     {
         id: 'resize',
@@ -22,6 +22,20 @@ export const tools = [
         name: 'Remove background',
         tagline: 'Cut a subject out onto a transparent layer.',
         icon: Blend,
+        comingSoon: true,
+    },
+    {
+        id: 'convert',
+        name: 'Convert format',
+        tagline: 'Move between JPEG, PNG, WebP, and AVIF.',
+        icon: Image,
+        comingSoon: true,
+    },
+    {
+        id: 'convert',
+        name: 'Convert format',
+        tagline: 'Move between JPEG, PNG, WebP, and AVIF.',
+        icon: Image,
         comingSoon: true,
     },
     {

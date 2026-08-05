@@ -15,17 +15,31 @@ const ToolCard = (props) => {
 
     useGSAP(() => {
         tl.current = gsap.timeline({ paused: true });
-
-        tl.current
+        if (tool.comingSoon) {
+            tl.current
             .to(glowRef.current, {
                 opacity: 0.3,
                 duration: 0.4
             }, 0)
             .to(borderRef.current, {
                 autoAlpha: 1,
-                boxShadow: "0 0 16px rgba(232,163,61,.5)",
+                boxShadow: "0 0 16px rgba(232, 163, 61, .5)",
                 duration: 0.4
             }, 0);
+        }
+        else if (!tool.comingSoon) {
+            tl.current
+            .to(glowRef.current, {
+                opacity: 0.3,
+                duration: 0.4,
+                backgroundColor: "#d09235",
+            }, 0)
+            .to(borderRef.current, {
+                autoAlpha: 1,
+                boxShadow: "0 0 16px rgba(208, 146, 53, .5)",
+                duration: 0.4
+            }, 0);
+        }
     }, []);
 
     useGSAP(() => {
@@ -44,20 +58,22 @@ const ToolCard = (props) => {
     }, { dependencies: [mouseEnter] });
 
     const handleMouseMove = (e) => {
-        const card = e.currentTarget.getBoundingClientRect();
-        const centerX = card.left + card.width / 2
-        const centerY = card.top + card.height / 2
-        const x = e.clientX - centerX
-        const y = e.clientY - centerY
-        const moveX = x / 10
-        const moveY = y / 10
+        if (!tool.comingSoon) {
+            const card = e.currentTarget.getBoundingClientRect();
+            const centerX = card.left + card.width / 2
+            const centerY = card.top + card.height / 2
+            const x = e.clientX - centerX
+            const y = e.clientY - centerY
+            const moveX = x / 10
+            const moveY = y / 10
 
-        gsap.to(cardRef.current, {
-            x: moveX,
-            y: moveY,
-            duration: 0.3,
-            ease: "power2.out"
-        })
+            gsap.to(cardRef.current, {
+                x: moveX,
+                y: moveY,
+                duration: 0.3,
+                ease: "power2.out"
+            })
+        }
     }
 
     const content = (
@@ -80,7 +96,7 @@ const ToolCard = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-0.5">
+                <div className={`flex flex-col gap-0.5 ${tool.comingSoon ? 'text-neutral-300' : 'text-white'}`}>
                     <h3 className='font-body bold text-lg'>{tool.name}</h3>
                     <p className='line-clamp-2 font-body tracking-normal leading-5'>{tool.tagline}</p>
                 </div>
