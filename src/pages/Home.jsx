@@ -9,7 +9,7 @@ const Home = () => {
         <Layout>
             <div className='py-10 w-full'>
                 <Hero />
-                <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+                <div className='grid grid-cols-4 gap-4'>
                     {tools.map((tool, idx) => (
                         <ToolCard key={idx} tool={tool} />
                     ))}
