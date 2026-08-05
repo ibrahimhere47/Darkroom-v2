@@ -57,6 +57,9 @@
   color: #50f050;
 }
 
-.class {
-  background-color: #636463;
+@utility no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 }
