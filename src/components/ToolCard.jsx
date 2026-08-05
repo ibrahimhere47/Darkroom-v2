@@ -15,7 +15,7 @@ const ToolCard = (props) => {
 
     useGSAP(() => {
         tl.current = gsap.timeline({ paused: true });
-        if (tool.comingSoon) {
+        if (!tool.comingSoon) {
             tl.current
             .to(glowRef.current, {
                 opacity: 0.3,
@@ -27,7 +27,7 @@ const ToolCard = (props) => {
                 duration: 0.4
             }, 0);
         }
-        else if (!tool.comingSoon) {
+        else {
             tl.current
             .to(glowRef.current, {
                 opacity: 0.3,
