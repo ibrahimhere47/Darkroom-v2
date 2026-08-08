@@ -29,6 +29,8 @@
 
   --color-amber-47: #e8a33d;
   --color-amber-dim: #d09235;
+  --color-amber-transparent: #e8a43daf;
+  --color-amber-transparent-dim: #d09235af;
   --color-success: #50f050;
   --color-success-dim: #008200;
   --color-badge-dim: #383938;
@@ -59,7 +61,7 @@
 }
 
 .class {
-  color: rgb(208, 146, 53)
+  color: #e8a43daf
 }
 
 @utility no-scrollbar {

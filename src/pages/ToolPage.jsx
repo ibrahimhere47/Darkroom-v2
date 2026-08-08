@@ -2,7 +2,7 @@ import { Suspense, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getTool } from '../tools/toolsRegistry.js'
 import Layout from '../components/Layout.jsx'
-import FirstToolAppearance from '../components/tool-page-comps/ToolPageFirstLook.jsx'
+import ToolPageEmptyLook from '../components/tool-page-comps/ToolPageEmptyLook.jsx'
 import ToolPageNotFound from '../components/tool-page-comps/ToolPageNotFound.jsx'
 import ToolPageHeader from '../components/tool-page-comps/ToolPageHeader.jsx'
 import { CornerUpLeft, Frown } from 'lucide-react'
@@ -21,7 +21,7 @@ const ToolPage = () => {
 
     if (firstAppearance) {
         return (
-            <FirstToolAppearance />
+            <ToolPageEmptyLook />
         )
     }
 
