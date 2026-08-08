@@ -106,7 +106,7 @@ const ToolCard = (props) => {
 
     if (tool.comingSoon == true) {
         return (
-            <div className='flex cursor-pointer'>
+            <div className='flex cursor-default'>
                 {content}
             </div>
         )

@@ -5,7 +5,7 @@ export const tools = [
     {
         id: 'compress',
         name: 'Compress',
-        tagline: 'Shrink file size with a quality slider and covert finished file to JPEG, PNG, or WebP.',
+        tagline: 'Shrink file size with a quality slider and covert finished file to JPEG, PNG, or WebP',
         icon: ArrowBigDownDash,
         component: lazy(() => import('./compress/CompressTool.jsx')),
     },
