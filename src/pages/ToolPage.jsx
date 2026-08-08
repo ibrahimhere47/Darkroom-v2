@@ -6,12 +6,23 @@ import ToolPageEmptyLook from '../components/tool-page-comps/ToolPageEmptyLook.j
 import ToolPageNotFound from '../components/tool-page-comps/ToolPageNotFound.jsx'
 import ToolPageHeader from '../components/tool-page-comps/ToolPageHeader.jsx'
 import Loader from '../components/Loader.jsx'
-import { CornerUpLeft, Frown } from 'lucide-react'
+import gsap from 'gsap'
+
+const ToolReadyChecker = ({ Tool, onReady, files, setFiles }) => {
+    useEffect(() => {
+        onReady()
+    }, [])
+
+    return <Tool files={files} setFiles={setFiles} />
+}
 
 const ToolPage = () => {
     const { toolId } = useParams()
     const tool = getTool(toolId)
     const [files, setFiles] = useState([])
+
+    const [loading, setLoading] = useState(true)
+    const loaderRef = useRef(null)
 
     if (!tool || tool.comingSoon || !tool.component) {
         return (
@@ -26,13 +37,25 @@ const ToolPage = () => {
         )
     }
 
+    const handleReady = () => {
+        gsap.to(loaderRef.current, {
+            opacity: 0,
+            duration: 0.8,
+            onComplete: () => setLoading(false)
+        })
+    }
+
     return (
-        <Suspense fallback={<Loader/>}>
-            <Layout>
-                <ToolPageHeader />
-                <Tool files={files} setFiles={setFiles} />
-            </Layout>
-        </Suspense>
+        <>
+        <Layout>
+            <ToolPageHeader />
+            <Suspense fallback={null}>
+                <ToolReadyChecker Tool={Tool} onReady={handleReady} files={files} setFiles={setFiles} />
+            </Suspense>
+        </Layout>
+
+        {loading && <Loader ref={loaderRef} />}
+        </>
     )
 }
 
