@@ -1,16 +1,17 @@
 import React from 'react'
 import { useRef, useState } from 'react'
 
-const ToolPageDropZone = () => {
+const ToolPageDropZone = (props) => {
 
     const fileInputRef = useRef(null)
     const containerRef = useRef(null)
     const [isDragging, setIsDragging] = useState(false)
+    const setFiles = props.setFiles
 
     const handleFiles = (fileList) => {
         const files = Array.from(fileList)
         if (files.length === 0) return
-        console.log(files)
+        setFiles(files)
     }
 
     const handleBrowseClick = () => {

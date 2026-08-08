@@ -11,7 +11,7 @@ import { CornerUpLeft, Frown } from 'lucide-react'
 const ToolPage = () => {
     const { toolId } = useParams()
     const tool = getTool(toolId)
-    const [firstAppearance, setFirstAppearance] = useState(true)
+    const [files, setFiles] = useState([])
 
     if (!tool || tool.comingSoon || !tool.component) {
         return (
@@ -20,9 +20,9 @@ const ToolPage = () => {
     }
     const Tool = tool.component
 
-    if (firstAppearance) {
+    if (files.length < 1) {
         return (
-            <ToolPageEmptyLook />
+            <ToolPageEmptyLook setFiles={setFiles} />
         )
     }
 
@@ -30,7 +30,7 @@ const ToolPage = () => {
         <Suspense fallback={<Loader/>}>
             <Layout>
                 <ToolPageHeader />
-                <Tool />
+                <Tool files={files} setFiles={setFiles} />
             </Layout>
         </Suspense>
     )

@@ -1,8 +1,16 @@
 import React from 'react'
 
-const CompressTool = () => {
+const CompressTool = (props) => {
+
+    const files = props.files
+    const setFiles = props.setFiles
+
+    console.log(files)
+
     return (
-        <div>CompressTool</div>
+        <div>
+            {files[0].name}
+        </div>
     )
 }
 

@@ -6,7 +6,7 @@ import ToolPageNotFound from './ToolPageNotFound'
 import ToolPageHeader from './ToolPageHeader'
 import ToolPageDropZone from './ToolPageDropZone'
 
-const FirstToolAppearance = (props) => {
+const ToolPageEmptyLook = (props) => {
     const { toolId } = useParams()
     const tool = getTool(toolId)
 
@@ -21,11 +21,11 @@ const FirstToolAppearance = (props) => {
                     <video src={props.video}></video>
                     <h1>Drag or Browse Files to compress</h1>
                 </div>
-                <ToolPageDropZone />
+                <ToolPageDropZone setFiles={props.setFiles} />
             </div>
         </Suspense>
         </Layout>
     )
 }
 
-export default FirstToolAppearance
+export default ToolPageEmptyLook
