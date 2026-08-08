@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { Image } from 'lucide-react'
+import { Images } from 'lucide-react'
 
 const HeroIcon = () => {
 
@@ -44,7 +44,7 @@ const HeroIcon = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <Image ref={iconRef} color="#e8a33d" size={200}/>
+            <Images ref={iconRef} color="#e8a33d" size={200}/>
         </div>
         </>
     )
