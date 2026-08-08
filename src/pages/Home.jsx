@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Layout from '../components/Layout'
 import ToolCard from '../components/ToolCard'
-import Hero from '../components/Hero'
+import Hero from '../components/hero-comps/Hero'
 import Loader from '../components/Loader'
 import { tools } from '../tools/toolsRegistry'
 import gsap from 'gsap'
