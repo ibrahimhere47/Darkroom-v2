@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import Layout from '../Layout'
 import { getTool } from '../../tools/toolsRegistry'
 import ToolPageNotFound from './ToolPageNotFound'
+import ToolPageHeader from './ToolPageHeader'
 
 const FirstToolAppearance = () => {
     const { toolId } = useParams()
@@ -12,13 +13,7 @@ const FirstToolAppearance = () => {
 
     return (
         <Layout>
-        <div className="tool-page-header">
-            <Link to="/" className="back-link mono">
-            ← All tools
-            </Link>
-            <h1>{tool.name}</h1>
-            <p>{tool.tagline}</p>
-        </div>
+        <ToolPageHeader />
         <Suspense fallback={<p className="mono">Loading tool…</p>}>
             <div></div>
         </Suspense>

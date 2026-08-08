@@ -2,8 +2,9 @@ import { Suspense, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getTool } from '../tools/toolsRegistry.js'
 import Layout from '../components/Layout.jsx'
-import FirstToolAppearance from '../components/tool-page-comps/FirstToolAppearance.jsx'
+import FirstToolAppearance from '../components/tool-page-comps/ToolPageFirstLook.jsx'
 import ToolPageNotFound from '../components/tool-page-comps/ToolPageNotFound.jsx'
+import ToolPageHeader from '../components/tool-page-comps/ToolPageHeader.jsx'
 import { CornerUpLeft, Frown } from 'lucide-react'
 
 const ToolPage = () => {
@@ -26,13 +27,7 @@ const ToolPage = () => {
 
     return (
         <Layout>
-        <div className="tool-page-header">
-            <Link to="/" className="back-link mono">
-            ← All tools
-            </Link>
-            <h1>{tool.name}</h1>
-            <p>{tool.tagline}</p>
-        </div>
+        <ToolPageHeader />
         <Suspense fallback={<p className="mono">Loading tool…</p>}>
             <Tool />
         </Suspense>
