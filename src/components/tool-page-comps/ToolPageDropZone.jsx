@@ -19,7 +19,6 @@ const ToolPageDropZone = (props) => {
     }
 
     const handleInputChange = (e) => {
-        console.log(e)
         handleFiles(e.target.files)
         e.target.value = ''
     }
