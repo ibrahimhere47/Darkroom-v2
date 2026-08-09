@@ -12,7 +12,7 @@ const CompressTool = (props) => {
             formData.append("File", files[0]);
             formData.append("Quality", quality);
 
-        const response = await fetch("https://darkroom-v2-backend.railway.internal/compress", {
+        const response = await fetch("darkroom-v2-backend-production.up.railway.app/compress", {
             method: "POST",
             body: formData,
         });
