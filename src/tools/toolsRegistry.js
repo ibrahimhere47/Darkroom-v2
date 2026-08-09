@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Heart, Crop, Blend, Image, ArrowBigDownDash } from 'lucide-react'
+import { Crop, Blend, Image, ArrowBigDownDash } from 'lucide-react'
 
 export const tools = [
     {

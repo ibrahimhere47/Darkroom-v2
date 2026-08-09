@@ -1,29 +1,65 @@
-import React, { Suspense, useRef, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import React, { Suspense, useRef } from 'react'
+import { useParams } from 'react-router-dom'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 import Layout from '../Layout'
 import { getTool } from '../../tools/toolsRegistry'
 import ToolPageNotFound from './ToolPageNotFound'
 import ToolPageHeader from './ToolPageHeader'
 import ToolPageDropZone from './ToolPageDropZone'
 
+gsap.registerPlugin(useGSAP)
+
 const ToolPageEmptyLook = (props) => {
     const { toolId } = useParams()
     const tool = getTool(toolId)
 
-    if (!tool) return <ToolPageNotFound/>
+    const containerRef = useRef(null)
+    const blobRef = useRef(null)
+
+    if (!tool) return <ToolPageNotFound />
+
+    useGSAP(() => {
+        gsap.to(blobRef.current, {
+            x: 80,
+            y: -50,
+            scale: 1.15,
+            duration: 14,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+        })
+    }, { scope: containerRef })
 
     return (
         <Layout>
-        <ToolPageHeader />
-        <Suspense fallback={<p className="mono">Loading tool…</p>}>
-            <div className='flex w-full h-[80vh] justify-center my-16'>
-                <div className='w-1/2 h-full flex flex-col justify-center'>
-                    <video src={props.video}></video>
-                    <h1>Drag or Browse Files to compress</h1>
+            <ToolPageHeader />
+                <div
+                    ref={containerRef}
+                    className="relative flex flex-col items-center justify-center w-full min-h-[80vh] my-16 px-6 overflow-hidden isolate"
+                >
+                    <div
+                        ref={blobRef}
+                        className="pointer-events-none absolute inset-0 flex items-start justify-center z-0"
+                    >
+                        <div
+                            className="w-150 h-150 rounded-full blur-3xl opacity-25"
+                            style={{
+                                background: 'radial-gradient(circle, rgba(217,143,58,0.7), transparent 70%)',
+                            }}
+                        />
+                    </div>
+
+                    <div className="text-center max-w-lg mb-10">
+                        <h1 className="text-5xl font-zilla flex flex-wrap justify-center gap-x-3 gap-y-1">
+                            Drag or Browse Files to {tool.id}
+                        </h1>
+                    </div>
+
+                    <div className='w-5/6 h-full'>
+                        <ToolPageDropZone setFiles={props.setFiles} />
+                    </div>
                 </div>
-                <ToolPageDropZone setFiles={props.setFiles} />
-            </div>
-        </Suspense>
         </Layout>
     )
 }
