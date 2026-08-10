@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { Download, DownloadCloud, Loader2, SlidersHorizontal, ImageOff } from 'lucide-react'
+import { Download, DownloadCloud, Loader2, Trash2 } from 'lucide-react'
 
 const CompressTool = (props) => {
 
@@ -20,14 +20,19 @@ const CompressTool = (props) => {
         [files]
     )
 
-    const hasResults = imageUrl.length > 0
-    const displayUrls = hasResults ? imageUrl : previewUrls
+    const hasResults = imageUrl.some(Boolean)
+
+    const items = files.map((file, idx) => ({
+        file,
+        previewUrl: previewUrls[idx],
+        resultUrl: imageUrl[idx] || null,
+    }))
 
     const handleCompress = async () => {
         setIsCompressing(true)
-        setImageUrl([])
+        setImageUrl(new Array(files.length).fill(null))
 
-        await Promise.all(files.map(async (file) => {
+        await Promise.all(files.map(async (file, idx) => {
             const formData = new FormData()
             formData.append("File", file)
             formData.append("Quality", quality)
@@ -44,7 +49,13 @@ const CompressTool = (props) => {
                 }
 
                 const blob = await response.blob()
-                setImageUrl(prev => [...prev, URL.createObjectURL(blob)])
+                const url = URL.createObjectURL(blob)
+
+                setImageUrl(prev => {
+                    const next = [...prev]
+                    next[idx] = url
+                    return next
+                })
             } catch (err) {
                 console.error(err)
             }
@@ -63,13 +74,31 @@ const CompressTool = (props) => {
     }
 
     const handleDownloadAll = () => {
-        imageUrl.forEach((url, idx) => {
-            setTimeout(() => handleDownload(url, idx), idx * 200)
+        items.forEach((item, idx) => {
+            if (item.resultUrl) {
+                setTimeout(() => handleDownload(item.resultUrl, idx), idx * 200)
+            }
+        })
+    }
+
+    const removeFile = (idx) => {
+        setFiles(prev => prev.filter((_, i) => i !== idx))
+        setImageUrl(prev => prev.filter((_, i) => i !== idx))
+    }
+
+    const handleRemoveClick = (e, idx) => {
+        const frame = e.currentTarget.closest('.result-frame')
+        gsap.to(frame, {
+            opacity: 0,
+            scale: 0.9,
+            duration: 0.25,
+            ease: 'power2.in',
+            onComplete: () => removeFile(idx),
         })
     }
 
     useGSAP(() => {
-        if (imageUrl.length > 0) {
+        if (hasResults) {
             gsap.fromTo(
                 '.result-frame',
                 { opacity: 0, y: 14, scale: 0.97 },
@@ -105,29 +134,42 @@ const CompressTool = (props) => {
                     </div>
                 ) : (
                     <div className='relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4'>
-                        {displayUrls.map((elem, idx) => (
-                            <div
-                                key={idx}
-                                className={`result-frame group relative rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 ${hasResults ? '' : 'opacity-70'}`}
-                            >
-                                <img src={elem} className='w-full h-40 object-cover' />
+                        {items.map((item, idx) => {
+                            const shownUrl = item.resultUrl || item.previewUrl
+                            const isDeveloped = Boolean(item.resultUrl)
 
-                                {hasResults && (
-                                    <>
-                                        <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300' />
-                                        <button
-                                            onClick={(e) => handleDownloadClick(e, elem, idx)}
-                                            className='absolute top-2 right-2 bg-black/70 hover:bg-amber-47 hover:text-black text-white p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-200'
-                                        >
-                                            <Download size={16} />
-                                        </button>
-                                        <span className='absolute bottom-2 left-2 text-[10px] tracking-wider text-amber-47/90 bg-black/60 px-2 py-0.5 rounded-full'>
-                                            developed
-                                        </span>
-                                    </>
-                                )}
-                            </div>
-                        ))}
+                            return (
+                                <div
+                                    key={idx}
+                                    className={`result-frame group relative rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 ${isDeveloped ? '' : 'opacity-70'}`}
+                                >
+                                    <img src={shownUrl} className='w-full h-40 object-cover' />
+
+                                    <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300' />
+
+                                    <button
+                                        onClick={(e) => handleRemoveClick(e, idx)}
+                                        className='absolute top-2 left-2 bg-black/70 hover:bg-red-500 hover:text-white text-neutral-300 p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300'
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
+
+                                    {isDeveloped && (
+                                        <>
+                                            <button
+                                                onClick={(e) => handleDownloadClick(e, item.resultUrl, idx)}
+                                                className='absolute top-2 right-2 bg-black/70 hover:bg-amber-47 hover:text-black text-white p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-200'
+                                            >
+                                                <Download size={16} />
+                                            </button>
+                                            <span className='absolute bottom-2 left-2 text-[10px] tracking-wider text-amber-47/90 bg-black/60 px-2 py-0.5 rounded-full'>
+                                                developed
+                                            </span>
+                                        </>
+                                    )}
+                                </div>
+                            )
+                        })}
                     </div>
                 )}
             </div>
@@ -136,15 +178,15 @@ const CompressTool = (props) => {
                 <div className='flex flex-col gap-6'>
                     <div className='flex flex-col gap-3'>
                         <div>
-                            <p className='text-sm tracking-widest text-neutral-500 uppercase mb-1'>Develop</p>
-                            <p className='text-sm text-neutral-400'>Adjust quality, then compress your batch.</p>
+                            <p className='text-sm tracking-widest text-neutral-400 uppercase mb-1'>Develop</p>
+                            <p className='text-sm text-neutral-300'>Adjust quality, then compress your batch.</p>
                         </div>
                         <div className='border-b border-b-neutral-600' />
                     </div>
 
                     <div>
                         <div className='flex justify-between items-center mb-2'>
-                            <span className='text-sm tracking-widest text-neutral-500 uppercase'>Quality</span>
+                            <span className='text-sm tracking-widest text-neutral-400 uppercase'>Quality</span>
                             <span className='text-amber-47 text-lg font-semibold font-mono'>{quality}</span>
                         </div>
                         <input
@@ -156,7 +198,7 @@ const CompressTool = (props) => {
                             disabled={isCompressing}
                             className='w-full h-1.5 rounded-full appearance-none bg-neutral-700 accent-amber-47 cursor-pointer disabled:opacity-40'
                         />
-                        <div className='flex justify-between text-[14px] text-neutral-600 mt-1 font-mono'>
+                        <div className='flex justify-between text-[14px] text-neutral-300 mt-1 font-mono'>
                             <span>10</span>
                             <span>100</span>
                         </div>
@@ -195,7 +237,7 @@ const CompressTool = (props) => {
 
                     <p className='text-[11px] text-neutral-600 leading-relaxed'>
                         {files.length} {files.length === 1 ? 'image' : 'images'} loaded
-                        {hasResults && ` · ${imageUrl.length} developed`}
+                        {hasResults && ` · ${imageUrl.filter(Boolean).length} developed`}
                     </p>
                 </div>
             </div>
