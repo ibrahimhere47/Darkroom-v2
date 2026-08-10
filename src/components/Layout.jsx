@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
                     <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
                     <span>Darkroom</span>
                 </Link>
-                <p className='mono'>Your image toolkit</p>
+                <p className='mono hidden md:block'>Your image toolkit</p>
             </header>
             <main className='mx-8'>{children}</main>
             <footer className='flex items-baseline justify-between py-12 mx-8 border-t-neutral-400 border-t'>
