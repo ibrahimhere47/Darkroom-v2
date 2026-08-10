@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { Plus } from 'lucide-react'
@@ -32,14 +32,35 @@ const ToolStage = ({
     // Re-run the entrance animation whenever items are added/removed or
     // results come in (previews -> processed swap).
     const revealSignature = `${items.length}:${items.map((item) => (item.resultUrl ? '1' : '0')).join('')}`
+    const [revealed, setRevealed] = useState(false)
 
     useGSAP(() => {
-        if (!isProcessing && items.length > 0) {
+        if (!isProcessing && items.length > 0 && !revealed) {
             gsap.fromTo(
                 '.result-frame',
-                { opacity: 0, y: 14, scale: 0.97 },
-                { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out', stagger: 0.08 }
+                { 
+                    opacity: 0,
+                    y: 14, 
+                    scale: 0.97 
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.5,
+                    ease: 'power3.out',
+                    stagger: 0.08,
+                    onComplete: () => setRevealed(true),
+                }
             )
+        }
+        else {
+            gsap.to('.result-frame', {
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                y: 0,
+            })
         }
     }, [revealSignature, isProcessing])
 
@@ -77,7 +98,7 @@ const ToolStage = ({
                     {onAddFiles && (
                         <div className='flex flex-col items-center'>
                             <button
-                                className='flex gap-1 font-mono font-semibold rounded-full bg-amber-47/95 p-1.5 text-black cursor-pointer hover:bg-amber-47 transition-all duration-350'
+                                className='flex gap-1 font-mono font-semibold rounded-full bg-amber-47/95 p-1.5 px-2 text-black cursor-pointer hover:bg-amber-47 transition-all duration-350'
                                 onClick={() => fileInputRef.current?.click()}
                             >
                                 <Plus /> {addLabel}
