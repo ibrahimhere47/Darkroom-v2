@@ -34,7 +34,10 @@ const Home = () => {
                 <div className='bg-neutral-900 rounded-2xl p-10 border border-neutral-700'>
                     <div className='flex flex-wrap gap-4'>
                     {tools.map((tool, idx) => (
-                        <div key={idx} className='w-[calc(25%-12px)] min-w-0 shrink-0'>
+                        <div
+                            key={idx}
+                            className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] xl:w-[calc(20%-13px)] min-w-0 shrink-0'
+                        >
                             <ToolCard tool={tool} />
                         </div>
                     ))}
