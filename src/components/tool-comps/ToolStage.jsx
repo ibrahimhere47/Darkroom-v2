@@ -80,6 +80,7 @@ const ToolStage = ({
                     )}
                 </div>
             ) : (
+                <div className='min-w-full min-h-114 flex flex-col justify-between'>
                 <div className='flex flex-col gap-8'>
                     <div className='relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4'>
                         {items.map((item, idx) => (
@@ -94,25 +95,25 @@ const ToolStage = ({
                             />
                         ))}
                     </div>
-
-                    {onAddFiles && (
-                        <div className='flex flex-col items-center'>
-                            <button
-                                className='flex gap-1 font-mono font-semibold rounded-full bg-amber-47/95 p-1.5 px-2 text-black cursor-pointer hover:bg-amber-47 transition-all duration-350'
-                                onClick={() => fileInputRef.current?.click()}
-                            >
-                                <Plus /> {addLabel}
-                            </button>
-                            <input
-                                type='file'
-                                ref={fileInputRef}
-                                onChange={handleInputChange}
-                                accept='image/*'
-                                multiple
-                                style={{ display: 'none' }}
-                            />
-                        </div>
-                    )}
+                </div>
+                {onAddFiles && (
+                    <div className='flex flex-col items-center'>
+                        <button
+                            className='flex gap-1 font-mono font-semibold rounded-full bg-amber-47/95 p-1.5 px-2 text-black cursor-pointer hover:bg-amber-47 transition-all duration-350'
+                            onClick={() => fileInputRef.current?.click()}
+                        >
+                            <Plus /> {addLabel}
+                        </button>
+                        <input
+                            type='file'
+                            ref={fileInputRef}
+                            onChange={handleInputChange}
+                            accept='image/*'
+                            multiple
+                            style={{ display: 'none' }}
+                        />
+                    </div>
+                )}
                 </div>
             )}
         </div>
