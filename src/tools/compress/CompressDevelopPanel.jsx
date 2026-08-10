@@ -1,10 +1,6 @@
 import React from 'react'
 import {
-    SidebarPanel,
     SidebarSection,
-    StatHighlight,
-    ProgressBar,
-    StatRowList,
 } from '../../components/tool-comps/ToolSidebar'
 
 const CompressDevelopPanel = (props) => {

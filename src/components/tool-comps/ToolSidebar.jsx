@@ -3,14 +3,14 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
 /** Outer w-85 panel every tool's sidebar lives in. */
-export const SidebarPanel = ({ children }) => (
+const SidebarPanel = ({ children }) => (
     <div className='w-full lg:w-85 shrink-0 rounded-2xl bg-neutral-900 border border-neutral-800 p-6 flex flex-col justify-between'>
         {children}
     </div>
 )
 
 /** Eyebrow label + optional description + divider, used at the top of every sidebar state. */
-export const SidebarSection = ({ eyebrow, description, children }) => (
+const SidebarSection = ({ eyebrow, description, children }) => (
     <div className='flex flex-col gap-3'>
         <div>
             <p className='text-sm tracking-widest text-neutral-400 uppercase mb-1'>{eyebrow}</p>
@@ -22,7 +22,7 @@ export const SidebarSection = ({ eyebrow, description, children }) => (
 )
 
 /** Big headline stat, e.g. "42% smaller". */
-export const StatHighlight = ({ value, label }) => (
+const StatHighlight = ({ value, label }) => (
     <div className='flex flex-col gap-1'>
         <span className='text-5xl font-semibold text-amber-47 leading-none font-body'>{value}</span>
         <span className='text-xs tracking-widest text-neutral-500 uppercase'>{label}</span>
@@ -34,7 +34,7 @@ export const StatHighlight = ({ value, label }) => (
  * left/right captions underneath. `animateKey` should change whenever the
  * bar should replay its fill animation (e.g. when results first appear).
  */
-export const ProgressBar = ({ ratio, leftLabel, rightLabel, animateKey }) => {
+const ProgressBar = ({ ratio, leftLabel, rightLabel, animateKey }) => {
     const fillRef = useRef(null)
 
     useGSAP(() => {
@@ -63,7 +63,7 @@ export const ProgressBar = ({ ratio, leftLabel, rightLabel, animateKey }) => {
 }
 
 /** One label/value line, e.g. "Original size ... 4.2 MB". */
-export const StatRow = ({ label, value, highlight }) => (
+const StatRow = ({ label, value, highlight }) => (
     <div className='flex justify-between'>
         <span>{label}</span>
         <span className={highlight ? 'text-amber-47' : 'text-neutral-300'}>{value}</span>
@@ -71,10 +71,19 @@ export const StatRow = ({ label, value, highlight }) => (
 )
 
 /** A stack of StatRows. */
-export const StatRowList = ({ rows }) => (
+const StatRowList = ({ rows }) => (
     <div className='flex flex-col gap-2 text-[11px] text-neutral-500'>
         {rows.map((row, idx) => (
             <StatRow key={idx} {...row} />
         ))}
     </div>
 )
+
+export {
+    SidebarPanel,
+    SidebarSection,
+    StatHighlight,
+    ProgressBar,
+    StatRow,
+    StatRowList,
+}
