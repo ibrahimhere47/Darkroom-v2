@@ -5,9 +5,8 @@ import { useState, useMemo, useCallback } from 'react'
  * Handles preview URLs, per-file results, and add/remove of files, so each
  * tool only needs to supply its own processing logic (the actual API call).
  *
- * @param {File[]} files
- * @param {(updater: (prev: File[]) => File[]) => void} setFiles
  */
+
 const useToolFiles = (files, setFiles) => {
     const [resultUrls, setResultUrls] = useState([])
     const [resultMeta, setResultMeta] = useState([])
