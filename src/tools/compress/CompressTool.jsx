@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { Download, DownloadCloud, Loader2, Trash2, RotateCcw } from 'lucide-react'
+import { Download, DownloadCloud, Loader2, Trash2, RotateCcw, Plus } from 'lucide-react'
 import formatBytes from '../../utils/formatBytes'
 
 const CompressTool = (props) => {
@@ -18,6 +18,7 @@ const CompressTool = (props) => {
     const downloadAllRef = useRef(null)
     const recompressRef = useRef(null)
     const barFillRef = useRef(null)
+    const fileInputRef = useRef(null)
 
     const previewUrls = useMemo(
         () => files.map((file) => URL.createObjectURL(file)),
@@ -157,6 +158,17 @@ const CompressTool = (props) => {
         handleDownload(url, idx)
     }
 
+    const handleInputChange = (e) => {
+        handleFiles(e.target.files)
+        e.target.value = ''
+    }
+
+    const handleFiles = (fileList) => {
+        const newFiles = Array.from(fileList)
+        if (newFiles.length === 0) return
+        setFiles((prev) => [...prev, ...newFiles])
+    }
+
     return (
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
@@ -171,6 +183,7 @@ const CompressTool = (props) => {
                         <div className='w-10 h-10 border-4 border-neutral-700 border-t-amber-47 rounded-full animate-spin' />
                     </div>
                 ) : (
+                    <div className='flex flex-col gap-8'>
                     <div className='relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4'>
                         {items.map((item, idx) => {
                             const shownUrl = item.resultUrl || item.previewUrl
@@ -208,6 +221,25 @@ const CompressTool = (props) => {
                                 </div>
                             )
                         })}
+                    </div>
+                    <div className='flex flex-col items-center'>
+                        <button 
+                            className='flex gap-1 font-mono font-semibold rounded-full bg-amber-47/95 p-1.5 text-black cursor-pointer hover:bg-amber-47 transition-all duration-350'
+                            onClick={() => {
+                                fileInputRef.current?.click()
+                            }}
+                        >
+                            <Plus /> Add Images
+                        </button>
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleInputChange}
+                            accept="image/*"
+                            multiple
+                            style={{ display: 'none' }}
+                        />
+                    </div>
                     </div>
                 )}
             </div>
