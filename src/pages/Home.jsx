@@ -29,7 +29,7 @@ const Home = () => {
     return (
         <>
         <Layout>
-            <div className='py-10 w-full'>
+            <div className='py-8 md:py-10 w-full'>
                 <Hero />
                 <div className='bg-neutral-900 rounded-2xl p-5 md:p-10 md:border border-neutral-700'>
                     <div className='flex flex-wrap gap-4'>
