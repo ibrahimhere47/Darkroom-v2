@@ -13,6 +13,8 @@ import {
     ProgressBar,
     StatRowList,
 } from '../../components/tool-comps/ToolSidebar'
+import CompressDevelopedPanel from './CompressDevelopedPanel'
+import CompressDevelopPanel from './CompressDevelopPanel'
 
 const CompressTool = (props) => {
 
@@ -97,54 +99,23 @@ const CompressTool = (props) => {
 
                 {allDeveloped ? (
                     // ---- Developed panel ----
-                    <div className='flex flex-col gap-6 mb-11'>
-                        <SidebarSection
-                            eyebrow='Developed'
-                            description={`${files.length} ${files.length === 1 ? 'image' : 'images'} processed at ${quality}% quality.`}
-                        />
-
-                        <StatHighlight value={`${savedPercent}%`} label='smaller' />
-
-                        <ProgressBar
-                            ratio={compressedRatio}
-                            leftLabel={`${formatBytes(compressedTotal)} now`}
-                            rightLabel={`${formatBytes(originalTotal)} original`}
-                            animateKey={allDeveloped}
-                        />
-
-                        <StatRowList
-                            rows={[
-                                { label: 'Original size', value: formatBytes(originalTotal) },
-                                { label: 'Compressed size', value: formatBytes(compressedTotal) },
-                                { label: 'Saved', value: formatBytes(savedBytes), highlight: true },
-                            ]}
-                        />
-                    </div>
+                    <CompressDevelopedPanel
+                        files={files}
+                        quality={quality}
+                        originalTotal={originalTotal}
+                        compressedTotal={compressedTotal}
+                        savedBytes={savedBytes}
+                        savedPercent={savedPercent}
+                        compressedRatio={compressedRatio}
+                        allDeveloped={allDeveloped}
+                    />
                 ) : (
                     // ---- Develop panel ----
-                    <div className='flex flex-col gap-6'>
-                        <SidebarSection eyebrow='Develop' description='Adjust quality, then compress your batch.' />
-
-                        <div>
-                            <div className='flex justify-between items-center mb-2'>
-                                <span className='text-sm tracking-widest text-neutral-400 uppercase'>Quality</span>
-                                <span className='text-amber-47 text-lg font-semibold font-mono'>{quality}</span>
-                            </div>
-                            <input
-                                type='range'
-                                min='10'
-                                max='100'
-                                value={quality}
-                                onChange={(e) => setQuality(Number(e.target.value))}
-                                disabled={isCompressing}
-                                className='w-full h-1.5 rounded-full appearance-none bg-neutral-700 accent-amber-47 cursor-pointer disabled:opacity-40'
-                            />
-                            <div className='flex justify-between text-[14px] text-neutral-300 mt-1 font-mono'>
-                                <span>10</span>
-                                <span>100</span>
-                            </div>
-                        </div>
-                    </div>
+                    <CompressDevelopPanel
+                        quality={quality}
+                        setQuality={setQuality}
+                        isCompressing={isCompressing}
+                    />
                 )}
 
                 <div className='w-full flex flex-col gap-4 items-center'>
