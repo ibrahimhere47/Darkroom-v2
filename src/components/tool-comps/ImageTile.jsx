@@ -11,9 +11,9 @@ const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, onRemove, onDown
 
     return (
         <div
-            className={`result-frame group relative rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 ${isProcessed ? '' : 'opacity-70'}`}
+            className={`result-frame group relative rounded-xl overflow-hidden border border-neutral-800 bg-neutral-950 ${isProcessed ? '' : 'opacity-70'}`}
         >
-            <img src={shownUrl} className='w-full h-40 object-cover' />
+            <img src={shownUrl} className='w-full h-40 object-contain' />
 
             <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300' />
 
