@@ -31,7 +31,7 @@ export const tools = [
         name: 'Convert format',
         tagline: 'Move between JPEG, PNG, WebP, and AVIF depending on whatever you need',
         icon: Image,
-        comingSoon: true,
+        component: lazy(() => import('./convert/ConvertTool.jsx'))
     },
     {
         id: 'remove-background',
