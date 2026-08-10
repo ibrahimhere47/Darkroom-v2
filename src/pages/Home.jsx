@@ -6,10 +6,13 @@ import Loader from '../components/Loader'
 import { tools } from '../tools/toolsRegistry'
 import gsap from 'gsap'
 
-const Home = () => {
+const LOADER_SEEN_KEY = 'hasSeenLoader'
 
-    //Animating Loader
-    const [loading, setLoading] = useState(true);
+const Home = () => {
+    // Only show the loader if it hasn't been shown yet this session
+    const [showLoader, setShowLoader] = useState(
+        () => typeof window !== 'undefined' && !sessionStorage.getItem(LOADER_SEEN_KEY)
+    )
     const loaderRef = useRef(null)
 
     useEffect(() => {
@@ -18,37 +21,40 @@ const Home = () => {
                 opacity: 0,
                 duration: 0.8,
                 onComplete: () => {
-                    setLoading(false)
+                    console.log('[Loader] gsap onComplete fired, setting sessionStorage')
+                    setShowLoader(false)
+                    sessionStorage.setItem(LOADER_SEEN_KEY, 'true')
+                    console.log('[Loader] sessionStorage now:', sessionStorage.getItem(LOADER_SEEN_KEY))
                 }
             })
-        }, 1500);
+        }, 1500)
 
-        return () => clearTimeout(timer);
-    }, []);
+        return () => {
+            clearTimeout(timer)
+        }
+    }, [showLoader])
 
     return (
         <>
-        <Layout>
-            <div className='py-8 md:py-10 w-full'>
-                <Hero />
-                <div className='bg-neutral-900 rounded-2xl p-5 md:p-10 md:border border-neutral-700'>
-                    <div className='flex flex-wrap gap-4'>
-                    {tools.map((tool, idx) => (
-                        <div
-                            key={idx}
-                            className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] [@media(min-width:2560px)]:w-[calc(20%-13px)] min-w-0 shrink-0'
-                        >
-                            <ToolCard tool={tool} />
+            <Layout>
+                <div className='py-8 md:py-10 w-full'>
+                    <Hero />
+                    <div className='bg-neutral-900 rounded-2xl p-5 md:p-10 md:border border-neutral-700'>
+                        <div className='flex flex-wrap gap-4'>
+                            {tools.map((tool, idx) => (
+                                <div
+                                    key={idx}
+                                    className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] [@media(min-width:2560px)]:w-[calc(20%-13px)] min-w-0 shrink-0'
+                                >
+                                    <ToolCard tool={tool} />
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
-                </div>
-            </div>
-        </Layout>
+            </Layout>
 
-        {loading && (
-            <Loader ref={loaderRef} />
-        )}
+            {showLoader ? <Loader ref={loaderRef} /> : null}
         </>
     )
 }
