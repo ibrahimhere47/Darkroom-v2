@@ -7,7 +7,7 @@ const ToolPageHeader = () => {
     const tool = getTool(toolId)
 
     return (
-        <div className="flex my-8 px-5 justify-between items-center">
+        <div className="flex mt-8 px-5 justify-between items-center">
             <Link to="/" className="mono">
             ← All tools
             </Link>
