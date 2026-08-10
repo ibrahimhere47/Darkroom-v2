@@ -1,12 +1,15 @@
 import React from 'react'
-import { Download, Trash2 } from 'lucide-react'
+import { Download, Trash2, ArrowRight } from 'lucide-react'
 
 /**
  * One thumbnail in a tool's image grid. Shows the result once processed
  * (falling back to the original preview), with hover-revealed remove /
  * download actions and an optional badge (e.g. file size, dimensions).
+ *
+ * `hoverSize` (optional): { current: string, estimated: string } — shown
+ * on hover before the image is processed, as "current → estimated".
  */
-const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, onRemove, onDownload }) => {
+const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, onRemove, onDownload }) => {
     const shownUrl = resultUrl || previewUrl
 
     return (
@@ -42,6 +45,14 @@ const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, onRemove, onDown
                         </span>
                     )}
                 </>
+            )}
+
+            {!isProcessed && hoverSize && (
+                <span className='absolute top-1/2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[15px] tracking-wider text-neutral-200 bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300'>
+                    {hoverSize.current}
+                    <ArrowRight size={16} className='text-amber-47' />
+                    {hoverSize.estimated}
+                </span>
             )}
         </div>
     )

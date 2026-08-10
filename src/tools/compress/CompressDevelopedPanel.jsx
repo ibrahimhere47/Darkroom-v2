@@ -11,7 +11,6 @@ const CompressDevelopedPanel = (props) => {
     const { files, quality, originalTotal, compressedTotal, savedBytes, savedPercent, compressedRatio, allDeveloped } = props
 
     return (
-        // ---- Developed panel ----
         <div className='flex flex-col gap-6 mb-11'>
             <SidebarSection
                 eyebrow='Developed'

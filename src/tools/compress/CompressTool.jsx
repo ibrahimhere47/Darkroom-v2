@@ -83,6 +83,16 @@ const CompressTool = (props) => {
         downloadFile(url, `compressed-${idx + 1}.jpg`)
     }
 
+    const estimateRatio = (quality) => {
+        const q = Math.min(Math.max(quality, 1), 100) / 100
+        return 0.12 + 0.75 * Math.pow(q, 1.4)
+    }
+
+    const getHoverSize = (item, file) => ({
+        current: formatBytes(file.size),
+        estimated: `~${formatBytes(file.size * estimateRatio(quality))}`,
+    })
+
     return (
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
@@ -92,6 +102,7 @@ const CompressTool = (props) => {
                 onRemove={handleRemoveClick}
                 onDownload={handleDownloadClick}
                 getBadge={(item) => item.resultMeta ? formatBytes(item.resultMeta.size) : null}
+                getHoverSize={(item, idx) => getHoverSize(item, files[idx])}
                 onAddFiles={addFiles}
             />
 
@@ -115,6 +126,7 @@ const CompressTool = (props) => {
                         quality={quality}
                         setQuality={setQuality}
                         isCompressing={isCompressing}
+                        originalTotal={originalTotal}
                     />
                 )}
 

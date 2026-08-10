@@ -23,6 +23,7 @@ const ToolStage = ({
     onRemove,
     onDownload,
     getBadge,
+    getHoverSize,
     onAddFiles,
     addLabel = 'Add Images',
     loadingContent,
@@ -90,6 +91,7 @@ const ToolStage = ({
                                 resultUrl={item.resultUrl}
                                 isProcessed={Boolean(item.resultUrl)}
                                 badge={getBadge ? getBadge(item, idx) : null}
+                                hoverSize={!item.resultMeta && getHoverSize ? getHoverSize(item, idx) : null}
                                 onRemove={onRemove ? (e) => onRemove(e, idx) : undefined}
                                 onDownload={onDownload && item.resultUrl ? (e) => onDownload(e, item.resultUrl, idx) : undefined}
                             />

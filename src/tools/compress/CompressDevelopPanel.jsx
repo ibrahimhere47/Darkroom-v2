@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
     SidebarSection,
 } from '../../components/tool-comps/ToolSidebar'
+import formatBytes from '../../utils/formatBytes'
+
+const estimateRatio = (quality) => {
+    const q = Math.min(Math.max(quality, 1), 100) / 100
+    return 0.12 + 0.75 * Math.pow(q, 1.4)
+}
 
 const CompressDevelopPanel = (props) => {
-    const { quality, setQuality, isCompressing } = props
+    const { quality, setQuality, isCompressing, originalTotal } = props
+
+    const estimatedTotal = useMemo(
+        () => originalTotal * estimateRatio(quality),
+        [originalTotal, quality]
+    )
 
     return (
         <div className='flex flex-col gap-6'>
@@ -29,6 +40,15 @@ const CompressDevelopPanel = (props) => {
                     <span>100</span>
                 </div>
             </div>
+
+            {originalTotal > 0 && (
+                <div className='flex justify-between items-center'>
+                    <span className='text-sm tracking-widest text-neutral-400 uppercase'>Est. size</span>
+                    <span className='text-neutral-200 text-lg font-mono font-semibold'>
+                        ~{formatBytes(estimatedTotal)}
+                    </span>
+                </div>
+            )}
         </div>
     )
 }
