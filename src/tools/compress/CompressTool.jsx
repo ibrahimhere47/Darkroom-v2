@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { Download, DownloadCloud, Loader2, SlidersHorizontal } from 'lucide-react'
+import { Download, DownloadCloud, Loader2, SlidersHorizontal, ImageOff } from 'lucide-react'
 
 const CompressTool = (props) => {
 
@@ -97,9 +97,13 @@ const CompressTool = (props) => {
                 ref={stageRef}
                 className='relative flex-1 min-h-105 rounded-2xl bg-black border border-neutral-800 p-6 overflow-hidden'
             >
-
                 <div className='pointer-events-none absolute top-20 right-80 w-72 h-72 rounded-full bg-amber-47/5 blur-3xl' />
 
+                {isCompressing ? (
+                    <div className='relative z-10 w-full h-full min-h-92.5 flex flex-col items-center justify-center gap-3'>
+                        <div className='w-10 h-10 border-4 border-neutral-700 border-t-amber-47 rounded-full animate-spin' />
+                    </div>
+                ) : (
                     <div className='relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4'>
                         {displayUrls.map((elem, idx) => (
                             <div
@@ -113,11 +117,11 @@ const CompressTool = (props) => {
                                         <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300' />
                                         <button
                                             onClick={(e) => handleDownloadClick(e, elem, idx)}
-                                            className='absolute top-2 right-2 bg-black/70 hover:bg-amber-500 hover:text-black text-white p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-200'
+                                            className='absolute top-2 right-2 bg-black/70 hover:bg-amber-47 hover:text-black text-white p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-200'
                                         >
                                             <Download size={16} />
                                         </button>
-                                        <span className='absolute bottom-2 left-2 text-[10px] tracking-wider text-amber-400/90 bg-black/60 px-2 py-0.5 rounded-full'>
+                                        <span className='absolute bottom-2 left-2 text-[10px] tracking-wider text-amber-47/90 bg-black/60 px-2 py-0.5 rounded-full'>
                                             developed
                                         </span>
                                     </>
@@ -125,6 +129,7 @@ const CompressTool = (props) => {
                             </div>
                         ))}
                     </div>
+                )}
             </div>
 
             <div className='w-full lg:w-72 shrink-0 rounded-2xl bg-neutral-900 border border-neutral-800 p-6 flex flex-col justify-between'>
@@ -140,7 +145,7 @@ const CompressTool = (props) => {
                     <div>
                         <div className='flex justify-between items-center mb-2'>
                             <span className='text-sm tracking-widest text-neutral-500 uppercase'>Quality</span>
-                            <span className='text-amber-400 text-lg font-semibold font-mono'>{quality}</span>
+                            <span className='text-amber-47 text-lg font-semibold font-mono'>{quality}</span>
                         </div>
                         <input
                             type='range'
@@ -149,7 +154,7 @@ const CompressTool = (props) => {
                             value={quality}
                             onChange={(e) => setQuality(Number(e.target.value))}
                             disabled={isCompressing}
-                            className='w-full h-1.5 rounded-full appearance-none bg-neutral-700 accent-amber-500 cursor-pointer disabled:opacity-40'
+                            className='w-full h-1.5 rounded-full appearance-none bg-neutral-700 accent-amber-47 cursor-pointer disabled:opacity-40'
                         />
                         <div className='flex justify-between text-[14px] text-neutral-600 mt-1 font-mono'>
                             <span>10</span>
@@ -164,7 +169,7 @@ const CompressTool = (props) => {
                         {...magnetHover(compressBtnRef)}
                         onClick={handleCompress}
                         disabled={isCompressing || files.length === 0}
-                        className='w-full flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 disabled:bg-neutral-700 disabled:text-neutral-500 text-black font-semibold py-3 rounded-xl cursor-pointer disabled:cursor-not-allowed transition-colors duration-200'
+                        className='w-full flex items-center justify-center gap-2 bg-amber-47 hover:brightness-110 disabled:bg-neutral-700 disabled:text-neutral-500 text-black font-semibold py-4 rounded-xl cursor-pointer disabled:cursor-not-allowed transition-all duration-200'
                     >
                         {isCompressing ? (
                             <>
@@ -181,7 +186,7 @@ const CompressTool = (props) => {
                             ref={downloadAllRef}
                             {...magnetHover(downloadAllRef)}
                             onClick={handleDownloadAll}
-                            className='w-full flex items-center justify-center gap-2 bg-transparent border border-neutral-700 hover:border-amber-500 text-neutral-300 hover:text-amber-400 px-4 py-2.5 rounded-xl cursor-pointer transition-colors duration-200'
+                            className='w-full flex items-center justify-center gap-2 bg-transparent border border-neutral-700 hover:border-amber-47 text-neutral-300 hover:text-amber-47 py-4 rounded-xl cursor-pointer transition-colors duration-200'
                         >
                             <DownloadCloud size={16} />
                             Download all
