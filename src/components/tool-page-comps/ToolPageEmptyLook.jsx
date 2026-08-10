@@ -50,13 +50,13 @@ const ToolPageEmptyLook = (props) => {
                         />
                     </div>
 
-                    <div className="text-center max-w-lg mb-10">
+                    <div className="text-center max-w-lg mb-5 md:mb-8 xl:mb-10">
                         <h1 className="text-3xl sm:text-5xl font-zilla flex flex-wrap justify-center gap-x-3 gap-y-1">
                             Drag or Browse Files to {tool.id}
                         </h1>
                     </div>
 
-                    <div className='w-5/6 h-full'>
+                    <div className='w-full md:w-5/6 h-full'>
                         <ToolPageDropZone setFiles={props.setFiles} />
                     </div>
                 </div>
