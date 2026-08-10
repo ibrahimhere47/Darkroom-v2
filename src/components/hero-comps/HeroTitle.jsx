@@ -49,15 +49,17 @@ const HeroTitle = () => {
     return (
         <h1
             ref={titleRef}
-            className="font-zilla text-6xl leading-14 tracking-wide cursor-default flex justify-center"
+            className="font-zilla text-4xl md:text-6xl leading-8 md:leading-14 tracking-wide cursor-default"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <span className="hero-word inline-block">Your</span>{" "}
-            <span className="hero-word inline-block">Private</span>{" "}
-            <span className="hero-word inline-block">Image</span>{" "}
-            <span className="hero-word inline-block">Editing</span>{" "}
-            <span className="hero-word inline-block">Toolkit</span>
+            <div className="flex flex-wrap justify-center gap-2">    
+                <span className="hero-word inline-block">Your</span>{" "}
+                <span className="hero-word inline-block">Private</span>{" "}
+                <span className="hero-word inline-block">Image</span>{" "}
+                <span className="hero-word inline-block">Editing</span>{" "}
+                <span className="hero-word inline-block">Toolkit</span>
+            </div>
         </h1>
     );
 };
