@@ -26,10 +26,10 @@ const Hero = () => {
 
     return (
         <>
-        <div className='flex justify-center mb-4 md:mb-9 cursor-default'>
+        <div className='flex justify-center mb-6 md:mb-9 cursor-default'>
             <div className='flex flex-col items-center'>
                 <p 
-                className='font-mono text-amber-47 text-sm pb-1 md:pb-3 inline-block'
+                className='font-mono text-amber-47 text-sm pb-3 inline-block'
                 ref={captionRef}
                 onMouseEnter={handleCaptionHover}
                 >safe | fast | efficient</p>
