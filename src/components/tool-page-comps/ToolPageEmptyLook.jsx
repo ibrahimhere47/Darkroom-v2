@@ -36,7 +36,7 @@ const ToolPageEmptyLook = (props) => {
             <ToolPageHeader />
                 <div
                     ref={containerRef}
-                    className="relative flex flex-col items-center justify-center w-full min-h-[80vh] mb-4 px-2 sm:px-6 overflow-hidden isolate"
+                    className="relative flex flex-col items-center justify-center w-full min-h-[80vh] mb-4 sm:px-6 overflow-hidden isolate"
                 >
                     <div
                         ref={blobRef}
@@ -51,7 +51,7 @@ const ToolPageEmptyLook = (props) => {
                     </div>
 
                     <div className="text-center max-w-lg mb-10">
-                        <h1 className="text-5xl font-zilla flex flex-wrap justify-center gap-x-3 gap-y-1">
+                        <h1 className="text-3xl sm:text-5xl font-zilla flex flex-wrap justify-center gap-x-3 gap-y-1">
                             Drag or Browse Files to {tool.id}
                         </h1>
                     </div>
