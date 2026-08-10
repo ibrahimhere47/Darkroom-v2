@@ -98,7 +98,7 @@ const ToolCard = (props) => {
                 </div>
                 <div className={`flex flex-col gap-0.5 ${tool.comingSoon ? 'text-neutral-300' : 'text-white'}`}>
                     <h3 className='bold text-lg font-mono font-bold'>{tool.name}</h3>
-                    <p className='line-clamp-2 font-body tracking-normal leading-5 text-sm'>{tool.tagline}</p>
+                    <p className='line-clamp-3 font-body tracking-normal leading-5 text-[13px]'>{tool.tagline}</p>
                 </div>
             </div>
         </div>

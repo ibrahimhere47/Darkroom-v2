@@ -53,7 +53,7 @@ const HeroTitle = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="flex flex-wrap justify-center gap-2">    
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4">    
                 <span className="hero-word inline-block">Your</span>{" "}
                 <span className="hero-word inline-block">Private</span>{" "}
                 <span className="hero-word inline-block">Image</span>{" "}

@@ -36,7 +36,7 @@ const Home = () => {
                     {tools.map((tool, idx) => (
                         <div
                             key={idx}
-                            className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] xl:w-[calc(20%-13px)] min-w-0 shrink-0'
+                            className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] [@media(min-width:2560px)]:w-[calc(20%-13px)] min-w-0 shrink-0'
                         >
                             <ToolCard tool={tool} />
                         </div>
