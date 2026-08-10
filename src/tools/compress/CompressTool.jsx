@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react'
+import { Download } from 'lucide-react'
 
 const CompressTool = (props) => {
 
@@ -33,6 +34,21 @@ const CompressTool = (props) => {
         })
     }
 
+    const handleDownload = (url, idx) => {
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `compressed-${idx + 1}.jpg`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
+
+    const handleDownloadAll = () => {
+        imageUrl.forEach((url, idx) => {
+            setTimeout(() => handleDownload(url, idx), idx * 200)
+        })
+    }
+
     return (
         <div className='flex'>
             <div className='w-3/4 bg-black'>
@@ -55,6 +71,16 @@ const CompressTool = (props) => {
                 />
                 <span>Quality: {quality}</span>
                 <button onClick={handleCompress}>Compress</button>
+
+                {imageUrl.length > 0 && (
+                    <button
+                        onClick={handleDownloadAll}
+                        className='mt-2 flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg cursor-pointer'
+                    >
+                        <Download size={16} />
+                        Download All
+                    </button>
+                )}
             </div>
         </div>
     )
