@@ -17,14 +17,14 @@ const Home = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
+            if (!loaderRef.current) return;
+
             gsap.to(loaderRef.current, {
                 opacity: 0,
                 duration: 0.8,
                 onComplete: () => {
-                    console.log('[Loader] gsap onComplete fired, setting sessionStorage')
                     setShowLoader(false)
                     sessionStorage.setItem(LOADER_SEEN_KEY, 'true')
-                    console.log('[Loader] sessionStorage now:', sessionStorage.getItem(LOADER_SEEN_KEY))
                 }
             })
         }, 1500)

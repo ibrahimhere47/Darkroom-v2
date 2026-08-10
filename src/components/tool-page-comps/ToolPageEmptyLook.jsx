@@ -17,9 +17,9 @@ const ToolPageEmptyLook = (props) => {
     const containerRef = useRef(null)
     const blobRef = useRef(null)
 
-    if (!tool) return <ToolPageNotFound />
-
     useGSAP(() => {
+        if (!blobRef.current) return;
+
         gsap.to(blobRef.current, {
             x: 80,
             y: -50,
@@ -30,6 +30,8 @@ const ToolPageEmptyLook = (props) => {
             repeat: -1,
         })
     }, { scope: containerRef })
+
+    if (!tool) return <ToolPageNotFound />
 
     return (
         <Layout>

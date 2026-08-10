@@ -118,7 +118,7 @@ const ToolPageDropZone = (props) => {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
         >
-            <Upload color='black' strokeWidth={3} size={45} />
+            <Upload color='black' strokeWidth={3} size={45} ref={iconRef} />
 
             <button
                 ref={buttonRef}
