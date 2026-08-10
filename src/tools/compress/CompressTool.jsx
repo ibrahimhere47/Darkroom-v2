@@ -1,15 +1,8 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { Download, DownloadCloud, Loader2, Trash2, RotateCcw, HardDriveDownload } from 'lucide-react'
-
-const formatBytes = (bytes) => {
-    if (!bytes && bytes !== 0) return '—'
-    if (bytes < 1024) return `${bytes} B`
-    const kb = bytes / 1024
-    if (kb < 1024) return `${kb.toFixed(1)} KB`
-    return `${(kb / 1024).toFixed(2)} MB`
-}
+import { Download, DownloadCloud, Loader2, Trash2, RotateCcw } from 'lucide-react'
+import formatBytes from '../../utils/formatBytes'
 
 const CompressTool = (props) => {
 
@@ -226,7 +219,6 @@ const CompressTool = (props) => {
                     <div className='flex flex-col gap-6 mb-11'>
                         <div className='flex flex-col gap-3'>
                             <div className='flex items-center gap-2'>
-                                <HardDriveDownload size={16} className='text-amber-47' />
                                 <p className='text-sm tracking-widest text-neutral-400 uppercase'>Developed</p>
                             </div>
                             <p className='text-sm text-neutral-300'>
