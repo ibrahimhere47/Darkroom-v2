@@ -31,7 +31,7 @@ const Home = () => {
         <Layout>
             <div className='py-10 w-full'>
                 <Hero />
-                <div className='bg-neutral-900 rounded-2xl p-10 border border-neutral-700'>
+                <div className='bg-neutral-900 rounded-2xl p-2 md:p-7 xl:p-10 border border-neutral-700'>
                     <div className='flex flex-wrap gap-4'>
                     {tools.map((tool, idx) => (
                         <div
