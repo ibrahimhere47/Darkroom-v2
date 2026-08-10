@@ -54,8 +54,7 @@ const HeroTitle = () => {
             onMouseLeave={handleMouseLeave}
         >
             <span className="hero-word inline-block">Your</span>{" "}
-            <span className="hero-word inline-block">Private</span>
-            <br />
+            <span className="hero-word inline-block">Private</span>{" "}
             <span className="hero-word inline-block">Image</span>{" "}
             <span className="hero-word inline-block">Editing</span>{" "}
             <span className="hero-word inline-block">Toolkit</span>

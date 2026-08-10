@@ -30,6 +30,41 @@ export const tools = [
         icon: Image,
         comingSoon: true,
     },
+    {
+        id: 'convert',
+        name: 'Convert format',
+        tagline: 'Move between JPEG, PNG, WebP, and AVIF depending on whatever you need',
+        icon: Image,
+        comingSoon: true,
+    },
+    {
+        id: 'convert',
+        name: 'Convert format',
+        tagline: 'Move between JPEG, PNG, WebP, and AVIF depending on whatever you need',
+        icon: Image,
+        comingSoon: true,
+    },
+    {
+        id: 'convert',
+        name: 'Convert format',
+        tagline: 'Move between JPEG, PNG, WebP, and AVIF depending on whatever you need',
+        icon: Image,
+        comingSoon: true,
+    },
+    {
+        id: 'convert',
+        name: 'Convert format',
+        tagline: 'Move between JPEG, PNG, WebP, and AVIF depending on whatever you need',
+        icon: Image,
+        comingSoon: true,
+    },
+    {
+        id: 'convert',
+        name: 'Convert format',
+        tagline: 'Move between JPEG, PNG, WebP, and AVIF depending on whatever you need',
+        icon: Image,
+        comingSoon: true,
+    },
 ]
 
 export function getTool(id) {

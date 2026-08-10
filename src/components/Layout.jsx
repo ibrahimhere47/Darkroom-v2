@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
             </header>
             <main className='mx-8'>{children}</main>
             <footer className='flex items-baseline justify-between py-12 mx-8 border-t-neutral-400 border-t'>
-                <p className='mono'>Copyright@2027 Darkroom</p>
+                <p className='mono'>Copyright@2026 Darkroom | Your image toolkit</p>
             </footer>
         </div>
     )
