@@ -15,6 +15,8 @@ import {
     ProgressBar,
     StatRowList,
 } from '../../components/tool-comps/ToolSidebar'
+import ResizeDevelopedPanel from './ResizeDevelopedPanel'
+import ResizeDevelopPanel from './ResizeDevelopPanel'
 
 const RESIZE_ENDPOINT = 'https://darkroom-v2-backend-production.up.railway.app/resize'
 
@@ -145,92 +147,29 @@ const ResizeTool = (props) => {
 
                 {allResized ? (
                     // ---- Resized panel ----
-                    <div className='flex flex-col gap-6 mb-11'>
-                        <SidebarSection
-                            eyebrow='Resized'
-                            description={`${files.length} ${files.length === 1 ? 'image' : 'images'} resized to ${width} × ${height}.`}
-                        />
-
-                        <StatHighlight value={`${width}×${height}`} label='target size' />
-
-                        <ProgressBar
-                            ratio={resizedRatio}
-                            leftLabel={`${formatBytes(resizedTotal)} now`}
-                            rightLabel={`${formatBytes(originalTotal)} original`}
-                            animateKey={allResized}
-                        />
-
-                        <StatRowList
-                            rows={[
-                                { label: 'Original size', value: formatBytes(originalTotal) },
-                                { label: 'Resized size', value: formatBytes(resizedTotal) },
-                                {
-                                    label: sizeDelta >= 0 ? 'Saved' : 'Added',
-                                    value: formatBytes(Math.abs(sizeDelta)),
-                                    highlight: true,
-                                },
-                            ]}
-                        />
-                    </div>
+                    <ResizeDevelopedPanel 
+                        width={width}
+                        height={height}
+                        originalTotal={originalTotal}
+                        resizedTotal={resizedTotal}
+                        files={files}
+                        allResized={allResized}
+                    />
                 ) : (
                     // ---- Resize settings panel ----
-                    <div className='flex flex-col gap-6'>
-                        <SidebarSection eyebrow='Resize' description='Set target dimensions, then resize your batch.' />
-
-                        <div className='flex flex-col gap-3'>
-                            <div className='flex justify-between items-center'>
-                                <span className='text-sm tracking-widest text-neutral-400 uppercase'>Dimensions</span>
-                                <button
-                                    onClick={toggleLockAspect}
-                                    disabled={isResizing}
-                                    className='text-neutral-400 hover:text-amber-47 disabled:opacity-40 cursor-pointer transition-colors duration-200'
-                                    title={lockAspect ? 'Aspect ratio locked' : 'Aspect ratio unlocked'}
-                                >
-                                    {lockAspect ? <Lock size={16} /> : <Unlock size={16} />}
-                                </button>
-                            </div>
-
-                            <div className='flex items-center gap-2'>
-                                <input
-                                    type='number'
-                                    min='1'
-                                    value={width}
-                                    onChange={(e) => handleWidthChange(e.target.value)}
-                                    disabled={isResizing}
-                                    className='w-full bg-neutral-900 border border-neutral-700 focus:border-amber-47 outline-none rounded-lg px-3 py-2 text-sm text-neutral-200 disabled:opacity-40'
-                                />
-                                <span className='text-neutral-600'>×</span>
-                                <input
-                                    type='number'
-                                    min='1'
-                                    value={height}
-                                    onChange={(e) => handleHeightChange(e.target.value)}
-                                    disabled={isResizing}
-                                    className='w-full bg-neutral-900 border border-neutral-700 focus:border-amber-47 outline-none rounded-lg px-3 py-2 text-sm text-neutral-200 disabled:opacity-40'
-                                />
-                            </div>
-                        </div>
-
-                        <div className='flex flex-col gap-2'>
-                            <span className='text-sm tracking-widest text-neutral-400 uppercase'>Mode</span>
-                            <div className='flex gap-2'>
-                                {MODES.map((m) => (
-                                    <button
-                                        key={m.id}
-                                        onClick={() => setMode(m.id)}
-                                        disabled={isResizing}
-                                        className={`flex-1 py-2 rounded-lg text-xs uppercase tracking-wider cursor-pointer transition-colors duration-200 disabled:opacity-40 ${
-                                            mode === m.id
-                                                ? 'bg-amber-47 text-black font-semibold'
-                                                : 'bg-neutral-900 border border-neutral-700 text-neutral-400 hover:border-amber-47 hover:text-amber-47'
-                                        }`}
-                                    >
-                                        {m.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                    <ResizeDevelopPanel
+                        width={width}
+                        height={height}
+                        setWidth={handleWidthChange}
+                        setHeight={handleHeightChange}
+                        lockAspect={lockAspect}
+                        setLockAspect={setLockAspect}
+                        aspectRatio={aspectRatio}
+                        mode={mode}
+                        setMode={setMode}
+                        isResizing={isResizing}
+                        MODES={MODES}
+                    />
                 )}
 
                 <div className='w-full flex flex-col gap-4 items-center'>

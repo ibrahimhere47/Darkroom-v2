@@ -48,7 +48,7 @@ const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, onRem
             )}
 
             {!isProcessed && hoverSize && (
-                <span className='absolute top-1/2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[15px] tracking-wider text-neutral-200 bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300'>
+                <span className='absolute top-3/4 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[15px] tracking-wider text-neutral-200 bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300'>
                     {hoverSize.current}
                     <ArrowRight size={16} className='text-amber-47' />
                     {hoverSize.estimated}
