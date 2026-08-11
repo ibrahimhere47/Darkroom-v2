@@ -41,6 +41,12 @@
   --color-success-dim: #008200;
   --color-badge-dim: #383938;
   --color-badge-grey: #636463;
+
+  --color-category-optimize: #FF4D6D;
+  --color-category-edit: #FF9F1C;
+  --color-category-properties: #2EC4B6;
+  --color-category-effects: #011627;
+  --color-category-security: #9B5DE5;
 }
 
 @utility mono {

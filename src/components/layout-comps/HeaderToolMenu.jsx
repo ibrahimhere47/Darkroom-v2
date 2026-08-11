@@ -1,4 +1,3 @@
-// ToolsMenu.jsx
 import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
@@ -92,11 +91,11 @@ const HeaderToolMenu = () => {
                             </p>
                             <ul className='flex flex-col gap-1'>
                                 {category.tools.map((tool) => (
-                                    <li key={tool.id} className='flex items-center gap-1'>
+                                    <li key={tool.id} className='flex items-center-safe gap-1'>
                                         <tool.icon size={20} className='text-amber-47' />
                                         <Link
                                             to={`/tools/${tool.id}`}
-                                            className='no-underline text-md font-body text-neutral-200 hover:text-amber-47 transition-colors'
+                                            className='no-underline text-[17px] font-body text-neutral-200 hover:text-amber-47 transition-colors'
                                             onClick={() => setOpen(false)}
                                         >
                                             {tool.name ?? tool.id}
