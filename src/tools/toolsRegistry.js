@@ -9,6 +9,12 @@ import {
     RotateCcw, 
     SquareRoundCorner,
     Paintbrush,
+    DropletOff,
+    Type,
+    RemoveFormatting,
+    SquareDashed,
+    CircleCheckBig,
+    Laugh,
 } from 'lucide-react'
 
 export const tools = [
@@ -34,13 +40,6 @@ export const tools = [
         component: lazy(() => import('./convert/ConvertTool.jsx'))
     },
     {
-        id: 'remove-background',
-        name: 'Remove background',
-        tagline: 'Cut a subject out onto a transparent layer by erasing the background',
-        icon: Blend,
-        comingSoon: true,
-    },
-    {
         id: 'add-filter',
         name: 'Add Filters',
         tagline: 'Add aesthetic, retro, vintage, grayscale and many other filters to your image',
@@ -52,6 +51,13 @@ export const tools = [
         name: 'Watermark',
         tagline: 'Watermark your image to maintain brand identity and stay high on security',
         icon: Droplet,
+        comingSoon: true,
+    },
+    {
+        id: 'remove-watermark',
+        name: 'Remove Watermark',
+        tagline: 'Remove watermarks from images and restore them to their original state',
+        icon: DropletOff,
         comingSoon: true,
     },
     {
@@ -73,6 +79,48 @@ export const tools = [
         name: 'Add Background',
         tagline: 'Add a plain custom color background to your transparent background images',
         icon: Paintbrush,
+        comingSoon: true,
+    },
+    {
+        id: 'remove-background',
+        name: 'Remove background',
+        tagline: 'Cut a subject out onto a transparent layer by erasing the background',
+        icon: Blend,
+        comingSoon: true,
+    },
+    {
+        id: 'add-text',
+        name: 'Add Text',
+        tagline: 'Add text to your images with a variety of fonts, colors, and styles',
+        icon: Type,
+        comingSoon: true,
+    },
+    {
+        id: 'remove-text',
+        name: 'Remove Text',
+        tagline: 'Remove text from images and restore them to their original state',
+        icon: RemoveFormatting,
+        comingSoon: true,
+    },
+    {
+        id: 'add-border',
+        name: 'Add Border',
+        tagline: 'Add a border to your images with a variety of colors, styles, and widths',
+        icon: SquareDashed,
+        comingSoon: true,
+    },
+    {
+        id: 'color-correction',
+        name: 'Color Correction',
+        tagline: 'Adjust the color balance, brightness, contrast, and saturation of your images',
+        icon: CircleCheckBig,
+        comingSoon: true,
+    },
+    {
+        id: 'doodle',
+        name: 'Doodle',
+        tagline: 'Draw on your images with a variety of brushes, colors, and styles',
+        icon: Laugh,
         comingSoon: true,
     }
 ]
