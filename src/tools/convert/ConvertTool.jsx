@@ -50,12 +50,6 @@ const ConvertTool = (props) => {
 
     const handleRemoveClick = useAnimatedRemove(removeFile)
 
-    useEffect(() => {
-        if (files.length === 0) return
-        let cancelled = false
-        return () => { cancelled = true }
-    }, [files[0]])
-
     const originalTotal = useMemo(
         () => files.reduce((sum, f) => sum + f.size, 0),
         [files]
@@ -104,6 +98,12 @@ const ConvertTool = (props) => {
         downloadFile(url, filename(items[idx], idx))
     }
 
+    const getHoverFormat = (item, idx) => {
+        const file = files[idx]
+        if (!file?.type) return null
+        return extensionFromMime(file.type).toUpperCase()
+    }
+
     return (
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
@@ -113,6 +113,7 @@ const ConvertTool = (props) => {
                 onRemove={handleRemoveClick}
                 onDownload={handleDownloadClick}
                 getBadge={(item) => item.resultMeta ? `${item.resultMeta.format}` : null}
+                getHoverFormat={(item, idx) => getHoverFormat(item, idx)}
                 onAddFiles={addFiles}
             />
 
