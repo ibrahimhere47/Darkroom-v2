@@ -3,14 +3,15 @@ import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ChevronDown } from 'lucide-react'
+import CATEGORIES from '../../tools/toolCategories'
 
-const HeaderToolMenu = (props) => {
-    const { CATEGORIES } = props
+const HeaderToolMenu = () => {
     const [open, setOpen] = useState(false)
     const wrapperRef = useRef(null)
     const panelRef = useRef(null)
     const closeTimer = useRef(null)
     const arrowRef = useRef(null)
+    const categories = CATEGORIES.filter(c => c.name !== 'All')
 
     useLayoutEffect(() => {
         if (!open) return
@@ -84,7 +85,7 @@ const HeaderToolMenu = (props) => {
                 style={{ pointerEvents: 'none' }}
             >
                 <div className='grid grid-cols-3 md:grid-cols-5 gap-6'>
-                    {CATEGORIES.map((category) => (
+                    {categories.map((category) => (
                         <div key={category.name}>
                             <p className='mono text-sm text-neutral-500 mb-2 uppercase tracking-widest'>
                                 {category.name}

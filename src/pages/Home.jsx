@@ -6,6 +6,7 @@ import Loader from '../components/Loader'
 import HomePremiumAd from '../components/home-comps/HomePremiumAd'
 import HomeCategoryBtns from '../components/home-comps/HomeCategoryBtns'
 import { tools } from '../tools/toolsRegistry'
+import CATEGORIES from '../tools/toolCategories'
 import gsap from 'gsap'
 
 const LOADER_SEEN_KEY = 'hasSeenLoader'
@@ -35,15 +36,6 @@ const Home = () => {
             clearTimeout(timer)
         }
     }, [showLoader])
-
-    const CATEGORIES = [
-        { name: 'All', tools: tools },
-        { name: 'Optimize', tools: tools.filter(t => ['compress', 'remove-background', 'upscale'].includes(t.id)) },
-        { name: 'Edit', tools: tools.filter(t => ['add-background', 'add-text', 'remove-text', 'add-border', 'doodle'].includes(t.id)) },
-        { name: 'Properties', tools: tools.filter(t => ['convert', 'resize', 'rotate', 'round-corners'].includes(t.id)) },
-        { name: 'Effects', tools: tools.filter(t => ['add-filter', 'color-correction'].includes(t.id)) },
-        { name: 'Security', tools: tools.filter(t => ['watermark', 'remove-watermark'].includes(t.id)) },
-    ]
 
     const activeTools = CATEGORIES.find(c => c.name === activeCategory)?.tools ?? []
 
