@@ -16,6 +16,7 @@ import {
 } from '../../components/tool-comps/ToolSidebar'
 import ConvertDevelopedPanel from './ConvertDevelopedPanel'
 import ConvertDevelopPanel from './ConvertDevelopPanel'
+import { maxFilesPerBatch } from '../toolsRegistry'
 
 const CONVERT_ENDPOINT = 'https://darkroom-v2-backend-production.up.railway.app/convert'
 
@@ -64,6 +65,11 @@ const ConvertTool = (props) => {
     const convertedRatio = originalTotal ? convertedTotal / originalTotal : 0
 
     const handleConvert = async () => {
+        if (files.length >= maxFilesPerBatch) {
+            alert(`You can only convert up to ${maxFilesPerBatch} files at a time. Please remove some files and try again.`)
+            return
+        }
+        
         beginProcessing()
 
         const targetValue = FORMATS.find(f => f.id === format)?.value

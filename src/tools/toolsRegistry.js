@@ -137,3 +137,5 @@ export function getTool(id) {
     const tool = tools.find((t) => t.id === id)
     return tool
 }
+
+export const maxFilesPerBatch = 20;

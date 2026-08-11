@@ -17,6 +17,7 @@ import {
 } from '../../components/tool-comps/ToolSidebar'
 import ResizeDevelopedPanel from './ResizeDevelopedPanel'
 import ResizeDevelopPanel from './ResizeDevelopPanel'
+import { maxFilesPerBatch } from '../toolsRegistry'
 
 const RESIZE_ENDPOINT = 'https://darkroom-v2-backend-production.up.railway.app/resize'
 
@@ -116,6 +117,11 @@ const ResizeTool = (props) => {
     const resizedRatio = originalTotal > 0 ? resizedTotal / originalTotal : 0
 
     const handleResize = async () => {
+        if (files.length >= maxFilesPerBatch) {
+            alert(`You can only resize up to ${maxFilesPerBatch} files at a time. Please remove some files and try again.`)
+            return
+        }
+
         beginProcessing()
 
         await Promise.all(files.map(async (file, idx) => {

@@ -15,6 +15,7 @@ import {
 } from '../../components/tool-comps/ToolSidebar'
 import CompressDevelopedPanel from './CompressDevelopedPanel'
 import CompressDevelopPanel from './CompressDevelopPanel'
+import { maxFilesPerBatch } from '../toolsRegistry'
 
 const CompressTool = (props) => {
 
@@ -49,6 +50,11 @@ const CompressTool = (props) => {
     const compressedRatio = originalTotal > 0 ? compressedTotal / originalTotal : 0
 
     const handleCompress = async () => {
+        if (files.length >= maxFilesPerBatch) {
+            alert(`You can only compress up to ${maxFilesPerBatch} files at a time. Please remove some files and try again.`)
+            return
+        }
+
         beginProcessing()
 
         await Promise.all(files.map(async (file, idx) => {
