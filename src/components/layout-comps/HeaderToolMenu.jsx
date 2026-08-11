@@ -1,14 +1,40 @@
 // ToolsMenu.jsx
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
+import { ChevronDown } from 'lucide-react'
 
 const HeaderToolMenu = (props) => {
-
     const { CATEGORIES } = props
     const [open, setOpen] = useState(false)
+    const wrapperRef = useRef(null)
     const panelRef = useRef(null)
     const closeTimer = useRef(null)
+    const arrowRef = useRef(null)
+
+    useLayoutEffect(() => {
+        if (!open) return
+        const wrapper = wrapperRef.current
+        const panel = panelRef.current
+        if (!wrapper || !panel) return
+
+        const positionPanel = () => {
+            const margin = 16
+            const wrapperRect = wrapper.getBoundingClientRect()
+            const panelWidth = panel.offsetWidth
+            const triggerCenter = wrapperRect.left + wrapperRect.width / 2
+
+            let desiredLeft = triggerCenter - panelWidth / 2
+            desiredLeft = Math.max(margin, Math.min(desiredLeft, window.innerWidth - panelWidth - margin))
+
+            const offsetFromWrapper = desiredLeft - wrapperRect.left
+            panel.style.left = `${offsetFromWrapper}px`
+        }
+
+        positionPanel()
+        window.addEventListener('resize', positionPanel)
+        return () => window.removeEventListener('resize', positionPanel)
+    }, [open])
 
     useEffect(() => {
         if (!panelRef.current) return
@@ -20,6 +46,7 @@ const HeaderToolMenu = (props) => {
                 ease: 'power2.out',
                 pointerEvents: 'auto',
             })
+            gsap.to(arrowRef.current, { rotate: 180 })
         } else {
             gsap.to(panelRef.current, {
                 autoAlpha: 0,
@@ -28,10 +55,10 @@ const HeaderToolMenu = (props) => {
                 ease: 'power2.in',
                 pointerEvents: 'none',
             })
+            gsap.to(arrowRef.current, { rotate: 0 })
         }
     }, [open])
 
-    // Delay closing so moving from trigger -> panel doesn't close it mid-transit
     const scheduleClose = () => {
         closeTimer.current = setTimeout(() => setOpen(false), 150)
     }
@@ -41,17 +68,19 @@ const HeaderToolMenu = (props) => {
 
     return (
         <div
+            ref={wrapperRef}
             className='relative'
             onMouseEnter={() => { cancelClose(); setOpen(true) }}
             onMouseLeave={scheduleClose}
         >
-            <button className='mono text-sm hover:text-neutral-300 transition-colors'>
+            <button className='mono font-bold text-lg hover:text-neutral-300 transition-colors flex items-center'>
                 Tools
+                <ChevronDown ref={arrowRef} size={30} />
             </button>
 
             <div
                 ref={panelRef}
-                className='absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[90vw] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-2xl shadow-neutral-950 opacity-0 invisible'
+                className='absolute top-full mt-4 w-[90vw] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-2xl shadow-neutral-950 opacity-0 invisible'
                 style={{ pointerEvents: 'none' }}
             >
                 <div className='grid grid-cols-3 md:grid-cols-5 gap-6'>
