@@ -25,26 +25,34 @@ export const tools = [
         tagline: 'Shrink file size with a quality slider and covert finished file to JPEG, PNG, or WebP',
         icon: ArrowBigDownDash,
         component: lazy(() => import('./compress/CompressTool.jsx')),
+        category: 'Optimize',
+        categoryColor: '--color-category-optimize',
     },
     {
         id: 'resize',
         name: 'Resize',
         tagline: 'Fit, crop, or scale to exact dimensions instantaneously and securely',
         icon: Crop,
-        component: lazy(() => import('./resize/ResizeTool.jsx'))
+        component: lazy(() => import('./resize/ResizeTool.jsx')),
+        category: 'Properties',
+        categoryColor: '--color-category-properties',
     },
     {
         id: 'convert',
         name: 'Convert format',
         tagline: 'Move between JPEG, PNG, WebP, and AVIF depending on whatever you need',
         icon: Image,
-        component: lazy(() => import('./convert/ConvertTool.jsx'))
+        component: lazy(() => import('./convert/ConvertTool.jsx')),
+        category: 'Properties',
+        categoryColor: '--color-category-properties',
     },
     {
         id: 'add-filter',
         name: 'Add Filters',
         tagline: 'Add aesthetic, retro, vintage, grayscale and many other filters to your image',
         icon: Camera,
+        category: 'Effects',
+        categoryColor: '--color-category-effects',
         comingSoon: true,
     },
     {
@@ -52,6 +60,8 @@ export const tools = [
         name: 'Watermark',
         tagline: 'Watermark your image to maintain brand identity and stay high on security',
         icon: Droplet,
+        category: 'Security',
+        categoryColor: '--color-category-security',
         comingSoon: true,
     },
     {
@@ -59,6 +69,8 @@ export const tools = [
         name: 'Remove Watermark',
         tagline: 'Remove watermarks from images and restore them to their original state',
         icon: DropletOff,
+        category: 'Security',
+        categoryColor: '--color-category-security',
         comingSoon: true,
     },
     {
@@ -66,6 +78,8 @@ export const tools = [
         name: 'Rotate',
         tagline: 'Convert image from landscape to portrait or rotate to any degree you wish',
         icon: RotateCcw,
+        category: 'Properties',
+        categoryColor: '--color-category-properties',
         comingSoon: true,
     },
     {
@@ -73,6 +87,8 @@ export const tools = [
         name: 'Round Corners',
         tagline: 'Add a border radius to your images in order to give them a cleaner look',
         icon: SquareRoundCorner,
+        category: 'Properties',
+        categoryColor: '--color-category-properties',
         comingSoon: true,
     },
     {
@@ -80,6 +96,8 @@ export const tools = [
         name: 'Add Background',
         tagline: 'Add a plain custom color background to your transparent background images',
         icon: Paintbrush,
+        category: 'Edit',
+        categoryColor: '--color-category-edit',
         comingSoon: true,
     },
     {
@@ -87,6 +105,8 @@ export const tools = [
         name: 'Remove background',
         tagline: 'Cut a subject out onto a transparent layer by erasing the background',
         icon: Blend,
+        category: 'Optimize',
+        categoryColor: '--color-category-optimize',
         comingSoon: true,
     },
     {
@@ -94,6 +114,8 @@ export const tools = [
         name: 'Add Text',
         tagline: 'Add text to your images with a variety of fonts, colors, and styles',
         icon: Type,
+        category: 'Edit',
+        categoryColor: '--color-category-edit',
         comingSoon: true,
     },
     {
@@ -101,6 +123,8 @@ export const tools = [
         name: 'Remove Text',
         tagline: 'Remove text from images and restore them to their original state',
         icon: RemoveFormatting,
+        category: 'Edit',
+        categoryColor: '--color-category-edit',
         comingSoon: true,
     },
     {
@@ -108,6 +132,8 @@ export const tools = [
         name: 'Add Border',
         tagline: 'Add a border to your images with a variety of colors, styles, and widths',
         icon: SquareDashed,
+        category: 'Edit',
+        categoryColor: '--color-category-edit',
         comingSoon: true,
     },
     {
@@ -115,6 +141,8 @@ export const tools = [
         name: 'Color Correction',
         tagline: 'Adjust the color balance, brightness, contrast, and saturation of your images',
         icon: CircleCheckBig,
+        category: 'Effects',
+        categoryColor: '--color-category-effects',
         comingSoon: true,
     },
     {
@@ -122,6 +150,8 @@ export const tools = [
         name: 'Doodle',
         tagline: 'Draw on your images with a variety of brushes, colors, and styles',
         icon: Laugh,
+        category: 'Edit',
+        categoryColor: '--color-category-edit',
         comingSoon: true,
     },
     {
@@ -129,6 +159,8 @@ export const tools = [
         name: 'Upscale',
         tagline: 'Increase the resolution of your images without losing quality',
         icon: Scaling,
+        category: 'Optimize',
+        categoryColor: '--color-category-optimize',
         comingSoon: true,
     },
 ]

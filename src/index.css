@@ -42,11 +42,11 @@
   --color-badge-dim: #383938;
   --color-badge-grey: #636463;
 
-  --color-category-optimize: #FF4D6D;
-  --color-category-edit: #FF9F1C;
-  --color-category-properties: #2EC4B6;
-  --color-category-effects: #011627;
-  --color-category-security: #9B5DE5;
+  --color-category-optimize: #ff4d6d;
+  --color-category-edit: #ff9f1c;
+  --color-category-properties: #2ec4b6;
+  --color-category-effects: #3a86ff;
+  --color-category-security: #9b5de5;
 }
 
 @utility mono {
@@ -73,7 +73,7 @@
 }
 
 .class {
-  color: #e8a43daf
+  color: #010827
 }
 
 @utility no-scrollbar {

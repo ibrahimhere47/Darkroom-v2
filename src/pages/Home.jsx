@@ -41,7 +41,7 @@ const Home = () => {
 
     return (
         <>
-            <Layout CATEGORIES={CATEGORIES} >
+            <Layout>
                 <div className='py-8 md:py-10 w-full'>
                     <Hero />
                     <HomeCategoryBtns
@@ -52,12 +52,12 @@ const Home = () => {
 
                     <div className='bg-neutral-900 rounded-2xl p-5 md:p-10 md:border border-neutral-700'>
                         <div className='flex flex-wrap gap-4'>
-                            {activeTools.map((tool, toolIdx) => (
+                            {activeTools.map((tool) => (
                                 <div
-                                    key={toolIdx}
+                                    key={tool.id}
                                     className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] [@media(min-width:2560px)]:w-[calc(20%-13px)] min-w-0 shrink-0'
                                 >
-                                    <ToolCard tool={tool} />
+                                    <ToolCard tool={tool} color={tool.categoryColor} />
                                 </div>
                             ))}
                         </div>
