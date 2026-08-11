@@ -10,6 +10,7 @@ const ToolCard = (props) => {
     const color = `var(${tool.categoryColor})`
 
     const iconGlowRef = useRef(null)
+    const iconRef = useRef(null)
     const badgeGlowRef = useRef(null)
     const borderRef = useRef(null)
     const cardRef = useRef(null)
@@ -21,6 +22,12 @@ const ToolCard = (props) => {
         tl.current
             .to(iconGlowRef.current, {
                 opacity: 0.3,
+                duration: 0.4,
+                backgroundColor: color
+            }, 0)
+
+            .to(iconRef.current, {
+                color: color,
                 duration: 0.4,
             }, 0)
 
@@ -107,15 +114,15 @@ const ToolCard = (props) => {
 
                             <div
                                 ref={iconGlowRef}
-                                className="absolute inset-0 opacity-0 blur-lg rounded-full"
-                                style={{
-                                    backgroundColor: color,
-                                }}
+                                className="absolute inset-0 opacity-0 blur-lg rounded-full bg-amber-47"
+                                // style={{
+                                //     backgroundColor: color,
+                                // }}
                             />
 
                             <Icon
-                                color={color}
-                                className="relative z-10"
+                                ref={iconRef}
+                                className="relative z-10 text-amber-47"
                             />
                         </div>
                     </div>
