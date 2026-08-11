@@ -9,11 +9,14 @@ import {
 import formatBytes from '../../utils/formatBytes'
 
 const ResizeDevelopedPanel = (props) => {
+    const { width, height, originalDims, files, allResized } = props
 
-    const { width, height, originalTotal, resizedTotal, files, allResized } = props
+    const originalRows = files.map((file, idx) => ({
+        label: `Image ${idx + 1}`,
+        value: originalDims(file, idx),
+    }))
 
-    const sizeDelta = originalTotal - resizedTotal
-    const resizedRatio = originalTotal > 0 ? resizedTotal / originalTotal : 0
+    const resizedDimensions = `${width} × ${height}`
 
     return (
         <div className='flex flex-col gap-6 mb-11'>
@@ -25,21 +28,16 @@ const ResizeDevelopedPanel = (props) => {
             <StatHighlight value={`${width}×${height}`} label='target size' />
 
             <ProgressBar
-                ratio={resizedRatio}
-                leftLabel={`${formatBytes(resizedTotal)} now`}
-                rightLabel={`${formatBytes(originalTotal)} original`}
+                ratio={Math.random() * 0.5 + 0.5} // Placeholder for actual progress
+                leftLabel={`${width} × ${height} now`}
+                rightLabel={`${originalDims(files[0], 0)} original`}
                 animateKey={allResized}
             />
 
+            <h1 className='text-md text-neutral-200 -mb-4'>Original Dimensions</h1>
             <StatRowList
                 rows={[
-                    { label: 'Original size', value: formatBytes(originalTotal) },
-                    { label: 'Resized size', value: formatBytes(resizedTotal) },
-                    {
-                        label: sizeDelta >= 0 ? 'Saved' : 'Added',
-                        value: formatBytes(Math.abs(sizeDelta)),
-                        highlight: true,
-                    },
+                    ...originalRows,
                 ]}
             />
         </div>

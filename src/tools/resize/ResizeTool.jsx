@@ -160,6 +160,11 @@ const ResizeTool = (props) => {
         return dims ? `${dims.width} × ${dims.height}` : '…'
     }
 
+    const getOriginalDimensions = (file, idx) => {
+        const dims = fileDimensions[idx]
+        return dims ? `${dims.width} × ${dims.height}` : '…'
+    }
+
     return (
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
@@ -180,8 +185,7 @@ const ResizeTool = (props) => {
                     <ResizeDevelopedPanel 
                         width={width}
                         height={height}
-                        originalTotal={originalTotal}
-                        resizedTotal={resizedTotal}
+                        originalDims={getOriginalDimensions}
                         files={files}
                         allResized={allResized}
                     />
