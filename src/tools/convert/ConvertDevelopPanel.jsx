@@ -8,7 +8,7 @@ const ConvertDevelopPanel = (props) => {
     const { quality, setQuality, format, setFormat, isConverting, FORMATS } = props
 
     return (
-        <div className='flex flex-col gap-6'>
+        <div className='flex flex-col gap-6 mb-10 md:mb-2'>
             <SidebarSection eyebrow='Develop' description='Adjust quality, select format, then convert your batch.' />
 
             <div>

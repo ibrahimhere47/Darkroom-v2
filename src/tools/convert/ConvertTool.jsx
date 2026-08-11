@@ -30,7 +30,7 @@ const ConvertTool = (props) => {
     const files = props.files || []
     const setFiles = props.setFiles
 
-    const [quality, setQuality] = useState(80)
+    const [quality, setQuality] = useState(100)
     const [format, setFormat] = useState('image/jpeg')
 
     const {
@@ -112,7 +112,7 @@ const ConvertTool = (props) => {
                 isProcessing={isConverting}
                 onRemove={handleRemoveClick}
                 onDownload={handleDownloadClick}
-                getBadge={(item) => item.resultMeta ? `${item.resultMeta.format}` : null}
+                getBadge={(item) => item.resultMeta ? (`${item.resultMeta.format}`).toUpperCase() : null}
                 getHoverFormat={(item, idx) => getHoverFormat(item, idx)}
                 onAddFiles={addFiles}
             />
