@@ -15,6 +15,7 @@ import {
     SquareDashed,
     CircleCheckBig,
     Laugh,
+    Scaling,
 } from 'lucide-react'
 
 export const tools = [
@@ -122,7 +123,14 @@ export const tools = [
         tagline: 'Draw on your images with a variety of brushes, colors, and styles',
         icon: Laugh,
         comingSoon: true,
-    }
+    },
+    {
+        id: 'upscale',
+        name: 'Upscale',
+        tagline: 'Increase the resolution of your images without losing quality',
+        icon: Scaling,
+        comingSoon: true,
+    },
 ]
 
 export function getTool(id) {
