@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import ToolCard from '../components/ToolCard'
 import Hero from '../components/hero-comps/Hero'
 import Loader from '../components/Loader'
+import HomePremiumAd from '../components/home-comps/HomePremiumAd'
 import { tools } from '../tools/toolsRegistry'
 import gsap from 'gsap'
 
@@ -97,6 +98,9 @@ const Home = () => {
                             ))}
                         </div>
                     </div>
+                </div>
+                <div className='flex justify-center'>
+                    <HomePremiumAd />
                 </div>
             </Layout>
 
