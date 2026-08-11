@@ -66,6 +66,30 @@ const ResizeTool = (props) => {
         return () => { cancelled = true }
     }, [files[0]])
 
+    const [fileDimensions, setFileDimensions] = useState({}) // keyed by file name+size, or index
+
+    useEffect(() => {
+        if (files.length === 0) return
+        let cancelled = false
+
+        Promise.all(
+            files.map((file) =>
+                getImageDimensions(file)
+                    .then((dims) => [file, dims])
+                    .catch(() => [file, null])
+            )
+        ).then((results) => {
+            if (cancelled) return
+            const map = {}
+            results.forEach(([file, dims], idx) => {
+                if (dims) map[idx] = dims
+            })
+            setFileDimensions(map)
+        })
+
+        return () => { cancelled = true }
+    }, [files])
+
     const handleWidthChange = (value) => {
         const next = Math.max(1, Number(value) || 0)
         setWidth(next)
@@ -131,6 +155,11 @@ const ResizeTool = (props) => {
         downloadFile(url, filename(items[idx], idx))
     }
 
+    const getHoverDimensions = (item, idx) => {
+        const dims = fileDimensions[idx]
+        return dims ? `${dims.width} × ${dims.height}` : '…'
+    }
+
     return (
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
@@ -140,6 +169,7 @@ const ResizeTool = (props) => {
                 onRemove={handleRemoveClick}
                 onDownload={handleDownloadClick}
                 getBadge={(item) => item.resultMeta ? `${item.resultMeta.width} × ${item.resultMeta.height}` : null}
+                getHoverDimensions={(item, idx) => getHoverDimensions(item, idx)}
                 onAddFiles={addFiles}
             />
 

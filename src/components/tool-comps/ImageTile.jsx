@@ -9,7 +9,7 @@ import { Download, Trash2, ArrowRight } from 'lucide-react'
  * `hoverSize` (optional): { current: string, estimated: string } — shown
  * on hover before the image is processed, as "current → estimated".
  */
-const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, onRemove, onDownload }) => {
+const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, hoverDimensions, onRemove, onDownload }) => {
     const shownUrl = resultUrl || previewUrl
 
     return (
@@ -52,6 +52,11 @@ const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, onRem
                     {hoverSize.current}
                     <ArrowRight size={16} className='text-amber-47 hidden md:block' />
                     <span className='hidden md:block'>{hoverSize.estimated}</span>
+                </span>
+            )}
+            {!isProcessed && hoverDimensions && (
+                <span className='absolute top-3/4 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[11px] md:text-[15px] tracking-wider text-neutral-200 bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap md:opacity-0 md:group-hover:opacity-100 transition-all duration-300'>
+                    {hoverDimensions}
                 </span>
             )}
         </div>
