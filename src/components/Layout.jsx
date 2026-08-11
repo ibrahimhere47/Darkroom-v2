@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import Headers from './Headers'
+import Headers from './layout-comps/Headers'
 
 const Layout = ({ children }) => {
     return (

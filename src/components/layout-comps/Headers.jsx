@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { Link } from 'react-router-dom'
+import HeaderToolMenu from './HeaderToolMenu'
+
 gsap.registerPlugin(ScrollTrigger)
 
 const Headers = () => {
@@ -15,7 +17,7 @@ const Headers = () => {
 
         // explicit starting state — header2 starts off-screen via transform, not display:none
         gsap.set(header, { yPercent: 0 })
-        gsap.set(header2, { yPercent: -100 })
+        gsap.set(header2, { yPercent: -200 })
 
         const showHeader = () => gsap.to(header, { yPercent: 0, duration: 0.3, ease: 'power2.out' })
         const hideHeader = () => gsap.to(header, { yPercent: -100, duration: 0.3, ease: 'power2.out' })
@@ -52,7 +54,7 @@ const Headers = () => {
                     <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
                     <span>Darkroom</span>
                 </Link>
-                <p className='mono hidden md:block'>Your image toolkit</p>
+                <HeaderToolMenu />
             </header>
             <header
                 ref={header2Ref}
@@ -62,6 +64,7 @@ const Headers = () => {
                     <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
                     <span>Darkroom</span>
                 </Link>
+                <HeaderToolMenu />
             </header>
         </div>
     )
