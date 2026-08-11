@@ -2,17 +2,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
-import { tools } from '../../tools/toolsRegistry'
 
-const CATEGORIES = [
-    { name: 'Optimize', tools: tools.filter(t => ['compress', 'remove-background', 'upscale'].includes(t.id)) },
-    { name: 'Edit', tools: tools.filter(t => ['add-background', 'remove-background', 'add-text', 'remove-text', 'add-border', 'doodle'].includes(t.id)) },
-    { name: 'Properties', tools: tools.filter(t => ['convert', 'resize', 'rotate', 'round-corners'].includes(t.id)) },
-    { name: 'Effects', tools: tools.filter(t => ['add-filter', 'color-correction'].includes(t.id)) },
-    { name: 'Security', tools: tools.filter(t => ['watermark', 'remove-watermark'].includes(t.id)) },
-]
+const HeaderToolMenu = (props) => {
 
-const HeaderToolMenu = () => {
+    const { CATEGORIES } = props
     const [open, setOpen] = useState(false)
     const panelRef = useRef(null)
     const closeTimer = useRef(null)
@@ -58,21 +51,22 @@ const HeaderToolMenu = () => {
 
             <div
                 ref={panelRef}
-                className='absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[min(90vw,720px)] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-2xl shadow-neutral-950 opacity-0 invisible'
+                className='absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[90vw] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-2xl shadow-neutral-950 opacity-0 invisible'
                 style={{ pointerEvents: 'none' }}
             >
-                <div className='grid grid-cols-2 md:grid-cols-3 gap-6'>
+                <div className='grid grid-cols-3 md:grid-cols-5 gap-6'>
                     {CATEGORIES.map((category) => (
                         <div key={category.name}>
-                            <p className='mono text-xs text-neutral-500 mb-2 uppercase tracking-wide'>
+                            <p className='mono text-sm text-neutral-500 mb-2 uppercase tracking-widest'>
                                 {category.name}
                             </p>
                             <ul className='flex flex-col gap-1'>
                                 {category.tools.map((tool) => (
-                                    <li key={tool.id}>
+                                    <li key={tool.id} className='flex items-center gap-1'>
+                                        <tool.icon size={20} className='text-amber-47' />
                                         <Link
                                             to={`/tools/${tool.id}`}
-                                            className='no-underline text-sm text-neutral-200 hover:text-amber-47 transition-colors'
+                                            className='no-underline text-md font-body text-neutral-200 hover:text-amber-47 transition-colors'
                                             onClick={() => setOpen(false)}
                                         >
                                             {tool.name ?? tool.id}

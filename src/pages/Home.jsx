@@ -36,42 +36,24 @@ const Home = () => {
         }
     }, [showLoader])
 
-    const categories = [
-        {
-            name: 'All',
-            tools: tools
-        },
-        {
-            name: 'Optimize',
-            tools: tools.filter(tool => ['compress', 'remove-background', 'upscale'].includes(tool.id))
-        },
-        {
-            name: 'Edit',
-            tools: tools.filter(tool => ['add-background', 'remove-background', 'add-text', 'remove-text', 'add-border', 'doodle'].includes(tool.id))
-        },
-        {
-            name: 'Properties',
-            tools: tools.filter(tool => ['convert', 'resize', 'rotate', 'round-corners'].includes(tool.id))
-        },
-        {
-            name: 'Effects',
-            tools: tools.filter(tool => ['add-filter', 'color-correction'].includes(tool.id))
-        },
-        {
-            name: 'Security',
-            tools: tools.filter(tool => ['watermark', 'remove-watermark'].includes(tool.id))
-        },
+    const CATEGORIES = [
+        { name: 'All', tools: tools },
+        { name: 'Optimize', tools: tools.filter(t => ['compress', 'remove-background', 'upscale'].includes(t.id)) },
+        { name: 'Edit', tools: tools.filter(t => ['add-background', 'add-text', 'remove-text', 'add-border', 'doodle'].includes(t.id)) },
+        { name: 'Properties', tools: tools.filter(t => ['convert', 'resize', 'rotate', 'round-corners'].includes(t.id)) },
+        { name: 'Effects', tools: tools.filter(t => ['add-filter', 'color-correction'].includes(t.id)) },
+        { name: 'Security', tools: tools.filter(t => ['watermark', 'remove-watermark'].includes(t.id)) },
     ]
 
-    const activeTools = categories.find(c => c.name === activeCategory)?.tools ?? []
+    const activeTools = CATEGORIES.find(c => c.name === activeCategory)?.tools ?? []
 
     return (
         <>
-            <Layout>
+            <Layout CATEGORIES={CATEGORIES} >
                 <div className='py-8 md:py-10 w-full'>
                     <Hero />
                     <HomeCategoryBtns
-                        categories={categories}
+                        CATEGORIES={CATEGORIES}
                         activeCategory={activeCategory}
                         setActiveCategory={setActiveCategory}
                     />

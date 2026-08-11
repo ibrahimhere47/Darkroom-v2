@@ -6,7 +6,8 @@ import HeaderToolMenu from './HeaderToolMenu'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const Headers = () => {
+const Headers = (props) => {
+    const { CATEGORIES } = props
     const headerRef = useRef(null)
     const header2Ref = useRef(null)
 
@@ -54,7 +55,7 @@ const Headers = () => {
                     <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
                     <span>Darkroom</span>
                 </Link>
-                <HeaderToolMenu />
+                <HeaderToolMenu CATEGORIES={CATEGORIES.filter(c => c.name !== 'All')} />
             </header>
             <header
                 ref={header2Ref}
@@ -64,7 +65,7 @@ const Headers = () => {
                     <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
                     <span>Darkroom</span>
                 </Link>
-                <HeaderToolMenu />
+                <HeaderToolMenu CATEGORIES={CATEGORIES.filter(c => c.name !== 'All')} />
             </header>
         </div>
     )

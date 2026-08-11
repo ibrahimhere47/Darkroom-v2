@@ -3,11 +3,11 @@ import React from 'react'
 
 const HomeCategoryBtns = (props) => {
     
-    const {categories, activeCategory, setActiveCategory} = props
+    const {CATEGORIES, activeCategory, setActiveCategory} = props
 
     return (
         <div className='flex flex-wrap gap-2 mb-6 md:mb-9 mt-5 justify-self-center'>
-            {categories.map((category) => (
+            {CATEGORIES.map((category) => (
                 <button
                     key={category.name}
                     onClick={() => setActiveCategory(category.name)}

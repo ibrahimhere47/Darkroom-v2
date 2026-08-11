@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Headers from './layout-comps/Headers'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, CATEGORIES }) => {
+
     return (
         <div className='bg-neutral-800 text-white no-scrollbar'>
-            <Headers />
+            <Headers CATEGORIES={CATEGORIES} />
             <main className='mx-8'>
                 <div className='bg-neutral-800 py-12'></div>
                 {children}
