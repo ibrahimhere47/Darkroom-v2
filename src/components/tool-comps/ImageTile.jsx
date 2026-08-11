@@ -23,7 +23,7 @@ const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, onRem
             {onRemove && (
                 <button
                     onClick={onRemove}
-                    className='absolute top-2 left-2 bg-black/70 hover:bg-red-500 hover:text-white text-neutral-300 p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300'
+                    className='absolute top-2 left-2 bg-black/70 hover:bg-red-500 hover:text-white text-neutral-300 p-2 rounded-full cursor-pointer md:opacity-0 md:group-hover:opacity-100 transition-all duration-300'
                 >
                     <Trash2 size={16} />
                 </button>
@@ -34,13 +34,13 @@ const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, onRem
                     {onDownload && (
                         <button
                             onClick={onDownload}
-                            className='absolute top-2 right-2 bg-black/70 hover:bg-amber-47 hover:text-black text-white p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-200'
+                            className='absolute top-2 right-2 bg-black/70 hover:bg-amber-47 hover:text-black text-white p-2 rounded-full cursor-pointer md:opacity-0 md:group-hover:opacity-100 transition-all duration-200'
                         >
                             <Download size={16} />
                         </button>
                     )}
                     {badge && (
-                        <span className='absolute top-3/4 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[11px] md:text-[15px] tracking-wider text-neutral-200 bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap md:opacity-0 md:group-hover:opacity-100 transition-all duration-300'>
+                        <span className='absolute top-3/4 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[11px] md:text-[15px] tracking-wider text-amber-47 bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap md:opacity-0 md:group-hover:opacity-100 transition-all duration-300'>
                             {badge}
                         </span>
                     )}
@@ -50,7 +50,7 @@ const ImageTile = ({ previewUrl, resultUrl, isProcessed, badge, hoverSize, onRem
             {!isProcessed && hoverSize && (
                 <span className='absolute top-3/4 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[11px] md:text-[15px] tracking-wider text-neutral-200 bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap md:opacity-0 md:group-hover:opacity-100 transition-all duration-300'>
                     {hoverSize.current}
-                    <ArrowRight className='text-amber-47 hidden md:text-[16px] md:block' />
+                    <ArrowRight size={16} className='text-amber-47 hidden md:block' />
                     <span className='hidden md:block'>{hoverSize.estimated}</span>
                 </span>
             )}

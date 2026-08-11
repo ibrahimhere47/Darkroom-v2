@@ -24,7 +24,7 @@ const CompressDevelopPanel = (props) => {
             <div>
                 <div className='flex justify-between items-center mb-2'>
                     <span className='text-sm tracking-widest text-neutral-400 uppercase'>Quality</span>
-                    <span className='text-amber-47 text-lg font-semibold font-mono'>{quality}</span>
+                    <span className='text-amber-47 text-lg font-semibold font-mono'>{quality}%</span>
                 </div>
                 <input
                     type='range'
@@ -36,13 +36,13 @@ const CompressDevelopPanel = (props) => {
                     className='w-full h-1.5 rounded-full appearance-none bg-neutral-700 accent-amber-47 cursor-pointer disabled:opacity-40'
                 />
                 <div className='flex justify-between text-[14px] text-neutral-300 mt-1 font-mono'>
-                    <span>10</span>
-                    <span>100</span>
+                    <span>10%</span>
+                    <span>100%</span>
                 </div>
             </div>
 
             {originalTotal > 0 && (
-                <div className='flex justify-between items-center'>
+                <div className='flex justify-between items-center mb-8 md:mb-2'>
                     <span className='text-sm tracking-widest text-neutral-400 uppercase'>Est. size</span>
                     <span className='text-neutral-200 text-lg font-mono font-semibold'>
                         ~{formatBytes(estimatedTotal)}
