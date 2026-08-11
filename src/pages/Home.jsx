@@ -4,6 +4,7 @@ import ToolCard from '../components/ToolCard'
 import Hero from '../components/hero-comps/Hero'
 import Loader from '../components/Loader'
 import HomePremiumAd from '../components/home-comps/HomePremiumAd'
+import HomeCategoryBtns from '../components/home-comps/HomeCategoryBtns'
 import { tools } from '../tools/toolsRegistry'
 import gsap from 'gsap'
 
@@ -69,22 +70,11 @@ const Home = () => {
             <Layout>
                 <div className='py-8 md:py-10 w-full'>
                     <Hero />
-
-                    <div className='flex flex-wrap gap-2 mb-6 md:mb-9 mt-5 justify-self-center'>
-                        {categories.map((category) => (
-                            <button
-                                key={category.name}
-                                onClick={() => setActiveCategory(category.name)}
-                                className={`px-2 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-colors ${
-                                    activeCategory === category.name
-                                        ? 'bg-amber-47 text-neutral-900 hover:bg-amber-400 border border-neutral-900'
-                                        : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 border border-neutral-600'
-                                }`}
-                            >
-                                {category.name}
-                            </button>
-                        ))}
-                    </div>
+                    <HomeCategoryBtns
+                        categories={categories}
+                        activeCategory={activeCategory}
+                        setActiveCategory={setActiveCategory}
+                    />
 
                     <div className='bg-neutral-900 rounded-2xl p-5 md:p-10 md:border border-neutral-700'>
                         <div className='flex flex-wrap gap-4'>

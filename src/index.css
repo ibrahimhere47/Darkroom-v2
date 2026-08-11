@@ -21,11 +21,17 @@
   font-weight: 400;
 }
 
+@font-face {
+  font-family: "Alex Brush";
+  src: url("/fonts/brush/AlexBrush-Regular.ttf") format("truetype");
+}
+
 @theme {
   --font-zilla: "Zilla Slab", Georgia, serif;
   --font-zilla-italic: "Zilla Slab Italic", "Zilla Slab", Georgia, serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-brush: "Alex Brush", Georgia, serif;
 
   --color-amber-47: #e8a33d;
   --color-amber-dim: #d09235;
