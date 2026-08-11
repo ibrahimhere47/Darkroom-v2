@@ -12,7 +12,7 @@ const ResizeDevelopPanel = (props) => {
     const { width, height, setWidth, setHeight, lockAspect, setLockAspect, aspectRatio, mode, setMode, isResizing, MODES } = props
 
     return (
-        <div className='flex flex-col gap-6'>
+        <div className='flex flex-col gap-6 mb-10 md:mb-2'>
             <SidebarSection eyebrow='Resize' description='Set target dimensions, then resize your batch.' />
 
             <div className='flex flex-col gap-3'>
@@ -67,6 +67,11 @@ const ResizeDevelopPanel = (props) => {
                         </button>
                     ))}
                 </div>
+                <p className='text-sm text-neutral-400'>
+                    {mode === 'fit' && 'Fits within the specified dimensions, retaining aspect ratio (may leave empty space)'}
+                    {mode === 'crop' && 'Crops to fill the specified dimensions (may cut off parts of the image)'}
+                    {mode === 'exact' && 'Stretches to fill the specified dimensions, ignoring aspect ratio (may distort the image)'}
+                </p>
             </div>
         </div>
     )
