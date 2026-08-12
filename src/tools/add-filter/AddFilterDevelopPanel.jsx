@@ -12,7 +12,7 @@ const AddFilterDevelopPanel = (props) => {
             <SidebarSection eyebrow='Develop' description='Select from only the best filters to make your image pop.' />
             
             <div>
-                <div className='flex gap-2'>
+                <div className='grid grid-cols-2 gap-2'>
                     {FILTERS.map((f) => (
                         <button
                             key={f}
