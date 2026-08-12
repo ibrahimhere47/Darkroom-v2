@@ -6,7 +6,7 @@ const HomeCategoryBtns = (props) => {
     const { CATEGORIES, activeCategory, setActiveCategory } = props
 
     return (
-        <div className='flex flex-wrap gap-2 mb-6 md:mb-9 mt-5 justify-self-center'>
+        <div className='flex flex-wrap gap-2 mb-2 md:mb-4 mt-7 justify-self-center'>
             {CATEGORIES.map((category) => (
                 <MagneticWrapper key={category.name} strength={activeCategory === category.name ? 0.2 : 0.3}>
                     <button

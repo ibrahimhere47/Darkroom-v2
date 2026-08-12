@@ -74,7 +74,6 @@ const HeaderToolMenu = () => {
             onMouseLeave={scheduleClose}
         >
             <button className='mono font-bold text-lg hover:text-neutral-300 transition-colors flex items-center'>
-                Tools
                 <ChevronDown ref={arrowRef} size={30} />
             </button>
 

@@ -27,7 +27,7 @@ const Hero = () => {
     return (
         <>
         <div className='flex justify-center cursor-default'>
-            <div className='flex flex-col items-center'>
+            <div className='flex flex-col items-center gap-1'>
                 <p 
                 className='font-mono text-amber-47 text-sm pb-3 inline-block'
                 ref={captionRef}

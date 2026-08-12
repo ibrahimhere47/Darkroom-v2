@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 @font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Zilla Slab";
   src: url("/fonts/zilla/ZillaSlab-Bold.ttf") format("truetype");
 }
@@ -27,6 +32,7 @@
 }
 
 @theme {
+  --font-fraunces: "Fraunces", Georgia, serif;
   --font-zilla: "Zilla Slab", Georgia, serif;
   --font-zilla-italic: "Zilla Slab Italic", "Zilla Slab", Georgia, serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;

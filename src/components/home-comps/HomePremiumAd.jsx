@@ -1,5 +1,6 @@
 import React from 'react'
 import { Crown, Gem } from 'lucide-react'
+import MagneticWrapper from '../MagneticWrapper'
 
 const HomePremiumAd = (props) => {
     const { isPopup = false } = props

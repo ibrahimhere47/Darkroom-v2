@@ -14,6 +14,7 @@ const ToolCard = (props) => {
     const badgeGlowRef = useRef(null)
     const borderRef = useRef(null)
     const cardRef = useRef(null)
+    const headingRef = useRef(null)
     const tl = useRef(null)
 
     useGSAP(() => {
@@ -38,6 +39,12 @@ const ToolCard = (props) => {
 
             .to(badgeGlowRef.current, {
                 opacity: 0.3,
+                duration: 0.4,
+            }, 0)
+
+            .to(headingRef.current, {
+                backgroundColor: color,
+                border: 'none',
                 duration: 0.4,
             }, 0)
     }, [])
@@ -96,7 +103,7 @@ const ToolCard = (props) => {
 
             {/* Card */}
             <div
-                className="flex flex-col gap-2 bg-neutral-700 rounded-xl p-3 flex-1 min-h-40"
+                className="flex flex-col gap-2 bg-neutral-800 rounded-xl p-3 flex-1 min-h-40"
                 style={{
                     borderColor: color,
                 }}
@@ -121,7 +128,8 @@ const ToolCard = (props) => {
 
                             <Icon
                                 ref={iconRef}
-                                className="relative z-10 text-amber-47"
+                                className="relative z-10"
+                                color={color}
                             />
                         </div>
                     </div>
@@ -161,11 +169,13 @@ const ToolCard = (props) => {
                             : 'text-white'
                     }`}
                 >
-                    <h3 className="text-lg font-mono font-bold">
+                    <h3 className={`text-2xl font-fraunces font-semibold w-fit px-2 rounded-2xl`}
+                        ref={headingRef}
+                    >
                         {tool.name}
                     </h3>
 
-                    <p className="line-clamp-3 font-body tracking-normal leading-5 text-[13px]">
+                    <p className="line-clamp-3 font-body tracking-normal leading-5 text-[12px] pl-2">
                         {tool.tagline}
                     </p>
                 </div>

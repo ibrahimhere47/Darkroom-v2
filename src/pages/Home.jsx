@@ -7,6 +7,7 @@ import HomePremiumAd from '../components/home-comps/HomePremiumAd'
 import HomeCategoryBtns from '../components/home-comps/HomeCategoryBtns'
 import { tools, CATEGORIES } from '../tools/toolsRegistry'
 import gsap from 'gsap'
+import PremiumBanner from '../components/PremiumBanner'
 
 const LOADER_SEEN_KEY = 'hasSeenLoader'
 
@@ -49,7 +50,7 @@ const Home = () => {
                         setActiveCategory={setActiveCategory}
                     />
 
-                    <div className='bg-neutral-900 rounded-2xl p-5 md:p-10 md:border border-neutral-700'>
+                    <div className='bg-neutral-900/80 rounded-2xl p-5 md:pb-9 md:px-9'>
                         <div className='flex flex-wrap gap-4'>
                             {activeTools.map((tool) => (
                                 <div
@@ -63,7 +64,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className='flex justify-center'>
-                    <HomePremiumAd />
+                    <PremiumBanner />
                 </div>
             </Layout>
 

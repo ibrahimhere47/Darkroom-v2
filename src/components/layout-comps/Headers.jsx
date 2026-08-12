@@ -48,7 +48,7 @@ const Headers = () => {
         <div className='relative'>
             <header
                 ref={headerRef}
-                className='absolute inset-x-0 top-0 z-50 bg-neutral-900 flex items-baseline justify-between py-6 px-8 border-b-neutral-400 border-b'
+                className='absolute inset-x-0 top-0 z-50 bg-neutral-900/80 flex items-center justify-between py-3 px-8 mx-8 rounded-3xl mt-5 border border-neutral-700'
             >
                 <a href='/' className='no-underline flex items-center gap-1 font-body cursor-pointer'>
                     <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
@@ -58,7 +58,7 @@ const Headers = () => {
             </header>
             <header
                 ref={header2Ref}
-                className='fixed inset-x-0 top-0 z-40 bg-neutral-950 flex items-center justify-between py-6 px-20 mx-20 mt-6 border border-neutral-400 rounded-4xl shadow-2xl shadow-neutral-950'
+                className='fixed inset-x-0 top-0 z-40 bg-neutral-900/80 flex items-center justify-between py-3 px-20 mx-20 mt-6 rounded-4xl shadow-2xl shadow-neutral-950 border border-neutral-700'
             >
                     <a href='/' className='no-underline flex items-center gap-1 font-body cursor-pointer'>
                         <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
