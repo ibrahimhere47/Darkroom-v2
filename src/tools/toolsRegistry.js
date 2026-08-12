@@ -113,9 +113,9 @@ export const tools = [
         name: 'Remove background',
         tagline: 'Cut a subject out onto a transparent layer by erasing the background',
         icon: Blend,
+        component: lazy(() => import('./remove-background/RemoveBackgroundTool.jsx')),
         category: 'Optimize',
         categoryColor: '--color-category-optimize',
-        comingSoon: true,
     },
     {
         id: 'add-text',
