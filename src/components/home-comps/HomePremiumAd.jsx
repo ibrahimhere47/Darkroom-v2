@@ -9,7 +9,7 @@ const HomePremiumAd = () => {
                 <div className='w-full md:w-auto text-white flex flex-col justify-center gap-6 md:gap-7'>
                     
                     <div className='flex flex-col gap-2'>
-                        <h1 className='font-zilla text-4xl sm:text-5xl md:text-5xl lg:text-6xl'>
+                        <h1 className='font-body font-black text-4xl sm:text-5xl md:text-5xl lg:text-6xl'>
                             Premium
                         </h1>
 
