@@ -17,6 +17,8 @@ import AddFilterDevelopPanel from './AddFilterDevelopPanel'
 import AddFilterDevelopedPanel from './AddFilterDevelopedPanel'
 import gsap from 'gsap'
 import { Loader2, DownloadCloud, RotateCcw } from 'lucide-react'
+import Popup from '../../components/Popup'
+import HomePremiumAd from '../../components/home-comps/HomePremiumAd'
 
 const FILTERS = [
     'vintage',
@@ -29,6 +31,8 @@ const AddFilterTool = (props) => {
     const files = props.files || []
     const setFiles = props.setFiles
     const [filter, setFilter] = useState('vintage')
+    const [isPopup, setIsPopup] = useState(false)
+    const [popupMessage, setPopupMessage] = useState(false)
     
     const {
         items,
@@ -47,7 +51,8 @@ const AddFilterTool = (props) => {
 
     const handleFilter = async () => {
         if (files.length >= maxFilesPerBatch) {
-            alert(`You can only convert up to ${maxFilesPerBatch} files at a time. Please remove some files and try again.`)
+            setIsPopup(true)
+            setPopupMessage('Our free tier only offers 20 files per batch')
             return
         }
 
@@ -86,6 +91,7 @@ const AddFilterTool = (props) => {
     const handleRemoveClick = useAnimatedRemove(removeFile)
 
     return (
+        <>
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
             <ToolStage
@@ -149,6 +155,15 @@ const AddFilterTool = (props) => {
                 </div>
             </SidebarPanel>
         </div>
+        <Popup isOpen={isPopup} title={'Oops!'} description={'It seems you have hit some sort of limit'} onClose={() => {setIsPopup(false)}} >
+            <h1
+                className='font-mono font-bold mt-2 mb-3'
+            >
+            {popupMessage}
+            </h1>
+            <HomePremiumAd isPopup={true} />
+        </Popup>
+        </>
     )
 }
 

@@ -18,6 +18,8 @@ import {
 import ResizeDevelopedPanel from './ResizeDevelopedPanel'
 import ResizeDevelopPanel from './ResizeDevelopPanel'
 import { maxFilesPerBatch } from '../toolsRegistry'
+import Popup from '../../components/Popup'
+import HomePremiumAd from '../../components/home-comps/HomePremiumAd'
 
 const RESIZE_ENDPOINT = 'https://adjusture-backend.vercel.app/resize'
 
@@ -37,6 +39,8 @@ const ResizeTool = (props) => {
     const [lockAspect, setLockAspect] = useState(true)
     const [aspectRatio, setAspectRatio] = useState(null)
     const [mode, setMode] = useState('fit')
+    const [isPopup, setIsPopup] = useState(false)
+    const [popupMessage, setPopupMessage] = useState('')
 
     const {
         items,
@@ -118,7 +122,8 @@ const ResizeTool = (props) => {
 
     const handleResize = async () => {
         if (files.length >= maxFilesPerBatch) {
-            alert(`You can only resize up to ${maxFilesPerBatch} files at a time. Please remove some files and try again.`)
+            setIsPopup(true)
+            setPopupMessage('Our free tier only offers 20 files per batch')
             return
         }
 
@@ -172,6 +177,7 @@ const ResizeTool = (props) => {
     }
 
     return (
+        <>
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
             <ToolStage
@@ -244,6 +250,15 @@ const ResizeTool = (props) => {
                 </div>
             </SidebarPanel>
         </div>
+        <Popup isOpen={isPopup} title={'Oops!'} description={'It seems you have hit some sort of limit'} onClose={() => {setIsPopup(false)}} >
+            <h1
+                className='font-mono font-bold mt-2 mb-3'
+            >
+            {popupMessage}
+            </h1>
+            <HomePremiumAd isPopup={true} />
+        </Popup>
+        </>
     )
 }
 

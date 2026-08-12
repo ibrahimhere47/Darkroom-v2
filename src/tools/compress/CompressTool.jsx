@@ -17,6 +17,7 @@ import CompressDevelopedPanel from './CompressDevelopedPanel'
 import CompressDevelopPanel from './CompressDevelopPanel'
 import { maxFilesPerBatch } from '../toolsRegistry'
 import Popup from '../../components/Popup'
+import HomePremiumAd from '../../components/home-comps/HomePremiumAd'
 
 const CompressTool = (props) => {
 
@@ -55,7 +56,7 @@ const CompressTool = (props) => {
     const handleCompress = async () => {
         if (files.length >= maxFilesPerBatch) {
             setIsPopup(true)
-            setPopupMessage('You have more than twenty files rn plseas rekjdpaw')
+            setPopupMessage('Our free tier only offers 20 files per batch')
             return
         }
 
@@ -173,9 +174,13 @@ const CompressTool = (props) => {
                 </div>
             </SidebarPanel>
         </div>
-        <Popup isOpen={isPopup} title={popupMessage} description={'lkdsakdja'} onClose={() => {setIsPopup(false)}} >
-            <h1>{popupMessage}</h1>
-            <h1>jkjlkldkaj</h1>
+        <Popup isOpen={isPopup} title={'Oops!'} description={'It seems you have hit some sort of limit'} onClose={() => {setIsPopup(false)}} >
+            <h1
+                className='font-mono font-bold mt-2 mb-3'
+            >
+            {popupMessage}
+            </h1>
+            <HomePremiumAd isPopup={true} />
         </Popup>
         </>
     )

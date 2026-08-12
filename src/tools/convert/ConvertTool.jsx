@@ -17,6 +17,8 @@ import {
 import ConvertDevelopedPanel from './ConvertDevelopedPanel'
 import ConvertDevelopPanel from './ConvertDevelopPanel'
 import { maxFilesPerBatch } from '../toolsRegistry'
+import Popup from '../../components/Popup'
+import HomePremiumAd from '../../components/home-comps/HomePremiumAd'
 
 const CONVERT_ENDPOINT = 'https://adjusture-backend.vercel.app/convert'
 
@@ -33,6 +35,8 @@ const ConvertTool = (props) => {
 
     const [quality, setQuality] = useState(100)
     const [format, setFormat] = useState('image/jpeg')
+    const [isPopup, setIsPopup] = useState(false)
+    const [popupMessage, setPopupMessage] = useState('')
 
     const {
         items,
@@ -66,7 +70,8 @@ const ConvertTool = (props) => {
 
     const handleConvert = async () => {
         if (files.length >= maxFilesPerBatch) {
-            alert(`You can only convert up to ${maxFilesPerBatch} files at a time. Please remove some files and try again.`)
+            setIsPopup(true)
+            setPopupMessage('Our free tier only offers 20 files per batch')
             return
         }
         
@@ -111,6 +116,7 @@ const ConvertTool = (props) => {
     }
 
     return (
+        <>
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
             <ToolStage
@@ -181,6 +187,15 @@ const ConvertTool = (props) => {
                 </div>
             </SidebarPanel>
         </div>
+        <Popup isOpen={isPopup} title={'Oops!'} description={'It seems you have hit some sort of limit'} onClose={() => {setIsPopup(false)}} >
+            <h1
+                className='font-mono font-bold mt-2 mb-3'
+            >
+            {popupMessage}
+            </h1>
+            <HomePremiumAd isPopup={true} />
+        </Popup>
+        </>
     )
 }
 
