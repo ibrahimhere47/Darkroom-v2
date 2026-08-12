@@ -169,7 +169,7 @@ const ToolCard = (props) => {
                             : 'text-white'
                     }`}
                 >
-                    <h3 className={`text-2xl font-fraunces font-semibold w-fit px-2 rounded-2xl`}
+                    <h3 className={`text-[23px] font-fraunces font-semibold w-fit px-2 rounded-2xl`}
                         ref={headingRef}
                     >
                         {tool.name}
