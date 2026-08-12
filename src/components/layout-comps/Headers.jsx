@@ -48,7 +48,7 @@ const Headers = () => {
         <div className='relative'>
             <header
                 ref={headerRef}
-                className='absolute inset-x-0 top-0 z-50 bg-neutral-800 flex items-baseline justify-between py-9 mx-8 border-b-neutral-400 border-b'
+                className='absolute inset-x-0 top-0 z-50 bg-neutral-900 flex items-baseline justify-between py-6 px-8 border-b-neutral-400 border-b'
             >
                 <Link to='/' className='no-underline flex items-center gap-1 font-body'>
                     <span className='bg-amber-47 w-3 h-3 rounded-full'></span>

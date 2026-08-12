@@ -2,16 +2,16 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Headers from './layout-comps/Headers'
 
-const Layout = ({ children, CATEGORIES }) => {
+const Layout = ({ children }) => {
 
     return (
         <div className='bg-neutral-800 text-white no-scrollbar'>
-            <Headers CATEGORIES={CATEGORIES} />
+            <Headers />
             <main className='mx-8'>
-                <div className='bg-neutral-800 py-12'></div>
+                <div className='bg-neutral-800 py-9'></div>
                 {children}
             </main>
-            <footer className='flex items-baseline justify-between py-12 mx-8 border-t-neutral-400 border-t'>
+            <footer className='flex bg-neutral-900 items-baseline justify-between py-6 px-8 border-t-neutral-400 border-t'>
                 <p className='mono'>Copyright@2026 Darkroom | Your image toolkit</p>
             </footer>
         </div>
