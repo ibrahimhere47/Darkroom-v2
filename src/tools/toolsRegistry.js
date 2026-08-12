@@ -18,6 +18,14 @@ import {
     Scaling,
 } from 'lucide-react'
 
+import {
+    LayoutGrid,
+    ChartNoAxesColumnIncreasing,
+    Info,
+    Sparkles,
+    ShieldCheck
+} from 'lucide-react'
+
 export const tools = [
     {
         id: 'compress',
@@ -173,10 +181,34 @@ export function getTool(id) {
 export const maxFilesPerBatch = 20;
 
 export const CATEGORIES = [
-        { name: 'All', tools: tools },
-        { name: 'Optimize', tools: tools.filter(t => t.category === 'Optimize') },
-        { name: 'Edit', tools: tools.filter(t => t.category === 'Edit') },
-        { name: 'Properties', tools: tools.filter(t => t.category === 'Properties') },
-        { name: 'Effects', tools: tools.filter(t => t.category === 'Effects') },
-        { name: 'Security', tools: tools.filter(t => t.category === 'Security') },
-    ]
+    {
+        name: 'All',
+        icon: LayoutGrid,
+        tools: tools
+    },
+    {
+        name: 'Optimize',
+        icon: ChartNoAxesColumnIncreasing,
+        tools: tools.filter(t => t.category === 'Optimize')
+    },
+    {
+        name: 'Edit',
+        icon: Crop,
+        tools: tools.filter(t => t.category === 'Edit')
+    },
+    {
+        name: 'Properties',
+        icon: Info,
+        tools: tools.filter(t => t.category === 'Properties')
+    },
+    {
+        name: 'Effects',
+        icon: Sparkles,
+        tools: tools.filter(t => t.category === 'Effects')
+    },
+    {
+        name: 'Security',
+        icon: ShieldCheck,
+        tools: tools.filter(t => t.category === 'Security')
+    },
+]
