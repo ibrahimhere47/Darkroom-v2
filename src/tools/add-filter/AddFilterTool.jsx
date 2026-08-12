@@ -80,7 +80,7 @@ const AddFilterTool = (props) => {
 
     const handleDownloadClick = (e, url, idx) => {
         gsap.fromTo(e.currentTarget, { scale: 0.85 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' })
-        downloadFile(url, filename(items[idx], idx))
+        downloadFile(url, `filtered-${idx + 1}.jpg`)
     }
 
     const handleRemoveClick = useAnimatedRemove(removeFile)
@@ -120,7 +120,7 @@ const AddFilterTool = (props) => {
                 <div className='w-full flex flex-col gap-4 items-center'>
                     {allFiltered ? (
                         <>
-                            <ActionButton onClick={() => downloadAll((idx) => filename(items[idx], idx))}>
+                            <ActionButton onClick={() => downloadAll((idx) => `filtered-${idx + 1}.jpg`)}>
                                 <DownloadCloud size={16} />
                                 Download all
                             </ActionButton>
