@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ChevronDown } from 'lucide-react'
-import CATEGORIES from '../../tools/toolCategories'
+import { CATEGORIES } from '../../tools/toolsRegistry.js'
 
 const HeaderToolMenu = () => {
     const [open, setOpen] = useState(false)
