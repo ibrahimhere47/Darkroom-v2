@@ -15,6 +15,8 @@ import {
 import { maxFilesPerBatch } from '../toolsRegistry'
 import AddFilterDevelopPanel from './AddFilterDevelopPanel'
 import AddFilterDevelopedPanel from './AddFilterDevelopedPanel'
+import gsap from 'gsap'
+import { Loader2, DownloadCloud, RotateCcw } from 'lucide-react'
 
 const FILTERS = [
     'vintage',
@@ -31,8 +33,8 @@ const AddFilterTool = (props) => {
     const {
         items,
         hasResults,
-        allDone: allConverted,
-        isProcessing: isConverting,
+        allDone: allFiltered,
+        isProcessing: isFiltering,
         beginProcessing,
         setResult,
         finishProcessing,
@@ -72,33 +74,51 @@ const AddFilterTool = (props) => {
                 console.error(err)
             }
         }))
+
+        finishProcessing()
     }
+
+    const handleDownloadClick = (e, url, idx) => {
+        gsap.fromTo(e.currentTarget, { scale: 0.85 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' })
+        downloadFile(url, filename(items[idx], idx))
+    }
+
+    const handleRemoveClick = useAnimatedRemove(removeFile)
 
     return (
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
             <ToolStage
                 items={items}
-                isProcessing={isResizing}
+                isProcessing={isFiltering}
                 onRemove={handleRemoveClick}
                 onDownload={handleDownloadClick}
                 getBadge={(item) => item.resultMeta ? `${item.resultMeta.width} × ${item.resultMeta.height}` : null}
-                getHoverDimensions={(item, idx) => getHoverDimensions(item, idx)}
                 onAddFiles={addFiles}
             />
 
             <SidebarPanel>
 
-                {allResized ? (
+                {allFiltered ? (
                     // ---- Resized panel ----
-                    <AddFilterDevelopedPanel />
+                    <AddFilterDevelopedPanel
+                        files={files}
+                        filter={filter}
+                        FILTERS={FILTERS}
+                        allFiltered={allFiltered}
+                    />
                 ) : (
                     // ---- Resize settings panel ----
-                    <AddFilterDevelopPanel />
+                    <AddFilterDevelopPanel
+                        filter={filter}
+                        setFilter={setFilter}
+                        isFiltering={isFiltering}
+                        FILTERS={FILTERS}
+                    />
                 )}
 
                 <div className='w-full flex flex-col gap-4 items-center'>
-                    {allResized ? (
+                    {allFiltered ? (
                         <>
                             <ActionButton onClick={() => downloadAll((idx) => filename(items[idx], idx))}>
                                 <DownloadCloud size={16} />
@@ -110,21 +130,21 @@ const AddFilterTool = (props) => {
                             </ActionButton>
                         </>
                     ) : (
-                        <ActionButton onClick={handleResize} disabled={isResizing || files.length === 0 || !width || !height}>
-                            {isResizing ? (
+                        <ActionButton onClick={handleFilter} disabled={isFiltering || files.length === 0 || !filter}>
+                            {isFiltering ? (
                                 <>
                                     <Loader2 size={16} className='animate-spin' />
-                                    Resizing…
+                                    Filtering...
                                 </>
                             ) : (
-                                'Resize'
+                                'Filter'
                             )}
                         </ActionButton>
                     )}
 
                     <p className='text-[11px] text-neutral-600 leading-relaxed'>
                         {files.length} {files.length === 1 ? 'image' : 'images'} loaded
-                        {hasResults && ` · ${items.filter((item) => item.resultUrl).length} resized`}
+                        {hasResults && ` · ${items.filter((item) => item.resultUrl).length} filtered`}
                     </p>
                 </div>
             </SidebarPanel>
