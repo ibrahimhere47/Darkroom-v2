@@ -150,9 +150,9 @@ export const tools = [
         name: 'Doodle',
         tagline: 'Draw on your images with a variety of brushes, colors, and styles',
         icon: Laugh,
+        component: lazy(() => import('./doodle/DoodleTool.jsx')),
         category: 'Edit',
         categoryColor: '--color-category-edit',
-        comingSoon: true,
     },
     {
         id: 'upscale',

@@ -1,4 +1,7 @@
 import React from 'react'
+import Layout from '../Layout'
+import { Frown, CornerUpLeft } from 'lucide-react'
+import { Link } from 'react-router'
 
 const ToolPageNotFound = () => {
     return (
