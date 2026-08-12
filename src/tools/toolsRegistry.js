@@ -51,9 +51,9 @@ export const tools = [
         name: 'Add Filters',
         tagline: 'Add aesthetic, retro, vintage, grayscale and many other filters to your image',
         icon: Camera,
+        component: lazy(() => import('./add-filter/AddFilterTool.jsx')),
         category: 'Effects',
         categoryColor: '--color-category-effects',
-        comingSoon: true,
     },
     {
         id: 'watermark',
