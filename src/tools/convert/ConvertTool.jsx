@@ -18,7 +18,7 @@ import ConvertDevelopedPanel from './ConvertDevelopedPanel'
 import ConvertDevelopPanel from './ConvertDevelopPanel'
 import { maxFilesPerBatch } from '../toolsRegistry'
 
-const CONVERT_ENDPOINT = 'https://darkroom-v2-backend-production.up.railway.app/convert'
+const CONVERT_ENDPOINT = 'https://adjusture-backend.vercel.app/convert'
 
 const FORMATS = [
     { id: 'image/jpeg', label: 'JPEG', value: 'jpeg' },
@@ -76,9 +76,9 @@ const ConvertTool = (props) => {
 
         await Promise.all(files.map(async (file, idx) => {
             const formData = new FormData()
-            formData.append('File', file)
-            formData.append('Quality', quality)
-            formData.append('Format', targetValue)
+            formData.append('file', file)
+            formData.append('quality', quality)
+            formData.append('format', targetValue)
 
             try {
                 const response = await fetch(CONVERT_ENDPOINT, { method: 'POST', body: formData })

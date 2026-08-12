@@ -19,7 +19,7 @@ import ResizeDevelopedPanel from './ResizeDevelopedPanel'
 import ResizeDevelopPanel from './ResizeDevelopPanel'
 import { maxFilesPerBatch } from '../toolsRegistry'
 
-const RESIZE_ENDPOINT = 'https://darkroom-v2-backend-production.up.railway.app/resize'
+const RESIZE_ENDPOINT = 'https://adjusture-backend.vercel.app/resize'
 
 const MODES = [
     { id: 'fit', label: 'Fit' },
@@ -126,10 +126,10 @@ const ResizeTool = (props) => {
 
         await Promise.all(files.map(async (file, idx) => {
             const formData = new FormData()
-            formData.append('File', file)
-            formData.append('Width', width)
-            formData.append('Height', height)
-            formData.append('Mode', mode)
+            formData.append('file', file)
+            formData.append('width', width)
+            formData.append('height', height)
+            formData.append('mode', mode)
 
             try {
                 const response = await fetch(RESIZE_ENDPOINT, {

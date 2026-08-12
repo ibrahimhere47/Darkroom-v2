@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { Plus } from 'lucide-react'
@@ -11,11 +11,14 @@ import ImageTile from './ImageTile'
  * @param {Array} items - [{ file, previewUrl, resultUrl, resultMeta }]
  * @param {boolean} isProcessing
  * @param {(e, idx) => void} [onRemove]
- * @param {(e, url, idx) => void} [onDownload] - called only for processed items
- * @param {(item, idx) => React.ReactNode} [getBadge] - per-tile badge, e.g. file size
- * @param {(fileList: FileList) => void} [onAddFiles] - omit to hide the add control
+ * @param {(e, url, idx) => void} [onDownload]
+ * @param {(item, idx) => React.ReactNode} [getBadge]
+ * @param {(item, idx) => React.ReactNode} [getHoverSize]
+ * @param {(item, idx) => React.ReactNode} [getHoverDimensions]
+ * @param {(item, idx) => React.ReactNode} [getHoverFormat]
+ * @param {(fileList: FileList) => void} [onAddFiles]
  * @param {string} [addLabel]
- * @param {React.ReactNode} [loadingContent] - override the default spinner
+ * @param {React.ReactNode} [loadingContent]
  */
 const ToolStage = ({
     items,
@@ -31,41 +34,45 @@ const ToolStage = ({
     loadingContent,
 }) => {
     const fileInputRef = useRef(null)
+    const stageRef = useRef(null)
 
-    // Re-run the entrance animation whenever items are added/removed or
-    // results come in (previews -> processed swap).
-    const revealSignature = `${items.length}:${items.map((item) => (item.resultUrl ? '1' : '0')).join('')}`
-    const [revealed, setRevealed] = useState(false)
+    const revealSignature = `${items.length}:${items
+        .map((item) => (item.resultUrl ? '1' : '0'))
+        .join('')}`
 
     useGSAP(() => {
-        if (!isProcessing && items.length > 0 && !revealed) {
-            gsap.fromTo(
-                '.result-frame',
-                { 
-                    opacity: 0,
-                    y: 14, 
-                    scale: 0.97 
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 0.5,
-                    ease: 'power3.out',
-                    stagger: 0.08,
-                    onComplete: () => setRevealed(true),
-                }
-            )
+        // Don't try to animate while the loading state is displayed.
+        if (isProcessing || items.length === 0) {
+            return
         }
-        else {
-            gsap.to('.result-frame', {
+
+        const frames = gsap.utils.toArray('.result-frame', stageRef.current)
+
+        // Safety check.
+        if (!frames.length) {
+            return
+        }
+
+        gsap.fromTo(
+            frames,
+            {
+                opacity: 0,
+                y: 14,
+                scale: 0.97,
+            },
+            {
                 opacity: 1,
+                y: 0,
                 scale: 1,
                 duration: 0.5,
-                y: 0,
-            })
-        }
-    }, [revealSignature, isProcessing])
+                ease: 'power3.out',
+                stagger: 0.08,
+            }
+        )
+    }, {
+        dependencies: [revealSignature, isProcessing],
+        scope: stageRef,
+    })
 
     const handleInputChange = (e) => {
         onAddFiles(e.target.files)
@@ -73,7 +80,10 @@ const ToolStage = ({
     }
 
     return (
-        <div className='relative flex-1 min-h-125 rounded-2xl bg-neutral-900 border border-neutral-800 p-6 overflow-hidden'>
+        <div
+            ref={stageRef}
+            className='relative flex-1 min-h-125 rounded-2xl bg-neutral-900 border border-neutral-800 p-6 overflow-hidden'
+        >
             <div className='pointer-events-none absolute top-20 right-80 w-72 h-72 rounded-full bg-amber-47/1 blur-3xl' />
 
             {isProcessing ? (
@@ -84,42 +94,77 @@ const ToolStage = ({
                 </div>
             ) : (
                 <div className='min-w-full min-h-114 flex flex-col justify-between'>
-                <div className='flex flex-col gap-8'>
-                    <div className='relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4'>
-                        {items.map((item, idx) => (
-                            <ImageTile
-                                key={idx}
-                                previewUrl={item.previewUrl}
-                                resultUrl={item.resultUrl}
-                                isProcessed={Boolean(item.resultUrl)}
-                                badge={getBadge ? getBadge(item, idx) : null}
-                                hoverSize={!item.resultMeta && getHoverSize ? getHoverSize(item, idx) : null}
-                                hoverDimensions={!item.resultMeta && getHoverDimensions ? getHoverDimensions(item, idx) : null}
-                                hoverFormat={!item.resultMeta && getHoverFormat ? getHoverFormat(item, idx) : null}
-                                onRemove={onRemove ? (e) => onRemove(e, idx) : undefined}
-                                onDownload={onDownload && item.resultUrl ? (e) => onDownload(e, item.resultUrl, idx) : undefined}
+                    <div className='flex flex-col gap-8'>
+                        <div className='relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4'>
+                            {items.map((item, idx) => (
+                                <ImageTile
+                                    key={idx}
+                                    previewUrl={item.previewUrl}
+                                    resultUrl={item.resultUrl}
+                                    isProcessed={Boolean(item.resultUrl)}
+                                    badge={
+                                        getBadge
+                                            ? getBadge(item, idx)
+                                            : null
+                                    }
+                                    hoverSize={
+                                        !item.resultMeta && getHoverSize
+                                            ? getHoverSize(item, idx)
+                                            : null
+                                    }
+                                    hoverDimensions={
+                                        !item.resultMeta && getHoverDimensions
+                                            ? getHoverDimensions(item, idx)
+                                            : null
+                                    }
+                                    hoverFormat={
+                                        !item.resultMeta && getHoverFormat
+                                            ? getHoverFormat(item, idx)
+                                            : null
+                                    }
+                                    onRemove={
+                                        onRemove
+                                            ? (e) => onRemove(e, idx)
+                                            : undefined
+                                    }
+                                    onDownload={
+                                        onDownload && item.resultUrl
+                                            ? (e) =>
+                                                    onDownload(
+                                                        e,
+                                                        item.resultUrl,
+                                                        idx
+                                                    )
+                                            : undefined
+                                    }
+                                    className='result-frame'
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {onAddFiles && (
+                        <div className='flex flex-col items-center'>
+                            <button
+                                className='flex gap-1 font-mono font-semibold rounded-full bg-amber-47/95 mt-6 p-1.5 px-2 text-black cursor-pointer hover:bg-amber-47 transition-all duration-350'
+                                onClick={() =>
+                                    fileInputRef.current?.click()
+                                }
+                            >
+                                <Plus />
+                                {addLabel}
+                            </button>
+
+                            <input
+                                type='file'
+                                ref={fileInputRef}
+                                onChange={handleInputChange}
+                                accept='image/*'
+                                multiple
+                                style={{ display: 'none' }}
                             />
-                        ))}
-                    </div>
-                </div>
-                {onAddFiles && (
-                    <div className='flex flex-col items-center'>
-                        <button
-                            className='flex gap-1 font-mono font-semibold rounded-full bg-amber-47/95 mt-6 p-1.5 px-2 text-black cursor-pointer hover:bg-amber-47 transition-all duration-350'
-                            onClick={() => fileInputRef.current?.click()}
-                        >
-                            <Plus /> {addLabel}
-                        </button>
-                        <input
-                            type='file'
-                            ref={fileInputRef}
-                            onChange={handleInputChange}
-                            accept='image/*'
-                            multiple
-                            style={{ display: 'none' }}
-                        />
-                    </div>
-                )}
+                        </div>
+                    )}
                 </div>
             )}
         </div>

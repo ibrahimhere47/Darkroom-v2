@@ -59,18 +59,18 @@ const CompressTool = (props) => {
 
         await Promise.all(files.map(async (file, idx) => {
             const formData = new FormData()
-            formData.append("File", file)
-            formData.append("Quality", quality)
+            formData.append("file", file)
+            formData.append("quality", quality)
 
             try {
-                const response = await fetch("https://darkroom-v2-backend-production.up.railway.app/compress", {
+                const response = await fetch("https://adjusture-backend.vercel.app/compress", {
                     method: "POST",
                     body: formData,
                 })
 
                 if (!response.ok) {
-                    console.error("Compress failed")
-                    return
+                    const { error } = await response.json()
+                    throw new Error(error)
                 }
 
                 const blob = await response.blob()
