@@ -171,3 +171,12 @@ export function getTool(id) {
 }
 
 export const maxFilesPerBatch = 20;
+
+export const CATEGORIES = [
+        { name: 'All', tools: tools },
+        { name: 'Optimize', tools: tools.filter(t => t.category === 'Optimize') },
+        { name: 'Edit', tools: tools.filter(t => t.category === 'Edit') },
+        { name: 'Properties', tools: tools.filter(t => t.category === 'Properties') },
+        { name: 'Effects', tools: tools.filter(t => t.category === 'Effects') },
+        { name: 'Security', tools: tools.filter(t => t.category === 'Security') },
+    ]

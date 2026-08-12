@@ -23,7 +23,6 @@ const ToolCard = (props) => {
             .to(iconGlowRef.current, {
                 opacity: 0.3,
                 duration: 0.4,
-                backgroundColor: color
             }, 0)
 
             .to(iconRef.current, {
@@ -115,9 +114,9 @@ const ToolCard = (props) => {
                             <div
                                 ref={iconGlowRef}
                                 className="absolute inset-0 opacity-0 blur-lg rounded-full bg-amber-47"
-                                // style={{
-                                //     backgroundColor: color,
-                                // }}
+                                style={{
+                                    backgroundColor: color,
+                                }}
                             />
 
                             <Icon
