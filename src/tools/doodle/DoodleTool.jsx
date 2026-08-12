@@ -47,15 +47,29 @@ const DoodleTool = (props) => {
     const handleClear = useCallback(() => canvasRef.current?.clear(), [])
 
     const handleSave = useCallback(async () => {
+        if (!files?.[0]) return
+
         const blob = await canvasRef.current?.exportComposite()
+
         if (!blob) return
+
+        const originalName = files[0].name
+            .replace(/\.[^.]+$/, '')
+
         const doodledFile = new File(
             [blob],
-            files[0].name.replace(/\.[^.]+$/, '') + '-doodled.png',
-            { type: 'image/png' }
+            `${originalName}-doodled.png`,
+            {
+                type: 'image/png',
+            }
         )
-        setFiles([doodledFile, ...files.slice(1)])
-    }, [files, setFiles])
+
+        setFiles([
+            doodledFile,
+            ...files.slice(1),
+        ])
+    })
+
 
     if (!files || files.length === 0) {
         return <p>Upload an image to start doodling.</p>
