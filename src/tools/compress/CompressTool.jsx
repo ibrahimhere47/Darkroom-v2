@@ -16,12 +16,15 @@ import {
 import CompressDevelopedPanel from './CompressDevelopedPanel'
 import CompressDevelopPanel from './CompressDevelopPanel'
 import { maxFilesPerBatch } from '../toolsRegistry'
+import Popup from '../../components/Popup'
 
 const CompressTool = (props) => {
 
     const files = props.files || []
     const setFiles = props.setFiles
     const [quality, setQuality] = useState(70)
+    const [isPopup, setIsPopup] = useState(false)
+    const [popupMessage, setPopupMessage] = useState('')
 
     const {
         items,
@@ -51,7 +54,8 @@ const CompressTool = (props) => {
 
     const handleCompress = async () => {
         if (files.length >= maxFilesPerBatch) {
-            alert(`You can only compress up to ${maxFilesPerBatch} files at a time. Please remove some files and try again.`)
+            setIsPopup(true)
+            setPopupMessage('You have more than twenty files rn plseas rekjdpaw')
             return
         }
 
@@ -100,6 +104,7 @@ const CompressTool = (props) => {
     })
 
     return (
+        <>
         <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
             <ToolStage
@@ -168,6 +173,11 @@ const CompressTool = (props) => {
                 </div>
             </SidebarPanel>
         </div>
+        <Popup isOpen={isPopup} title={popupMessage} description={'lkdsakdja'} onClose={() => {setIsPopup(false)}} >
+            <h1>{popupMessage}</h1>
+            <h1>jkjlkldkaj</h1>
+        </Popup>
+        </>
     )
 }
 
