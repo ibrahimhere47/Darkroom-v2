@@ -28,12 +28,6 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
     const currentStroke = useRef(null)
     const isDrawing = useRef(false)
 
-    /*
-     * ---------------------------------------------------------
-     * DRAWING
-     * ---------------------------------------------------------
-     */
-
     const drawStroke = useCallback((ctx, stroke) => {
         if (!stroke || stroke.points.length === 0) return
 
@@ -59,10 +53,6 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
             ctx.lineTo(point.x, point.y)
         }
 
-        /*
-         * A single-point stroke wouldn't normally produce anything,
-         * so make it a tiny dot.
-         */
         if (stroke.points.length === 1) {
             ctx.arc(
                 first.x,
@@ -106,15 +96,6 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
         redraw()
     }, [redraw])
 
-    /*
-     * ---------------------------------------------------------
-     * POINTER COORDINATES
-     * ---------------------------------------------------------
-     *
-     * Convert the displayed canvas coordinates back into the
-     * original image's coordinate system.
-     */
-
     const getImagePoint = useCallback((event) => {
         const canvas = canvasRef.current
         if (!canvas) return null
@@ -129,12 +110,6 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
             y: (event.clientY - rect.top) * scaleY,
         }
     }, [imageWidth, imageHeight])
-
-    /*
-     * ---------------------------------------------------------
-     * POINTER EVENTS
-     * ---------------------------------------------------------
-     */
 
     const handlePointerDown = (event) => {
         if (event.button !== 0) return
@@ -193,29 +168,21 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
 
         if (!finishedStroke) return
 
-        // Clear the temporary stroke reference
         currentStroke.current = null
 
-        // Commit the stroke to React state
         setStrokes((prev) => [
             ...prev,
             finishedStroke,
         ])
 
-        // A new stroke invalidates redo history
         setRedoStack([])
     }
-
-    /*
-     * ---------------------------------------------------------
-     * HISTORY
-     * ---------------------------------------------------------
-     */
 
     useEffect(() => {
         onHistoryChange?.({
             canUndo: strokes.length > 0,
             canRedo: redoStack.length > 0,
+            strokeCount: strokes.length,
         })
     }, [strokes.length, redoStack.length, onHistoryChange])
 
@@ -271,9 +238,6 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
 
                 const ctx = exportCanvas.getContext('2d')
 
-                /*
-                 * Draw original image at its exact resolution.
-                 */
                 ctx.drawImage(
                     image,
                     0,
@@ -282,10 +246,6 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
                     imageHeight
                 )
 
-                /*
-                 * Draw every stroke using the exact same
-                 * image-space coordinates used by the editor.
-                 */
                 for (const stroke of strokes) {
                     drawStroke(ctx, stroke)
                 }
@@ -306,21 +266,9 @@ const DoodleCanvas = forwardRef(function DoodleCanvas(
         ]
     )
 
-    /*
-     * ---------------------------------------------------------
-     * IMAGE LOADING
-     * ---------------------------------------------------------
-     */
-
     const handleImageLoad = () => {
         redraw()
     }
-
-    /*
-     * ---------------------------------------------------------
-     * RENDER
-     * ---------------------------------------------------------
-     */
 
     return (
         <div className="relative w-full overflow-hidden rounded-xl">
