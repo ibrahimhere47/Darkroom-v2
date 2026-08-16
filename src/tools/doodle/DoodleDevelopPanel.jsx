@@ -1,6 +1,6 @@
 import React from 'react'
 import { Eraser, Undo2, Redo2 } from 'lucide-react'
-import { SidebarSection } from '../../components/tool-comps/ToolSidebar'
+import { SidebarSection, StatRowList } from '../../components/tool-comps/ToolSidebar'
 
 const DoodleDevelopPanel = ({
     brushColor,
@@ -19,20 +19,20 @@ const DoodleDevelopPanel = ({
     strokeCount,
 }) => {
     return (
-        <>
-            <SidebarSection title='Brush'>
-                <div className='flex flex-col gap-3 w-full'>
-                    <div className='flex items-center gap-2'>
+        <div className='flex flex-col gap-5'>
+            <SidebarSection eyebrow='Brush' description='Pick a color and size, then sketch on the image.'>
+                <div className='flex flex-col gap-4'>
+                    <div className='flex items-center gap-2 flex-wrap'>
                         {presets.map((color) => (
                             <button
                                 key={color}
                                 type='button'
                                 aria-label={`Use ${color}`}
                                 onClick={() => onColorChange(color)}
-                                className={`w-6 h-6 rounded-full border transition-all ${
+                                className={`w-6 h-6 rounded-full border-2 transition-all ${
                                     !isErasing && brushColor === color
-                                        ? 'border-neutral-300 scale-110'
-                                        : 'border-neutral-800'
+                                        ? 'border-amber-47 scale-110'
+                                        : 'border-neutral-700'
                                 }`}
                                 style={{ backgroundColor: color }}
                             />
@@ -41,7 +41,7 @@ const DoodleDevelopPanel = ({
                             type='color'
                             value={brushColor}
                             onChange={(e) => onColorChange(e.target.value)}
-                            className='w-6 h-6 rounded-full overflow-hidden border border-neutral-800 bg-transparent cursor-pointer'
+                            className='w-6 h-6 rounded-full overflow-hidden border-2 border-neutral-700 bg-transparent cursor-pointer'
                             aria-label='Custom color'
                         />
                     </div>
@@ -49,7 +49,7 @@ const DoodleDevelopPanel = ({
                     <label className='flex flex-col gap-1.5 text-[11px] text-neutral-500'>
                         <span className='flex items-center justify-between'>
                             <span>Size</span>
-                            <span className='text-neutral-400'>{brushSize}px</span>
+                            <span className='text-neutral-300'>{brushSize}px</span>
                         </span>
                         <input
                             type='range'
@@ -57,7 +57,7 @@ const DoodleDevelopPanel = ({
                             max={50}
                             value={brushSize}
                             onChange={(e) => onBrushSizeChange(Number(e.target.value))}
-                            className='w-full accent-neutral-300'
+                            className='w-full accent-amber-47'
                         />
                     </label>
 
@@ -65,10 +65,10 @@ const DoodleDevelopPanel = ({
                         type='button'
                         onClick={onToggleErase}
                         aria-pressed={isErasing}
-                        className={`flex items-center justify-center gap-2 text-[12px] py-2 rounded-lg border transition-colors ${
+                        className={`flex items-center justify-center gap-2 text-[12px] py-2.5 rounded-xl border transition-all duration-200 ${
                             isErasing
-                                ? 'bg-neutral-100 text-neutral-900 border-neutral-100'
-                                : 'bg-transparent text-neutral-400 border-neutral-800 hover:border-neutral-700'
+                                ? 'bg-amber-47 text-black border-amber-47'
+                                : 'bg-transparent text-neutral-300 border-neutral-700 hover:border-amber-47 hover:text-amber-47'
                         }`}
                     >
                         <Eraser size={13} />
@@ -77,13 +77,13 @@ const DoodleDevelopPanel = ({
                 </div>
             </SidebarSection>
 
-            <SidebarSection title='History'>
-                <div className='flex items-center gap-2 w-full'>
+            <SidebarSection eyebrow='History'>
+                <div className='flex items-center gap-2'>
                     <button
                         type='button'
                         onClick={onUndo}
                         disabled={!canUndo}
-                        className='flex-1 flex items-center justify-center gap-1.5 text-[12px] py-2 rounded-lg border border-neutral-800 text-neutral-400 disabled:opacity-30 hover:border-neutral-700 transition-colors'
+                        className='flex-1 flex items-center justify-center gap-1.5 text-[12px] py-2.5 rounded-xl border border-neutral-700 text-neutral-300 disabled:opacity-30 disabled:cursor-not-allowed hover:border-amber-47 hover:text-amber-47 transition-all duration-200'
                     >
                         <Undo2 size={13} />
                         Undo
@@ -92,7 +92,7 @@ const DoodleDevelopPanel = ({
                         type='button'
                         onClick={onRedo}
                         disabled={!canRedo}
-                        className='flex-1 flex items-center justify-center gap-1.5 text-[12px] py-2 rounded-lg border border-neutral-800 text-neutral-400 disabled:opacity-30 hover:border-neutral-700 transition-colors'
+                        className='flex-1 flex items-center justify-center gap-1.5 text-[12px] py-2.5 rounded-xl border border-neutral-700 text-neutral-300 disabled:opacity-30 disabled:cursor-not-allowed hover:border-amber-47 hover:text-amber-47 transition-all duration-200'
                     >
                         <Redo2 size={13} />
                         Redo
@@ -100,13 +100,15 @@ const DoodleDevelopPanel = ({
                 </div>
             </SidebarSection>
 
-            <SidebarSection title='Canvas'>
-                <div className='flex justify-between w-full text-[11px] text-neutral-600'>
-                    <span>{width} × {height}px</span>
-                    <span>{strokeCount} {strokeCount === 1 ? 'stroke' : 'strokes'}</span>
-                </div>
+            <SidebarSection eyebrow='Canvas'>
+                <StatRowList
+                    rows={[
+                        { label: 'Dimensions', value: `${width} × ${height}px` },
+                        { label: 'Strokes', value: strokeCount, highlight: strokeCount > 0 },
+                    ]}
+                />
             </SidebarSection>
-        </>
+        </div>
     )
 }
 
