@@ -49,11 +49,11 @@ const HeroTitle = () => {
     return (
         <h1
             ref={titleRef}
-            className="font-fraunces text-4xl -my-4 font-semibold md:text-4xl leading-8 md:leading-14 cursor-default"
+            className="font-fraunces text-2xl -my-4 font-semibold md:text-4xl leading-8 md:leading-14 cursor-default"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="flex flex-wrap justify-center gap-2 md:gap-4">    
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3">    
                 <span className="hero-word inline-block">Your</span>{" "}
                 <span className="hero-word inline-block">Private</span>{" "}
                 <span className="hero-word inline-block">Image</span>{" "}

@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
         <div className='bg-neutral-900 text-white no-scrollbar'>
             <Headers />
             <main className='mx-8'>
-                <div className='bg-neutral-800 py-7'></div>
+                <div className='bg-neutral-900 py-7'></div>
                 {children}
             </main>
             <footer className='flex bg-neutral-900 items-baseline justify-between py-6 px-8 border-t-neutral-400 border-t'>

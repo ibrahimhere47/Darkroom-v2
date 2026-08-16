@@ -53,9 +53,6 @@ const HomeCategoryBtns = (props) => {
                 const isActive = activeCategory === category.name
                 const isHovered = hoveredCategory === category.name
                 const hasHover = hoveredCategory !== null
-
-                // Hover takes priority over the selected state.
-                // When nothing is hovered, the selected button is highlighted.
                 const isHighlighted = isHovered || (isActive && !hasHover)
 
                 const styles =
@@ -77,11 +74,14 @@ const HomeCategoryBtns = (props) => {
                             className={`
                                 group
                                 flex items-center gap-2
-                                py-2.25
-                                px-9
+                                py-1.25
+                                px-3
+                                md:py-2.25
+                                md:px-9
                                 rounded-full
                                 border
-                                text-sm
+                                text-xs
+                                md:text-sm
                                 font-medium
                                 transition-all duration-200
                                 cursor-pointer
