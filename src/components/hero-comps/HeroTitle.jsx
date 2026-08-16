@@ -49,7 +49,7 @@ const HeroTitle = () => {
     return (
         <h1
             ref={titleRef}
-            className="font-fraunces text-2xl -my-4 font-semibold md:text-4xl leading-8 md:leading-14 cursor-default"
+            className="font-fraunces text-2xl -my-3 font-semibold md:text-5xl leading-8 md:leading-14 cursor-default"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
