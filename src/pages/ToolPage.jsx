@@ -4,7 +4,6 @@ import { getTool } from '../tools/toolsRegistry.js'
 import Layout from '../components/Layout.jsx'
 import ToolPageEmptyLook from '../components/tool-page-comps/ToolPageEmptyLook.jsx'
 import ToolPageNotFound from '../components/tool-page-comps/ToolPageNotFound.jsx'
-import ToolPageHeader from '../components/tool-page-comps/ToolPageHeader.jsx'
 import Loader from '../components/Loader.jsx'
 import gsap from 'gsap'
 
@@ -48,7 +47,7 @@ const ToolPage = () => {
     return (
         <>
         <Layout>
-            <ToolPageHeader />
+            <div className='pt-2' />
             <Suspense fallback={null}>
                 <ToolReadyChecker Tool={Tool} onReady={handleReady} files={files} setFiles={setFiles} />
             </Suspense>

@@ -5,7 +5,6 @@ import gsap from 'gsap'
 import Layout from '../Layout'
 import { getTool } from '../../tools/toolsRegistry'
 import ToolPageNotFound from './ToolPageNotFound'
-import ToolPageHeader from './ToolPageHeader'
 import ToolPageDropZone from './ToolPageDropZone'
 
 gsap.registerPlugin(useGSAP)
@@ -35,7 +34,7 @@ const ToolPageEmptyLook = (props) => {
 
     return (
         <Layout>
-            <ToolPageHeader />
+                <div className='pt-4' />
                 <div
                     ref={containerRef}
                     className="relative flex flex-col items-center justify-center w-full min-h-[80vh] mb-4 sm:px-6 overflow-hidden isolate"
