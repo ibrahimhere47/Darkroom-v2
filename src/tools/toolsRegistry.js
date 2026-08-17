@@ -65,12 +65,12 @@ export const tools = [
     },
     {
         id: 'watermark',
-        name: 'Watermark',
+        name: 'Add Watermark',
         tagline: 'Watermark your image to maintain brand identity and stay high on security',
         icon: Droplet,
+        component: lazy(() => import('./watermark/WatermarkTool.jsx')),
         category: 'Security',
         categoryColor: '--color-category-security',
-        comingSoon: true,
     },
     {
         id: 'remove-watermark',
