@@ -8,6 +8,7 @@ const ToolCard = (props) => {
 
     const Icon = tool.icon
     const color = `var(${tool.categoryColor})`
+    const colorDim = `#101010af`
 
     const iconGlowRef = useRef(null)
     const iconRef = useRef(null)
@@ -140,19 +141,13 @@ const ToolCard = (props) => {
 
                             <div
                                 ref={badgeGlowRef}
-                                className={`absolute inset-0 opacity-0 blur-lg rounded-full ${
-                                    tool.comingSoon
-                                        ? 'bg-badge-grey'
-                                        : 'bg-success'
-                                }`}
+                                className='absolute inset-0 opacity-0 blur-lg rounded-full'
+                                style={tool.comingSoon ? { backgroundColor: '#555555' } : { backgroundColor: color }}
                             />
 
                             <span
-                                className={`badge ${
-                                    tool.comingSoon
-                                        ? 'badge-soon'
-                                        : 'badge-ready'
-                                }`}
+                                className='border rounded-[34px] py-0.5 px-1.75'
+                                style={tool.comingSoon ? { backgroundColor: '#383938', color: '#636463', borderColor: '#636463' } : { backgroundColor: colorDim, color: color, borderColor: color }}
                             >
                                 {tool.comingSoon ? 'Soon' : 'Ready'}
                             </span>

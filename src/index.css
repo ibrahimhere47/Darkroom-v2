@@ -60,28 +60,6 @@
   color: #f5f5f5
 }
 
-@utility badge {
-  border: 1px solid;
-  border-radius: 34px;
-  padding: 2px 7px;
-}
-
-@utility badge-soon {
-  border-color: #636463;
-  background-color: #383938;
-  color: #636463;
-}
-
-@utility badge-ready {
-  border-color: #3fbd3f;
-  background-color: #297c29;
-  color: #ccffcc;
-}
-
-.class {
-  color: #010827
-}
-
 @utility no-scrollbar {
   scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
