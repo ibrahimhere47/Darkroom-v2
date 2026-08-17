@@ -67,16 +67,18 @@ const Home = () => {
                     />
 
                     <div className='rounded-2xl p-5 md:pb-2 md:px-9'>
-                        <div className='flex flex-wrap gap-4'>
-                            {activeTools.map((tool) => (
-                                <div
-                                    key={tool.id}
-                                    className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] [@media(min-width:2560px)]:w-[calc(20%-13px)] min-w-0 shrink-0'
-                                >
-                                    <ToolCard tool={tool} color={tool.categoryColor} />
-                                </div>
-                            ))}
-                        </div>
+                            {activeTools.length > 0 ?
+                                <div className='flex flex-wrap gap-4'>
+                                    {activeTools.map((tool) => (
+                                        <div
+                                            key={tool.id}
+                                            className='w-full sm:w-[calc(50%-12px)] md:w-[calc(25%-12px)] [@media(min-width:2560px)]:w-[calc(20%-13px)] min-w-0 shrink-0'
+                                        >
+                                            <ToolCard tool={tool} color={tool.categoryColor} />
+                                        </div>
+                                    ))}
+                            </div>
+                            : <h1 className='flex justify-center font-mono text-neutral-400 font-bold text-2xl w-full mt-4'>No tools were found matching your selection</h1>}
                     </div>
                 </div>
                 <div className='flex justify-center'>
