@@ -6,6 +6,7 @@ import Layout from '../Layout'
 import { getTool } from '../../tools/toolsRegistry'
 import ToolPageNotFound from './ToolPageNotFound'
 import ToolPageDropZone from './ToolPageDropZone'
+import GuideButton from '../guide-comps/GuideButton'
 
 gsap.registerPlugin(useGSAP)
 
@@ -34,7 +35,7 @@ const ToolPageEmptyLook = (props) => {
 
     return (
         <Layout>
-                <div className='pt-4' />
+                <div className='mt-15' />
                 <div
                     ref={containerRef}
                     className="relative flex flex-col items-center justify-center w-full min-h-[80vh] mb-4 sm:px-6 overflow-hidden isolate"
@@ -57,8 +58,9 @@ const ToolPageEmptyLook = (props) => {
                         </h1>
                     </div>
 
-                    <div className='w-full md:w-5/6 h-full'>
+                    <div className='flex flex-col w-full md:w-5/6 h-full gap-9'>
                         <ToolPageDropZone setFiles={props.setFiles} />
+                        <GuideButton />
                     </div>
                 </div>
         </Layout>

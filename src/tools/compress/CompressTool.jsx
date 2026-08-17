@@ -106,7 +106,7 @@ const CompressTool = (props) => {
 
     return (
         <>
-        <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
+        <div className='flex flex-col lg:flex-row gap-5 w-full font-mono mt-12'>
 
             <ToolStage
                 items={items}

@@ -50,7 +50,7 @@ const Home = () => {
                         setActiveCategory={setActiveCategory}
                     />
 
-                    <div className='bg-neutral-900/80 rounded-2xl p-5 md:pb-2 md:px-9'>
+                    <div className='rounded-2xl p-5 md:pb-2 md:px-9'>
                         <div className='flex flex-wrap gap-4'>
                             {activeTools.map((tool) => (
                                 <div

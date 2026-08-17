@@ -103,7 +103,7 @@ const ToolCard = (props) => {
 
             {/* Card */}
             <div
-                className="flex flex-col gap-2 bg-neutral-800 rounded-xl p-3 flex-1 min-h-40"
+                className="flex flex-col gap-2 bg-[#202020] rounded-xl p-3 flex-1 min-h-40"
                 style={{
                     borderColor: color,
                 }}

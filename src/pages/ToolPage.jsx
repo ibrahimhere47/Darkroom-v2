@@ -52,7 +52,9 @@ const ToolPage = () => {
             <Suspense fallback={null}>
                 <ToolReadyChecker Tool={Tool} onReady={handleReady} files={files} setFiles={setFiles} />
             </Suspense>
-            <GuideButton />
+            <div className='flex w-full mt-8'>
+                <GuideButton />
+            </div>
         </Layout>
 
         {loading && <Loader ref={loaderRef} />}
