@@ -5,6 +5,7 @@ import Hero from '../components/hero-comps/Hero'
 import Loader from '../components/Loader'
 import HomePremiumAd from '../components/home-comps/HomePremiumAd'
 import HomeCategoryBtns from '../components/home-comps/HomeCategoryBtns'
+import HomeToolSearchBar from '../components/home-comps/HomeToolSearchBar'
 import { tools, CATEGORIES } from '../tools/toolsRegistry'
 import gsap from 'gsap'
 import PremiumBanner from '../components/PremiumBanner'
@@ -37,13 +38,28 @@ const Home = () => {
         }
     }, [showLoader])
 
-    const activeTools = CATEGORIES.find(c => c.name === activeCategory)?.tools ?? []
+    const [searchInput, setSearchInput] = useState('')
+    const [isSearching, setIsSearching] = useState(false)
+
+    const categoryTools = CATEGORIES.find(c => c.name === activeCategory)?.tools ?? []
+    const activeTools = categoryTools.filter(t => {
+        const name = t.name.toLowerCase()
+        return (
+            name.includes(isSearching ? searchInput : name)
+        )
+    }) ?? []
 
     return (
         <>
             <Layout>
                 <div className='py-8 md:py-10 w-full'>
                     <Hero />
+                    <HomeToolSearchBar
+                        searchInput={searchInput}
+                        setSearchInput={setSearchInput}
+                        isSearching={isSearching}
+                        setIsSearching={setIsSearching}
+                    />
                     <HomeCategoryBtns
                         CATEGORIES={CATEGORIES}
                         activeCategory={activeCategory}
