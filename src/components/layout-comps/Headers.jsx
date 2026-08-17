@@ -18,18 +18,18 @@ const Headers = () => {
 
         // explicit starting state — header2 starts off-screen via transform, not display:none
         gsap.set(header, { yPercent: 0 })
-        gsap.set(header2, { yPercent: -200 })
+        gsap.set(header2, { yPercent: -150 })
 
         const showHeader = () => gsap.to(header, { yPercent: 0, duration: 0.3, ease: 'power2.out' })
         const hideHeader = () => gsap.to(header, { yPercent: -100, duration: 0.3, ease: 'power2.out' })
         const showHeader2 = () => gsap.to(header2, { yPercent: 0, duration: 0.3, ease: 'power2.out' })
-        const hideHeader2 = () => gsap.to(header2, { yPercent: -200, duration: 0.3, ease: 'power2.out' })
+        const hideHeader2 = () => gsap.to(header2, { yPercent: -150, duration: 0.3, ease: 'power2.out' })
 
         const trigger = ScrollTrigger.create({
             start: 0,
             end: 'max',
             onUpdate: (self) => {
-                if (self.scroll() < 300) {
+                if (self.scroll() < 50) {
                     showHeader()
                     hideHeader2()
                 } else if (self.direction === -1) {
@@ -61,15 +61,15 @@ const Headers = () => {
             </header>
             <header
                 ref={header2Ref}
-                className='fixed top-0 right-8 left-8 z-40 bg-neutral-900/80 flex items-center justify-between py-3 px-20 mx-20 mt-6 rounded-4xl shadow-2xl shadow-neutral-950 border border-neutral-700'
+                className='fixed top-0 right-8 left-8 z-40 bg-neutral-900/85 flex items-center justify-between py-3 px-20 mx-20 mt-6 rounded-3xl shadow-2xl shadow-neutral-950 border border-neutral-700'
             >
-                    <MagneticWrapper strength={0.2}>
-                        <a href='/' className='no-underline flex items-center gap-1 font-body cursor-pointer'>
-                            <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
-                            <span>Darkroom</span>
-                        </a>
-                    </MagneticWrapper>
-                    <HeaderToolMenu />
+                <MagneticWrapper strength={0.2}>
+                    <a href='/' className='no-underline flex items-center gap-1 font-body cursor-pointer'>
+                        <span className='bg-amber-47 w-3 h-3 rounded-full'></span>
+                        <span>Darkroom</span>
+                    </a>
+                </MagneticWrapper>
+                <HeaderToolMenu />
             </header>
         </div>
     )
