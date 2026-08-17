@@ -72,6 +72,7 @@ const HeaderToolMenu = () => {
             className='relative'
             onMouseEnter={() => { cancelClose(); setOpen(true) }}
             onMouseLeave={scheduleClose}
+            onClick={scheduleClose}
         >
             <button className='mono font-bold text-lg hover:text-neutral-300 transition-colors flex items-center'>
                 <ChevronDown ref={arrowRef} size={30} />
