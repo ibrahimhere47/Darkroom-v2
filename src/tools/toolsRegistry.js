@@ -33,6 +33,7 @@ export const tools = [
         tagline: 'Shrink file size with a quality slider and covert finished file to JPEG, PNG, or WebP',
         icon: ArrowBigDownDash,
         component: lazy(() => import('./compress/CompressTool.jsx')),
+        guide: lazy(() => import('./compress/CompressGuide.jsx')),
         category: 'Optimize',
         categoryColor: '--color-category-optimize',
     },

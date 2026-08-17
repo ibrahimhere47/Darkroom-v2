@@ -4,6 +4,7 @@ import { getTool } from '../tools/toolsRegistry.js'
 import Layout from '../components/Layout.jsx'
 import ToolPageEmptyLook from '../components/tool-page-comps/ToolPageEmptyLook.jsx'
 import ToolPageNotFound from '../components/tool-page-comps/ToolPageNotFound.jsx'
+import GuideButton from '../components/guide-comps/GuideButton.jsx'
 import Loader from '../components/Loader.jsx'
 import gsap from 'gsap'
 
@@ -51,6 +52,7 @@ const ToolPage = () => {
             <Suspense fallback={null}>
                 <ToolReadyChecker Tool={Tool} onReady={handleReady} files={files} setFiles={setFiles} />
             </Suspense>
+            <GuideButton />
         </Layout>
 
         {loading && <Loader ref={loaderRef} />}
