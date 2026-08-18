@@ -6,6 +6,7 @@ import ToolPageEmptyLook from '../components/tool-page-comps/ToolPageEmptyLook.j
 import ToolPageNotFound from '../components/tool-page-comps/ToolPageNotFound.jsx'
 import GuideButton from '../components/guide-comps/GuideButton.jsx'
 import Loader from '../components/Loader.jsx'
+import ToolPageGuarantees from '../components/tool-page-comps/ToolPageGuarantees.jsx'
 import gsap from 'gsap'
 
 const ToolReadyChecker = ({ Tool, onReady, files, setFiles }) => {
@@ -52,8 +53,9 @@ const ToolPage = () => {
             <Suspense fallback={null}>
                 <ToolReadyChecker Tool={Tool} onReady={handleReady} files={files} setFiles={setFiles} />
             </Suspense>
-            <div className='flex w-full mt-8'>
+            <div className='flex flex-col gap-6 w-full mt-8'>
                 <GuideButton />
+                <ToolPageGuarantees />
             </div>
         </Layout>
 
