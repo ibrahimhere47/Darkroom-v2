@@ -9,6 +9,7 @@ import HomeToolSearchBar from '../components/home-comps/HomeToolSearchBar'
 import { tools, CATEGORIES } from '../tools/toolsRegistry'
 import gsap from 'gsap'
 import PremiumBanner from '../components/PremiumBanner'
+import { AlertTriangleIcon } from 'lucide-react'
 
 const LOADER_SEEN_KEY = 'hasSeenLoader'
 
@@ -78,7 +79,7 @@ const Home = () => {
                                         </div>
                                     ))}
                             </div>
-                            : <h1 className='flex justify-center font-mono text-neutral-400 font-bold text-2xl w-full mt-4'>No tools were found matching your selection</h1>}
+                            : <h1 className='flex justify-center items-center gap-3 font-mono text-neutral-400 font-bold text-2xl w-full mt-4'>No tools were found matching your selection<AlertTriangleIcon size={30} /></h1>}
                     </div>
                 </div>
                 <div className='flex justify-center'>

@@ -136,7 +136,7 @@ export default function PremiumBanner({ onUpgrade = () => {} }) {
           </div>
 
           {/* Right: faceted gem signature */}
-          <div className="md:col-span-2 relative hidden md:flex items-center justify-center h-full min-h-[260px]">
+          <div className="md:col-span-2 relative hidden md:flex items-center justify-center h-full min-h-65">
             <svg
               viewBox="0 0 420 300"
               className="w-full h-auto max-w-90"
