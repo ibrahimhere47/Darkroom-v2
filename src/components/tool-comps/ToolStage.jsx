@@ -82,7 +82,7 @@ const ToolStage = ({
     return (
         <div
             ref={stageRef}
-            className='relative flex-1 min-h-125 rounded-2xl bg-neutral-900 border border-neutral-800 p-6 overflow-hidden'
+            className='relative flex-1 min-h-125 rounded-2xl bg-neutral-950 border border-neutral-800 p-6 overflow-hidden'
         >
             <div className='pointer-events-none absolute top-20 right-80 w-72 h-72 rounded-full bg-amber-47/1 blur-3xl' />
 

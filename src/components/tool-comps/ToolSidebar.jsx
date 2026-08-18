@@ -4,7 +4,7 @@ import gsap from 'gsap'
 
 /** Outer w-85 panel every tool's sidebar lives in. */
 const SidebarPanel = ({ children }) => (
-    <div className='w-full lg:w-85 shrink-0 rounded-2xl bg-neutral-900 border border-neutral-950 p-6 flex flex-col justify-between'>
+    <div className='w-full lg:w-85 shrink-0 rounded-2xl bg-neutral-950 border border-neutral-800 p-6 flex flex-col justify-between'>
         {children}
     </div>
 )
