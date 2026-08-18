@@ -59,8 +59,10 @@ const ToolPageEmptyLook = (props) => {
                         </h1>
                     </div>
 
-                    <div className='flex flex-col w-full md:w-5/6 h-full gap-9'>
+                    <div className='w-full md:w-5/6 h-full'>
                         <ToolPageDropZone setFiles={props.setFiles} />
+                    </div>
+                    <div className='mt-9'>
                         <GuideButton />
                     </div>
                     <div className='mt-9'>
