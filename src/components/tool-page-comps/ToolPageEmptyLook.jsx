@@ -8,6 +8,7 @@ import ToolPageNotFound from './ToolPageNotFound'
 import ToolPageDropZone from './ToolPageDropZone'
 import ToolPageGuarantees from './ToolPageGuarantees'
 import GuideButton from '../guide-comps/GuideButton'
+import ToolPageDataGuide from './ToolPageDataGuide'
 
 gsap.registerPlugin(useGSAP)
 
@@ -41,7 +42,7 @@ const ToolPageEmptyLook = (props) => {
         const b = a.charAt(0);
         const c = a.replace(b, b.toUpperCase());
         setTitle(c)
-    })
+    }, [])
 
     return (
         <Layout>
@@ -71,11 +72,14 @@ const ToolPageEmptyLook = (props) => {
                     <div className='w-full md:w-5/6 h-full'>
                         <ToolPageDropZone setFiles={props.setFiles} />
                     </div>
-                    <div className='mt-9'>
+                    <div className='mt-9 w-full'>
                         <GuideButton />
                     </div>
-                    <div className='mt-9'>
+                    <div className='mt-9 w-full'>
                         <ToolPageGuarantees />
+                    </div>
+                    <div className='mt-9 mb-12 w-full'>
+                        <ToolPageDataGuide />
                     </div>
                 </div>
         </Layout>

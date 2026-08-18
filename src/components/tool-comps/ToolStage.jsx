@@ -82,7 +82,7 @@ const ToolStage = ({
     return (
         <div
             ref={stageRef}
-            className='relative flex-1 min-h-125 rounded-2xl bg-neutral-950 border border-neutral-800 p-6 overflow-hidden'
+            className='relative flex-1 h-fit md:h-155 rounded-2xl bg-neutral-950 border border-neutral-800 p-6 overflow-hidden'
         >
             <div className='pointer-events-none absolute top-20 right-80 w-72 h-72 rounded-full bg-amber-47/1 blur-3xl' />
 
@@ -93,7 +93,7 @@ const ToolStage = ({
                     )}
                 </div>
             ) : (
-                <div className='min-w-full min-h-114 flex flex-col justify-between'>
+                <div className='min-w-full h-full flex flex-col justify-between'>
                     <div className='flex flex-col gap-8'>
                         <div className='relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4'>
                             {items.map((item, idx) => (

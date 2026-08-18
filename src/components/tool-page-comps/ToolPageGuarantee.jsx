@@ -34,7 +34,7 @@ const ToolPageGuarantee = ({ g, idx }) => {
 
     return (
         <div onMouseEnter={handleHover} onMouseLeave={handleHoverLeave} className='w-1/4 h-70 text-neutral-300' ref={parentRef}>
-        <MagneticWrapper strength={0.12} className='relative w-full h-full p-6 bg-linear-180 from-neutral-950 to-[#121212] rounded-2xl border border-neutral-800'>
+        <MagneticWrapper strength={0.05} className='relative w-full h-full p-6 bg-linear-180 from-neutral-950 to-[#121212] rounded-2xl border border-neutral-800'>
             <div className='flex flex-col gap-6'>
                 <div className='flex flex-col items-center gap-0.5 border-b border-neutral-800 pb-3'>
                     <Icon size={36} />
