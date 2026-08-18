@@ -6,6 +6,7 @@ import ToolPage from './pages/ToolPage.jsx';
 import GuidePage from './pages/GuidePage.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import TermsAndConditions from './pages/TermsAndConditions.jsx';
+import AboutUs from './pages/AboutUs.jsx';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -22,6 +23,9 @@ const router = createBrowserRouter([{
 }, {
   path: '/terms-and-conditions',
   element: <TermsAndConditions />
+}, {
+  path: '/about-us',
+  element: <AboutUs />
 }
 ]);
 

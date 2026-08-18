@@ -56,7 +56,7 @@ const ToolPageGuarantees = () => {
     }
 
     return (
-        <div className='flex flex-col items-center gap-5 mb-12 bg-black w-full p-6 py-12 rounded-2xl border border-neutral-800'>
+        <div className='hidden md:flex flex-col items-center gap-5 mb-12 bg-black w-full p-6 py-12 rounded-2xl border border-neutral-800'>
             <div className='w-fit h-fit relative flex items-center justify-center' onMouseEnter={handleHover} onMouseLeave={handleHoverLeave}>
                 <h1 className='font-mono font-bold text-2xl text-amber-47' ref={headingRef}>Why choose Darkroom?</h1>
                 <div className='absolute inset-0 opacity-0 blur-lg rounded-full bg-amber-47' ref={glowRef} />
