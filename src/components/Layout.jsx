@@ -15,9 +15,9 @@ const Layout = ({ children }) => {
                 <div className='border-t border-dashed border-neutral-600 w-7/8' />
                 <div className='flex flex-col items-center gap-2 w-3/4'>
                     <div className='flex justify-between w-full'>
-                        <Link to='/privacy-policy' className='font-body text-lg text-neutral-300'>Privacy Policy</Link>
-                        <Link to='/terms-and-conditions' className='font-body text-lg text-neutral-300'>Terms and Conditions</Link>
-                        <Link to='/about-us' className='font-body text-lg text-neutral-300'>About Us</Link>
+                        <Link to='/privacy-policy' className='font-body text-lg text-neutral-300 hover:text-amber-47 transition-all duration-400'>Privacy Policy</Link>
+                        <Link to='/terms-and-conditions' className='font-body text-lg text-neutral-300 hover:text-amber-47 transition-all duration-400'>Terms and Conditions</Link>
+                        <Link to='/about-us' className='font-body text-lg text-neutral-300 hover:text-amber-47 transition-all duration-400'>About Us</Link>
                     </div>
                     <p className='font-mono text-neutral-400 mt-4'>Copyright@2026 Darkroom | Your image toolkit</p>
                     <h1 className='font-mono text-neutral-400 -mt-2'>Having issues? Contact us at anonymous.goat222@gmail.com</h1>

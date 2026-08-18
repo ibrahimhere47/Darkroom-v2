@@ -108,7 +108,7 @@ const ToolPageDropZone = (props) => {
     return (
         <div
             ref={containerRef}
-            className={`relative w-full h-96 rounded-2xl flex flex-col gap-4 justify-center items-center border-6 border-solid transition-colors duration-300 ${
+            className={`relative w-full h-115 rounded-2xl flex flex-col gap-4 justify-center items-center border-6 border-solid transition-colors duration-300 ${
                 isDragging
                     ? 'bg-amber-transparent-dim border-black'
                     : 'bg-amber-transparent border-amber-transparent-dim'
