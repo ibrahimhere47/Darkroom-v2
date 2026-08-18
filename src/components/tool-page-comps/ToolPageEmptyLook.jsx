@@ -9,6 +9,7 @@ import ToolPageDropZone from './ToolPageDropZone'
 import ToolPageGuarantees from './ToolPageGuarantees'
 import GuideButton from '../guide-comps/GuideButton'
 import ToolPageDataGuide from './ToolPageDataGuide'
+import EmptyLookTitle from './EmptyLookTitle'
 
 gsap.registerPlugin(useGSAP)
 
@@ -64,9 +65,7 @@ const ToolPageEmptyLook = (props) => {
                     </div>
 
                     <div className="text-center max-w-lg mb-5 md:mb-8 xl:mb-10">
-                        <h1 className="text-3xl sm:text-5xl font-zilla flex flex-wrap justify-center gap-x-3 gap-y-1">
-                            Drag or Browse Files to {title}
-                        </h1>
+                        <EmptyLookTitle title={title} />
                     </div>
 
                     <div className='w-full md:w-5/6 h-full'>
