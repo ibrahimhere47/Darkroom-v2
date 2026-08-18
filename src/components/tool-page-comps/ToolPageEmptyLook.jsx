@@ -1,4 +1,4 @@
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -34,6 +34,15 @@ const ToolPageEmptyLook = (props) => {
 
     if (!tool) return <ToolPageNotFound />
 
+    const [title, setTitle] = useState('')
+
+    useEffect(() => {
+        const a = tool.id.replace('-', ' ');
+        const b = a.charAt(0);
+        const c = a.replace(b, b.toUpperCase());
+        setTitle(c)
+    })
+
     return (
         <Layout>
                 <div className='mt-15' />
@@ -55,7 +64,7 @@ const ToolPageEmptyLook = (props) => {
 
                     <div className="text-center max-w-lg mb-5 md:mb-8 xl:mb-10">
                         <h1 className="text-3xl sm:text-5xl font-zilla flex flex-wrap justify-center gap-x-3 gap-y-1">
-                            Drag or Browse Files to {tool.id}
+                            Drag or Browse Files to {title}
                         </h1>
                     </div>
 
