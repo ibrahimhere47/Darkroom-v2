@@ -98,6 +98,16 @@ export const tools = [
         categoryColor: '--color-category-edit',
     },
     {
+        id: 'add-background',
+        name: 'Add Background',
+        tagline: 'Add a plain custom color background to your transparent background images',
+        icon: Paintbrush,
+        component: lazy(() => import('./add-background/AddBackgroundTool.jsx')),
+        guide: lazy(() => import('./add-background/AddBackgroundGuide.jsx')),
+        category: 'Edit',
+        categoryColor: '--color-category-edit',
+    },
+    {
         id: 'remove-watermark',
         name: 'Remove Watermark',
         tagline: 'Remove watermarks from images and restore them to their original state',
@@ -122,15 +132,6 @@ export const tools = [
         icon: SquareRoundCorner,
         category: 'Properties',
         categoryColor: '--color-category-properties',
-        comingSoon: true,
-    },
-    {
-        id: 'add-background',
-        name: 'Add Background',
-        tagline: 'Add a plain custom color background to your transparent background images',
-        icon: Paintbrush,
-        category: 'Edit',
-        categoryColor: '--color-category-edit',
         comingSoon: true,
     },
     {
