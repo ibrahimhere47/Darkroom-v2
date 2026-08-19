@@ -34,11 +34,11 @@ const HomeToolSearchBar = (props) => {
 
     return (
         <>
-        <div className='flex justify-center items-center mt-6 -mb-3 gap-3'>
+        <div className='flex justify-center items-center mt-6.5 -mb-2.5 gap-3'>
             <div className='flex justify-center items-center'>
                 <Search color='#777777' />
             </div>
-            <div className='flex justify-center items-center w-5/6'>
+            <div className='flex justify-center items-center w-3/4'>
                 <MagneticWrapper strength={0.02} className='w-full'>
                     <div 
                         className='flex justify-center items-center gap-2'

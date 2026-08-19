@@ -67,7 +67,7 @@ const Home = () => {
                         setActiveCategory={setActiveCategory}
                     />
 
-                    <div className='rounded-2xl p-5 md:pb-2 md:px-9'>
+                    <div className='rounded-2xl p-5 md:pb-2 md:px-9 md:pt-4'>
                             {activeTools.length > 0 ?
                                 <div className='flex flex-wrap gap-4'>
                                     {activeTools.map((tool) => (
