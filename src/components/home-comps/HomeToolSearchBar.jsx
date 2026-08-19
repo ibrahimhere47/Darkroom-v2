@@ -53,6 +53,7 @@ const HomeToolSearchBar = (props) => {
                             type='text'
                             className='bg-neutral-800 rounded-2xl py-2.75 px-6 w-full placeholder-amber-dim font-mono focus:border-none focus:outline-none'
                             placeholder='Search through your tools...'
+                            maxLength={32}
                             value={searchInput}
                             onInput={(e) => setSearchInput(e.target.value.toLowerCase())}
                         />
