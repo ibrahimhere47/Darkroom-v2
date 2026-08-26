@@ -50,9 +50,9 @@ const AddFilterTool = (props) => {
     } = useToolFiles(files, setFiles)
 
     const handleFilter = async () => {
-        if (files.length >= maxFilesPerBatch) {
+        if (files.length > maxFilesPerBatch) {
             setIsPopup(true)
-            setPopupMessage('Our free tier only offers 20 files per batch')
+            setPopupMessage(`Our free tier only offers ${maxFilesPerBatch} files per batch`)
             return
         }
 

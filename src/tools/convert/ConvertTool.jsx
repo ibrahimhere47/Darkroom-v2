@@ -69,9 +69,9 @@ const ConvertTool = (props) => {
     const convertedRatio = originalTotal ? convertedTotal / originalTotal : 0
 
     const handleConvert = async () => {
-        if (files.length >= maxFilesPerBatch) {
+        if (files.length > maxFilesPerBatch) {
             setIsPopup(true)
-            setPopupMessage('Our free tier only offers 20 files per batch')
+            setPopupMessage(`Our free tier only offers ${maxFilesPerBatch} files per batch`)
             return
         }
         

@@ -44,9 +44,9 @@ const AddBackgroundTool = (props) => {
     )
 
     const handleAddBackground = async () => {
-        if (files.length >= maxFilesPerBatch) {
+        if (files.length > maxFilesPerBatch) {
             setIsPopup(true)
-            setPopupMessage('Our free tier only offers 20 files per batch')
+            setPopupMessage(`Our free tier only offers ${maxFilesPerBatch} files per batch`)
             return
         }
 

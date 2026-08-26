@@ -186,7 +186,7 @@ export function getTool(id) {
     return tool
 }
 
-export const maxFilesPerBatch = 20;
+export const maxFilesPerBatch = 7;
 
 export const CATEGORIES = [
     {

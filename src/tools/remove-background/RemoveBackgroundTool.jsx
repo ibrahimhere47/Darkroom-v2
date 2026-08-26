@@ -1,107 +1,177 @@
-import { useState, useRef } from "react";
+import React, { useState, useMemo } from 'react'
+import gsap from 'gsap'
+import { DownloadCloud, Loader2, RotateCcw } from 'lucide-react'
+import extensionFromMime from '../../utils/extensionFromMime'
+import useToolFiles from '../../hooks/useToolFiles'
+import useAnimatedRemove from '../../hooks/useAnimatedRemove'
+import ToolStage from '../../components/tool-comps/ToolStage'
+import ActionButton from '../../components/tool-comps/ActionButton'
+import { SidebarPanel } from '../../components/tool-comps/ToolSidebar'
+import RemoveBackgroundDevelopedPanel from './RemoveBackgroundDevelopedPanel'
+import RemoveBackgroundDevelopPanel from './RemoveBackgroundDevelopPanel'
+import { maxFilesPerBatch } from '../toolsRegistry'
+import Popup from '../../components/Popup'
+import HomePremiumAd from '../../components/home-comps/HomePremiumAd'
 
-export default function BackgroundRemover() {
-    const [file, setFile] = useState(null);
-    const [previewUrl, setPreviewUrl] = useState(null);
-    const [resultUrl, setResultUrl] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+const REMOVE_BG_ENDPOINT = 'https://adjusture-backend.vercel.app/remove-background'
 
-    const fileInputRef = useRef(null);
+const RemoveBackgroundTool = (props) => {
 
-    const handleFileChange = (e) => {
-        const selected = e.target.files[0];
-        if (!selected) return;
+    const files = props.files || []
+    const setFiles = props.setFiles
 
-        setFile(selected);
-        setPreviewUrl(URL.createObjectURL(selected));
-        setResultUrl(null);
-        setError(null);
-    };
+    const [isPopup, setIsPopup] = useState(false)
+    const [popupMessage, setPopupMessage] = useState('')
 
-    const handleSubmit = async () => {
-        if (!file) return;
+    const {
+        items,
+        hasResults,
+        allDone: allProcessed,
+        isProcessing,
+        beginProcessing,
+        setResult,
+        finishProcessing,
+        resetResults,
+        addFiles,
+        removeFile,
+        downloadFile,
+        downloadAll,
+    } = useToolFiles(files, setFiles)
 
-        setLoading(true);
-        setError(null);
+    const handleRemoveClick = useAnimatedRemove(removeFile)
 
-        try {
-        const formData = new FormData();
-        formData.append("image", file);
+    const originalTotal = useMemo(
+        () => files.reduce((sum, f) => sum + f.size, 0),
+        [files]
+    )
 
-        const res = await fetch("https://adjusture-backend.vercel.app/remove-background", {
-            method: "POST",
-            body: formData,
-        });
+    const resultTotal = useMemo(
+        () => items.reduce((sum, item) => sum + (item.resultMeta?.size ?? 0), 0),
+        [items]
+    )
 
-        if (!res.ok) {
-            const data = await res.json().catch(() => ({}));
-            throw new Error(data.error || "Failed to remove background");
+    const sizeDelta = originalTotal - resultTotal
+    const resultRatio = originalTotal ? resultTotal / originalTotal : 0
+
+    const handleRemoveBackground = async () => {
+        if (files.length > maxFilesPerBatch) {
+            setIsPopup(true)
+            setPopupMessage(`Our free tier only offers ${maxFilesPerBatch} files per batch`)
+            return
         }
 
-        const blob = await res.blob();
-        setResultUrl(URL.createObjectURL(blob));
-        } catch (err) {
-        setError(err.message);
-        } finally {
-        setLoading(false);
-        }
-    };
+        beginProcessing()
+
+        await Promise.all(files.map(async (file, idx) => {
+            const formData = new FormData()
+            formData.append('image', file)
+
+            try {
+                const response = await fetch(REMOVE_BG_ENDPOINT, { method: 'POST', body: formData })
+                if (!response.ok) {
+                    console.error('Background removal failed')
+                    return
+                }
+                const blob = await response.blob()
+                const url = URL.createObjectURL(blob)
+                setResult(idx, url, { mime: blob.type, size: blob.size, format: 'png' })
+            } catch (err) {
+                console.error(err)
+            }
+        }))
+
+        finishProcessing()
+    }
+
+    const filename = (item, idx) => `no-bg-${idx + 1}.${extensionFromMime(item?.resultMeta?.mime)}`
+
+    const handleDownloadClick = (e, url, idx) => {
+        gsap.fromTo(e.currentTarget, { scale: 0.85 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' })
+        downloadFile(url, filename(items[idx], idx))
+    }
+
+    const getHoverFormat = (item, idx) => {
+        const file = files[idx]
+        if (!file?.type) return null
+        return extensionFromMime(file.type).toUpperCase()
+    }
 
     return (
-        <div style={{ maxWidth: 600, margin: "0 auto", padding: 20 }}>
-        <h2>Background Remover</h2>
+        <>
+        <div className='flex flex-col lg:flex-row gap-5 w-full font-mono my-12'>
 
-        {/* TEMP: hidden input triggered by styled button — remove/replace with your own dropzone later */}
-        <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-        />
-        <button onClick={() => fileInputRef.current.click()}>
-            Select File
-        </button>
+            <ToolStage
+                items={items}
+                isProcessing={isProcessing}
+                onRemove={handleRemoveClick}
+                onDownload={handleDownloadClick}
+                getBadge={(item) => item.resultMeta ? 'PNG' : null}
+                getHoverFormat={(item, idx) => getHoverFormat(item, idx)}
+                onAddFiles={addFiles}
+            />
 
-        {file && <span style={{ marginLeft: 10 }}>{file.name}</span>}
+            <SidebarPanel>
 
-        <button
-            onClick={handleSubmit}
-            disabled={!file || loading}
-            style={{ marginLeft: 10 }}
-        >
-            {loading ? "Processing..." : "Remove Background"}
-        </button>
+                {allProcessed ? (
+                    // ---- Result panel ----
+                    <RemoveBackgroundDevelopedPanel
+                        files={files}
+                        resultRatio={resultRatio}
+                        resultTotal={resultTotal}
+                        originalTotal={originalTotal}
+                        sizeDelta={sizeDelta}
+                        allProcessed={allProcessed}
+                    />
+                ) : (
+                    // ---- Pre-process settings panel ----
+                    <RemoveBackgroundDevelopPanel
+                        isProcessing={isProcessing}
+                        fileCount={files.length}
+                    />
+                )}
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+                <div className='w-full flex flex-col gap-4 items-center'>
+                    {allProcessed ? (
+                        <>
+                            <ActionButton onClick={() => downloadAll((idx) => filename(items[idx], idx))}>
+                                <DownloadCloud size={16} />
+                                Download all
+                            </ActionButton>
+                            <ActionButton variant='secondary' onClick={resetResults}>
+                                <RotateCcw size={14} />
+                                Remove background again
+                            </ActionButton>
+                        </>
+                    ) : (
+                        <ActionButton onClick={handleRemoveBackground} disabled={isProcessing || files.length === 0}>
+                            {isProcessing ? (
+                                <>
+                                    <Loader2 size={16} className='animate-spin' />
+                                    Removing background…
+                                </>
+                            ) : (
+                                'Remove background'
+                            )}
+                        </ActionButton>
+                    )}
 
-        <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
-            {previewUrl && (
-            <div>
-                <p>Original</p>
-                <img src={previewUrl} alt="original" style={{ maxWidth: 250 }} />
-            </div>
-            )}
-
-            {resultUrl && (
-            <div>
-                <p>Result</p>
-                <img
-                src={resultUrl}
-                alt="background removed"
-                style={{
-                    maxWidth: 250,
-                    background:
-                    "repeating-conic-gradient(#ccc 0% 25%, white 0% 50%) 50% / 20px 20px",
-                }}
-                />
-                <a href={resultUrl} download="result.png">
-                <button style={{ marginTop: 8 }}>Download</button>
-                </a>
-            </div>
-            )}
+                    <p className='text-[11px] text-neutral-600 leading-relaxed'>
+                        {files.length} {files.length === 1 ? 'image' : 'images'} loaded
+                        {hasResults && ` · ${items.filter((item) => item.resultUrl).length} processed`}
+                    </p>
+                </div>
+            </SidebarPanel>
         </div>
-        </div>
-    );
+        <Popup isOpen={isPopup} title={'Oops!'} description={'It seems you have hit some sort of limit'} onClose={() => {setIsPopup(false)}} >
+            <h1
+                className='font-mono font-bold mt-2 mb-3'
+            >
+            {popupMessage}
+            </h1>
+            <HomePremiumAd isPopup={true} />
+        </Popup>
+        </>
+    )
 }
+
+export default RemoveBackgroundTool
