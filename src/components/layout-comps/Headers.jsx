@@ -4,6 +4,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import { Link } from 'react-router-dom'
 import HeaderToolMenu from './HeaderToolMenu'
 import MagneticWrapper from '../MagneticWrapper'
+import AccountMenu from '../auth-comps/AccountMenu'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -57,7 +58,10 @@ const Headers = () => {
                         <span>Darkroom</span>
                     </a>
                 </MagneticWrapper>
-                <HeaderToolMenu />
+                <div className='flex items-center gap-5'>
+                    <AccountMenu />
+                    <HeaderToolMenu />
+                </div>
             </header>
             <header
                 ref={header2Ref}
@@ -69,7 +73,10 @@ const Headers = () => {
                         <span>Darkroom</span>
                     </a>
                 </MagneticWrapper>
-                <HeaderToolMenu />
+                <div className='flex items-center gap-5'>
+                    <AccountMenu />
+                    <HeaderToolMenu />
+                </div>
             </header>
         </div>
     )
