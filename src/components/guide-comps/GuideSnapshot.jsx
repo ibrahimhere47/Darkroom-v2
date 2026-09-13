@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, BookOpen } from 'lucide-react'
 import { getTool } from '../../tools/toolsRegistry'
 
 const GuideSnapshot = () => {
@@ -30,44 +30,58 @@ const GuideSnapshot = () => {
     return (
         <section
             aria-labelledby={headingId}
-            className='w-full rounded-2xl border border-neutral-800 bg-linear-90 from-[#0b0b0b] to-neutral-950 p-6 sm:p-8 flex flex-col gap-6'
+            className='w-full rounded-2xl border border-neutral-800 bg-linear-90 from-[#0c0c0c] to-neutral-950 p-6 sm:p-8 flex flex-col gap-8'
         >
             <script type="application/ld+json">
                 {JSON.stringify(structuredData)}
             </script>
 
-            <div className='flex flex-col gap-2'>
-                <h2 id={headingId} className='font-mono font-bold text-lg text-neutral-200'>
-                    {heading}
-                </h2>
-                {summary && (
-                    <p className='font-body text-sm text-neutral-400 leading-5'>{summary}</p>
-                )}
+            <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between sm:items-center gap-6'>
+                <div className='flex flex-col gap-2'>
+                    <div className='flex items-center gap-1.5 text-amber-47'>
+                        <BookOpen size={15} strokeWidth={2} />
+                        <span className='font-mono text-sm tracking-widest uppercase'>Guide</span>
+                    </div>
+                    <h2 id={headingId} className='font-mono font-bold text-[20px] text-neutral-100'>
+                        {heading}
+                    </h2>
+                    {summary && (
+                        <p className='font-body text-[18px] text-neutral-400 leading-5 max-w-md'>
+                            {summary}
+                        </p>
+                    )}
+                </div>
+
+                <Link
+                    to={`/guides/${toolId}`}
+                    className='group flex items-center gap-1.5 shrink-0 w-fit rounded-full border border-neutral-700 px-4 py-2 font-mono text-sm text-neutral-200 hover:border-amber-47 hover:text-amber-47 transition-colors duration-300'
+                >
+                    Read full guide
+                    <ArrowUpRight
+                        size={16}
+                        className='transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+                    />
+                </Link>
             </div>
 
-            <ol className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
+            <ol className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8'>
                 {steps.map((step, index) => (
-                    <li key={step.title} className='flex flex-col gap-1.5'>
-                        <span className='font-mono text-sm text-amber-47'>
+                    <li
+                        key={step.title}
+                        className={`flex flex-col gap-2 ${index !== 0 ? 'lg:border-l lg:border-neutral-800 lg:pl-6' : ''}`}
+                    >
+                        <span className='font-mono text-3xl font-bold text-amber-47'>
                             {String(index + 1).padStart(2, '0')}
                         </span>
-                        <span className='font-body text-sm font-bold text-neutral-200 leading-5'>
+                        <span className='font-body text-xl font-bold text-neutral-100 leading-5'>
                             {step.title}
                         </span>
-                        <span className='font-body text-sm text-neutral-400 leading-5'>
+                        <span className='font-body text-lg text-neutral-400 leading-5'>
                             {step.description}
                         </span>
                     </li>
                 ))}
             </ol>
-
-            <Link
-                to={`/guides/${toolId}`}
-                className='flex items-center gap-1 font-mono text-sm text-amber-47 hover:opacity-80 transition-opacity duration-300 w-fit'
-            >
-                Read the full {tool.name} guide
-                <ArrowUpRight size={16} />
-            </Link>
         </section>
     )
 }
