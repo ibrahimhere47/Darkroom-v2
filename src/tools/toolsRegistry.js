@@ -244,10 +244,6 @@ export const tools = [
         icon: Paintbrush,
         component: lazy(() => import('./add-background/AddBackgroundTool.jsx')),
         guide: lazy(() => import('./add-background/AddBackgroundGuide.jsx')),
-        // Kept as plain data (not attached to the lazy-loaded guide component)
-        // so GuideSnapshot can read it without needing to resolve the
-        // guide's dynamic import first. Other guides can add their own
-        // guideSteps array here following the same pattern.
         guideSteps: [
             {
                 title: 'Upload a transparent PNG',
@@ -266,12 +262,40 @@ export const tools = [
                 description: 'Download the finished image with its new solid background color, ready to share, print, or upload.',
             },
         ],
-        // Optional per-tool overrides for GuideSnapshot's SEO copy.
-        // Falls back to sensible defaults built from `name` if omitted.
         guideSnapshotHeading: 'How to Add a Background Color to a Transparent Image',
         guideSnapshotSummary: 'Fill the transparent areas of a PNG with a solid background color in four quick steps.',
         category: 'Edit',
         categoryColor: '--color-category-edit',
+    },
+    {
+        id: 'round-corners',
+        name: 'Round Corners',
+        tagline: 'Add a border radius to your images in order to give them a cleaner look',
+        icon: SquareRoundCorner,
+        component: lazy(() => import('./round-corners/RoundCornersTool.jsx')),
+        guide: lazy(() => import('./round-corners/RoundCornersGuide.jsx')),
+        guideSteps: [
+            {
+                title: 'Upload your image',
+                description: 'Add the image whose corners you want to round.',
+            },
+            {
+                title: 'Set your corner radius',
+                description: 'Drag a slider or enter an exact pixel value for the radius.',
+            },
+            {
+                title: 'Preview the result',
+                description: 'Check the rounded corners in real time before exporting.',
+            },
+            {
+                title: 'Export your image',
+                description: 'Download the finished image with rounded corners.',
+            },
+        ],
+        guideSnapshotHeading: 'How to Round the Corners of an Image',
+        guideSnapshotSummary: 'Add a border radius to your image corners for a cleaner look.',
+        category: 'Properties',
+        categoryColor: '--color-category-properties',
     },
     {
         id: 'remove-watermark',
@@ -287,15 +311,6 @@ export const tools = [
         name: 'Rotate',
         tagline: 'Convert image from landscape to portrait or rotate to any degree you wish',
         icon: RotateCcw,
-        category: 'Properties',
-        categoryColor: '--color-category-properties',
-        comingSoon: true,
-    },
-    {
-        id: 'round-corners',
-        name: 'Round Corners',
-        tagline: 'Add a border radius to your images in order to give them a cleaner look',
-        icon: SquareRoundCorner,
         category: 'Properties',
         categoryColor: '--color-category-properties',
         comingSoon: true,
