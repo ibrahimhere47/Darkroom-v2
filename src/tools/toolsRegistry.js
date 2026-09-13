@@ -358,6 +358,36 @@ export const tools = [
         categoryColor: '--color-category-edit',
     },
     {
+        id: 'color-correction',
+        name: 'Color Correction',
+        tagline: 'Adjust the color balance, brightness, contrast, and saturation of your images',
+        icon: CircleCheckBig,
+        component: lazy(() => import('./color-correction/ColorCorrectTool.jsx')),
+        guide: lazy(() => import('./color-correction/ColorCorrectGuide.jsx')),
+        guideSteps: [
+            {
+                title: 'Upload your image',
+                description: 'Add the photo you want to color correct.',
+            },
+            {
+                title: 'Adjust brightness and contrast',
+                description: 'Set the overall tone and depth of the image first.',
+            },
+            {
+                title: 'Fine-tune color and saturation',
+                description: 'Fix any color cast and dial saturation up or down.',
+            },
+            {
+                title: 'Export your image',
+                description: 'Download your finished, color-corrected image.',
+            },
+        ],
+        guideSnapshotHeading: 'How to Color Correct an Image',
+        guideSnapshotSummary: 'Adjust brightness, contrast, color balance, and saturation in one place.',
+        category: 'Effects',
+        categoryColor: '--color-category-effects',
+    },
+    {
         id: 'remove-watermark',
         name: 'Remove Watermark',
         tagline: 'Remove watermarks from images and restore them to their original state',
@@ -382,15 +412,6 @@ export const tools = [
         icon: RemoveFormatting,
         category: 'Edit',
         categoryColor: '--color-category-edit',
-        comingSoon: true,
-    },
-    {
-        id: 'color-correction',
-        name: 'Color Correction',
-        tagline: 'Adjust the color balance, brightness, contrast, and saturation of your images',
-        icon: CircleCheckBig,
-        category: 'Effects',
-        categoryColor: '--color-category-effects',
         comingSoon: true,
     },
     {
