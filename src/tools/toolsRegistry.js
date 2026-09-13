@@ -328,6 +328,36 @@ export const tools = [
         categoryColor: '--color-category-properties',
     },
     {
+        id: 'add-border',
+        name: 'Add Border',
+        tagline: 'Add a border to your images with a variety of colors, styles, and widths',
+        icon: SquareDashed,
+        component: lazy(() => import('./add-border/AddBorderTool.jsx')),
+        guide: lazy(() => import('./add-border/AddBorderGuide.jsx')),
+        guideSteps: [
+            {
+                title: 'Upload your image',
+                description: 'Add the image you want to frame with a border.',
+            },
+            {
+                title: 'Choose a style and color',
+                description: 'Pick a border style — solid, dashed, or double — and a color.',
+            },
+            {
+                title: 'Set the border width',
+                description: 'Adjust the width from a thin outline to a bold frame.',
+            },
+            {
+                title: 'Export your image',
+                description: 'Download the finished image with its new border.',
+            },
+        ],
+        guideSnapshotHeading: 'How to Add a Border to Your Images',
+        guideSnapshotSummary: 'Frame your image with a custom color, style, and width.',
+        category: 'Edit',
+        categoryColor: '--color-category-edit',
+    },
+    {
         id: 'remove-watermark',
         name: 'Remove Watermark',
         tagline: 'Remove watermarks from images and restore them to their original state',
@@ -350,15 +380,6 @@ export const tools = [
         name: 'Remove Text',
         tagline: 'Remove text from images and restore them to their original state',
         icon: RemoveFormatting,
-        category: 'Edit',
-        categoryColor: '--color-category-edit',
-        comingSoon: true,
-    },
-    {
-        id: 'add-border',
-        name: 'Add Border',
-        tagline: 'Add a border to your images with a variety of colors, styles, and widths',
-        icon: SquareDashed,
         category: 'Edit',
         categoryColor: '--color-category-edit',
         comingSoon: true,
