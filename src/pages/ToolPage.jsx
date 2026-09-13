@@ -55,11 +55,19 @@ const ToolPage = () => {
             <Suspense fallback={null}>
                 <ToolReadyChecker Tool={Tool} onReady={handleReady} files={files} setFiles={setFiles} />
             </Suspense>
-            <div className='flex flex-col gap-6 w-full mt-8 mb-12'>
-                <GuideSnapshot />
-                <GuideButton />
-                <ToolPageGuarantees />
-                <ToolPageDataGuide />
+            <div className='flex flex-col gap-7 mb-12 mt-9 bg-neutral-950 p-10 rounded-2xl border border-neutral-800 w-full'>
+                <div className='w-full'>
+                    <GuideSnapshot />
+                </div>
+                <div className='w-full'>
+                    <GuideButton />
+                </div>
+                <div className='w-full'>
+                    <ToolPageGuarantees />
+                </div>
+                <div className='w-full'>
+                    <ToolPageDataGuide />
+                </div>
             </div>
         </Layout>
 

@@ -36,34 +36,6 @@ const GuideSnapshot = () => {
                 {JSON.stringify(structuredData)}
             </script>
 
-            <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between sm:items-center gap-6'>
-                <div className='flex flex-col gap-2'>
-                    <div className='flex items-center gap-1.5 text-amber-47'>
-                        <BookOpen size={15} strokeWidth={2} />
-                        <span className='font-mono text-sm tracking-widest uppercase'>Guide</span>
-                    </div>
-                    <h2 id={headingId} className='font-mono font-bold text-[20px] text-neutral-100'>
-                        {heading}
-                    </h2>
-                    {summary && (
-                        <p className='font-body text-[18px] text-neutral-400 leading-5 max-w-md'>
-                            {summary}
-                        </p>
-                    )}
-                </div>
-
-                <Link
-                    to={`/guides/${toolId}`}
-                    className='group flex items-center gap-1.5 shrink-0 w-fit rounded-full border border-neutral-700 px-4 py-2 font-mono text-sm text-neutral-200 hover:border-amber-47 hover:text-amber-47 transition-colors duration-300'
-                >
-                    Read full guide
-                    <ArrowUpRight
-                        size={16}
-                        className='transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
-                    />
-                </Link>
-            </div>
-
             <ol className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8'>
                 {steps.map((step, index) => (
                     <li
@@ -82,6 +54,20 @@ const GuideSnapshot = () => {
                     </li>
                 ))}
             </ol>
+
+            <div className='flex w-full items-center justify-center mt-3'>
+                <Link
+                    to={`/guides/${toolId}`}
+                    className='group flex items-center gap-1.5 shrink-0 w-fit rounded-full border border-neutral-700 px-6 py-3 font-mono text-base text-neutral-200 hover:border-amber-47 hover:text-amber-47 transition-colors duration-300'
+                >
+                    Read full guide
+                    <ArrowUpRight
+                        size={16}
+                        className='transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+                    />
+                </Link>
+            </div>
+
         </section>
     )
 }

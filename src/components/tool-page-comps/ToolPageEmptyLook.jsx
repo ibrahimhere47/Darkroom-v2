@@ -69,20 +69,23 @@ const ToolPageEmptyLook = (props) => {
                         <EmptyLookTitle title={title} />
                     </div>
 
-                    <div className='w-full md:w-5/6 h-full'>
+                    <div className='w-full md:w-8/9 h-full'>
                         <ToolPageDropZone setFiles={props.setFiles} />
                     </div>
-                    <div className='mt-9 w-full'>
-                        <GuideSnapshot />
-                    </div>
-                    <div className='mt-9 w-full'>
-                        <GuideButton />
-                    </div>
-                    <div className='mt-9 w-full'>
-                        <ToolPageGuarantees />
-                    </div>
-                    <div className='mt-9 mb-12 w-full'>
-                        <ToolPageDataGuide />
+
+                    <div className='flex flex-col gap-7 mb-12 mt-9 bg-neutral-950 p-8 rounded-2xl border border-neutral-800 w-full md:w-8/9'>
+                        <div className='w-full'>
+                            <GuideSnapshot />
+                        </div>
+                        <div className='w-full'>
+                            <GuideButton />
+                        </div>
+                        <div className='w-full'>
+                            <ToolPageGuarantees />
+                        </div>
+                        <div className='w-full'>
+                            <ToolPageDataGuide />
+                        </div>
                     </div>
                 </div>
         </Layout>
