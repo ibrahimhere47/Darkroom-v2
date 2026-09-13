@@ -298,21 +298,42 @@ export const tools = [
         categoryColor: '--color-category-properties',
     },
     {
+        id: 'rotate',
+        name: 'Rotate',
+        tagline: 'Convert image from landscape to portrait or rotate to any degree you wish',
+        icon: RotateCcw,
+        component: lazy(() => import('./rotate/RotateTool.jsx')),
+        guide: lazy(() => import('./rotate/RotateGuide.jsx')),
+        guideSteps: [
+            {
+                title: 'Upload your image',
+                description: 'Add the image you want to rotate.',
+            },
+            {
+                title: 'Choose an angle',
+                description: 'Quick-rotate by 90 degrees or drag the dial for a custom angle.',
+            },
+            {
+                title: 'Preview the result',
+                description: 'Check the rotated image and any edge cropping before exporting.',
+            },
+            {
+                title: 'Export your image',
+                description: 'Download your image at its new orientation.',
+            },
+        ],
+        guideSnapshotHeading: 'How to Rotate an Image to Any Angle',
+        guideSnapshotSummary: 'Switch between portrait and landscape, or rotate to any exact degree.',
+        category: 'Properties',
+        categoryColor: '--color-category-properties',
+    },
+    {
         id: 'remove-watermark',
         name: 'Remove Watermark',
         tagline: 'Remove watermarks from images and restore them to their original state',
         icon: DropletOff,
         category: 'Security',
         categoryColor: '--color-category-security',
-        comingSoon: true,
-    },
-    {
-        id: 'rotate',
-        name: 'Rotate',
-        tagline: 'Convert image from landscape to portrait or rotate to any degree you wish',
-        icon: RotateCcw,
-        category: 'Properties',
-        categoryColor: '--color-category-properties',
         comingSoon: true,
     },
     {
