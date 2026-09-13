@@ -12,19 +12,21 @@ const GuideHeading = (props) => {
     const handleHover = () => {
         gsap.to(headingRef.current, {
             duration: 0.8,
-            overwrite: "auto",
-            scrambleText: {
-                text: text,
-                chars: "upperAndLowerCase",
-                revealDelay: 0.1,
-                speed: 0.3,
-            },
-            ease: "none",
+            y: -5,
+            ease: "power3.out",
+        });
+    }
+
+    const handleHoverLeave = () => {
+        gsap.to(headingRef.current, {
+            duration: 0.8,
+            y: 0,
+            ease: "power1.out",
         });
     }
 
     return (
-        <h1 className='text-4xl font-fraunces' ref={headingRef} onMouseEnter={handleHover}>{text}</h1>
+        <h1 className='text-4xl font-fraunces' ref={headingRef} onMouseEnter={handleHover} onMouseLeave={handleHoverLeave}>{text}</h1>
     )
 }
 

@@ -9,6 +9,7 @@ import Loader from '../components/Loader.jsx'
 import ToolPageGuarantees from '../components/tool-page-comps/ToolPageGuarantees.jsx'
 import ToolPageDataGuide from '../components/tool-page-comps/ToolPageDataGuide.jsx'
 import gsap from 'gsap'
+import GuideSnapshot from '../components/guide-comps/GuideSnapshot.jsx'
 
 const ToolReadyChecker = ({ Tool, onReady, files, setFiles }) => {
     useEffect(() => {
@@ -55,6 +56,7 @@ const ToolPage = () => {
                 <ToolReadyChecker Tool={Tool} onReady={handleReady} files={files} setFiles={setFiles} />
             </Suspense>
             <div className='flex flex-col gap-6 w-full mt-8 mb-12'>
+                <GuideSnapshot />
                 <GuideButton />
                 <ToolPageGuarantees />
                 <ToolPageDataGuide />

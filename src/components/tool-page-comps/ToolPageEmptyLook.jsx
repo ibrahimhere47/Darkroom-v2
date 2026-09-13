@@ -10,6 +10,7 @@ import ToolPageGuarantees from './ToolPageGuarantees'
 import GuideButton from '../guide-comps/GuideButton'
 import ToolPageDataGuide from './ToolPageDataGuide'
 import EmptyLookTitle from './EmptyLookTitle'
+import GuideSnapshot from '../guide-comps/GuideSnapshot'
 
 gsap.registerPlugin(useGSAP)
 
@@ -70,6 +71,9 @@ const ToolPageEmptyLook = (props) => {
 
                     <div className='w-full md:w-5/6 h-full'>
                         <ToolPageDropZone setFiles={props.setFiles} />
+                    </div>
+                    <div className='mt-9 w-full'>
+                        <GuideSnapshot />
                     </div>
                     <div className='mt-9 w-full'>
                         <GuideButton />
