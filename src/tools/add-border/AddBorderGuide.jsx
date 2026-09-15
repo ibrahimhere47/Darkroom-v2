@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import GuideHeading from '../../components/guide-comps/GuideHeading'
 import GuideBody from '../../components/guide-comps/GuideBody'
 import GuideImage from '../../components/guide-comps/GuideImage'
 import GuideVideo from '../../components/guide-comps/GuideVideo'
 import GuideStep from '../../components/guide-comps/GuideStep'
+import ToolPageDropZone from '../../components/tool-page-comps/ToolPageDropZone'
 
 const PAGE_TITLE = 'How to Add a Border to Your Images | Guide'
 const PAGE_DESCRIPTION =
     'Learn how to add a border to your image with a custom color, style, and width in just a few steps.'
+const TOOL_ID = 'add-border'
 
-// Sets <title> and the meta description tag for SEO, since this app
-// doesn't currently use react-helmet or a similar head-management library.
 const useSeoMeta = ({ title, description }) => {
     useEffect(() => {
         const previousTitle = document.title
@@ -39,7 +40,6 @@ const useSeoMeta = ({ title, description }) => {
     }, [title, description])
 }
 
-// HowTo structured data helps this guide surface as a rich result in search.
 const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -71,6 +71,11 @@ const structuredData = {
 
 const AddBorderGuide = () => {
     useSeoMeta({ title: PAGE_TITLE, description: PAGE_DESCRIPTION })
+    const navigate = useNavigate()
+
+    const handleFilesDropped = (files) => {
+        navigate(`/tools/${TOOL_ID}`, { state: { files } })
+    }
 
     return (
         <article className='flex flex-col gap-16'>
@@ -94,10 +99,7 @@ const AddBorderGuide = () => {
                     title='Upload Your Image'
                     body='Upload the image you want to add a border to.'
                 >
-                    <GuideImage
-                        image='/images/guides/add-border/step-1-upload.jpg'
-                        alt='Uploading an image into the add border tool'
-                    />
+                    <ToolPageDropZone setFiles={handleFilesDropped} />
                 </GuideStep>
 
                 <GuideStep

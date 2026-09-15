@@ -1,5 +1,5 @@
 import { Suspense, useState, useRef, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { getTool } from '../tools/toolsRegistry.js'
 import Layout from '../components/Layout.jsx'
 import ToolPageEmptyLook from '../components/tool-page-comps/ToolPageEmptyLook.jsx'
@@ -21,8 +21,9 @@ const ToolReadyChecker = ({ Tool, onReady, files, setFiles }) => {
 
 const ToolPage = () => {
     const { toolId } = useParams()
+    const location = useLocation()
     const tool = getTool(toolId)
-    const [files, setFiles] = useState([])
+    const [files, setFiles] = useState(location.state?.files || [])
 
     const [loading, setLoading] = useState(true)
     const loaderRef = useRef(null)
